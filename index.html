@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GraphMailer — Office 365 email marketing, done right</title>
+<meta name="description" content="Bulk email marketing built natively on Microsoft Graph / Office 365. Open & click tracking, scheduled batches, contact management, sortable reports.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0b0d10; }
+
+  /* ─── Hero carousel ───────────────────────────────────────────────────── */
+  .hero-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    color: #fff;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+  }
+
+  .hero-scrim {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.65) 100%);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 14px;
+    max-width: 560px;
+    padding: 60px 48px;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    opacity: 0.85;
+  }
+
+  .hero-title {
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.5;
+    opacity: 0.9;
+    max-width: 460px;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    width: fit-content;
+    margin-top: 8px;
+    padding: 12px 26px;
+    background: #ffffff;
+    color: #111111;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 4px;
+    transition: transform 0.2s ease, background 0.2s ease;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+  }
+  .hero-cta:hover { background: #eaeaea; transform: translateY(-1px); }
+
+  .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
+
+  .hero-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 3;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-nav-btn:hover { background: rgba(255,255,255,0.3); }
+  .swiper-button-prev { left: 16px; }
+  .swiper-button-next { right: 16px; }
+
+  /* slide indicator dots */
+  .hero-dots {
+    position: absolute;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+    display: flex;
+    gap: 8px;
+  }
+  .hero-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .hero-dot.active { background: #fff; transform: scale(1.25); }
+
+  @media (min-width: 992px) {
+    .hero-content { width: 50%; }
+  }
+
+  @media (max-width: 700px) {
+    .hero-content { padding: 32px 24px; }
+  }
+
+  /* ─── Contact modal ───────────────────────────────────────────────────── */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal-backdrop.open { display: flex; }
+
+  .modal {
+    background: #14181d;
+    color: #fff;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 460px;
+    padding: 32px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    opacity: 0.7;
+  }
+  .modal-close:hover { opacity: 1; }
+
+  .modal h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .modal p.lead {
+    font-size: 14px;
+    opacity: 0.75;
+    margin-bottom: 20px;
+    line-height: 1.5;
+  }
+
+  .modal label {
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 6px;
+    margin-top: 14px;
+  }
+  .modal input,
+  .modal textarea {
+    width: 100%;
+    background: #0b0d10;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: #fff;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  .modal input:focus,
+  .modal textarea:focus {
+    outline: none;
+    border-color: #fff;
+  }
+  .modal textarea { resize: vertical; min-height: 90px; }
+
+  .modal-submit {
+    margin-top: 22px;
+    width: 100%;
+    padding: 12px 20px;
+    background: #fff;
+    color: #111;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.2s ease;
+  }
+  .modal-submit:hover { background: #eaeaea; }
+
+  .modal-success {
+    display: none;
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+  .modal-success.show { display: block; }
+  .modal-success h3 { font-size: 20px; margin-bottom: 8px; }
+  .modal-success p { font-size: 14px; opacity: 0.75; line-height: 1.5; }
+</style>
+</head>
+<body>
+
+<div class="hero-wrapper">
+
+  <!-- Slide 1 — Office 365 native -->
+  <div class="hero-section">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=1600&q=80" alt="">
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Office 365 Native</div>
+      <h1 class="hero-title">Built on Microsoft Graph — not SMTP</h1>
+      <p class="hero-desc">While every other tool bounces mail through an SMTP relay, GraphMailer sends through your own Office 365 tenant's Graph API. Emails land in the Primary inbox, not Spam. Your sender reputation, your daily quota, your deliverability — all intact.</p>
+      <button class="hero-cta" data-cta="See how it works">See how it works</button>
+    </div>
+  </div>
+
+  <!-- Slide 2 — Tracking -->
+  <div class="hero-section">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80" alt="">
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Live Engagement</div>
+      <h1 class="hero-title">See who opens, who clicks, who ignores</h1>
+      <p class="hero-desc">1×1 pixel opens, smart link redirects for clicks, per-recipient engagement scores. Raw signals straight from Microsoft Graph — no third-party trackers, no relay hops to debug.</p>
+      <button class="hero-cta" data-cta="Request a demo">Request a demo</button>
+    </div>
+  </div>
+
+  <!-- Slide 3 — Bulk + Manage -->
+  <div class="hero-section">
+    <img class="hero-bg" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80" alt="">
+    <div class="hero-scrim"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Bulk + Manage</div>
+      <h1 class="hero-title">Send thousands, manage everything in one tab</h1>
+      <p class="hero-desc">Schedule batch sends to entire lists, import contacts via CSV, sort and filter reports, one-click delete, IST-formatted CSV exports. Compose with direct HTML, send in batches, list them — your data, your workflow.</p>
+      <button class="hero-cta" data-cta="Talk to us">Talk to us</button>
+    </div>
+  </div>
+
+  <button class="hero-nav-btn swiper-button-prev" aria-label="Previous slide">‹</button>
+  <button class="hero-nav-btn swiper-button-next" aria-label="Next slide">›</button>
+
+  <div class="hero-dots" role="tablist">
+    <button class="hero-dot active" data-slide="0" aria-label="Slide 1"></button>
+    <button class="hero-dot" data-slide="1" aria-label="Slide 2"></button>
+    <button class="hero-dot" data-slide="2" aria-label="Slide 3"></button>
+  </div>
+
+</div>
+
+<!-- Contact modal -->
+<div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">×</button>
+
+    <form id="contactForm">
+      <h2 id="modalTitle">Get in touch</h2>
+      <p class="lead">Tell us a bit about what you're sending. We'll get back within one business day.</p>
+
+      <label for="cf-name">Name</label>
+      <input id="cf-name" name="name" type="text" required autocomplete="name">
+
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" required autocomplete="email">
+
+      <label for="cf-msg">Message</label>
+      <textarea id="cf-msg" name="message" placeholder="What are you trying to send? Any current tool frustrations?" required></textarea>
+
+      <button type="submit" class="modal-submit">Send message</button>
+    </form>
+
+    <div class="modal-success" id="contactSuccess">
+      <h3>Thanks — we'll be in touch.</h3>
+      <p>Your message landed in our inbox. Expect a reply within one business day.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js"></script>
+<script>
+function initAnimation() {
+
+  function start(){
+    try{
+      const root = document.querySelector('.hero-wrapper');
+      if (!root){ console.warn('[gsap-anim] root not found'); return; }
+
+      const slides = root.querySelectorAll('.hero-section');
+      if (slides.length < 2){ console.warn('[gsap-anim] not enough slides'); return; }
+
+      const titleSel  = '.hero-title';
+      const descSel   = '.hero-desc';
+      const buttonSel = '.hero-cta';
+
+      slides.forEach((s,i)=>{
+        s.style.position = 'absolute';
+        s.style.top = 0;
+        s.style.left = 0;
+        s.style.width = '100%';
+        s.style.height = '100%';
+        s.style.opacity = i===0 ? 1 : 0;
+        s.style.pointerEvents = i===0 ? 'auto' : 'none';
+      });
+      // Reserve height using the viewport so the carousel fills the screen
+      root.style.minHeight = '100vh';
+
+      let ctxCleanup = null;
+      let autoPlay;
+
+      gsap.context(() => {
+
+        function animateContent(slide){
+          const tl = gsap.timeline();
+          const title  = slide.querySelector(titleSel);
+          const desc   = slide.querySelector(descSel);
+          const button = slide.querySelector(buttonSel);
+          if (title)  tl.fromTo(title,  {autoAlpha:0, y:30}, {autoAlpha:1, y:0, duration:0.8, ease:'power2.out'});
+          if (desc)   tl.fromTo(desc,   {autoAlpha:0, y:20}, {autoAlpha:1, y:0, duration:0.6, ease:'power2.out'}, "-=0.4");
+          if (button) tl.fromTo(button, {autoAlpha:0, y:10}, {autoAlpha:1, y:0, duration:0.5, ease:'power2.out'}, "-=0.3");
+          return tl;
+        }
+
+        animateContent(slides[0]);
+
+        let current = 0;
+        let isAnimating = false;
+        const interval = 6; // seconds per slide
+
+        const dots = root.querySelectorAll('.hero-dot');
+
+        function setActiveDot(idx){
+          dots.forEach((d,i)=>d.classList.toggle('active', i===idx));
+        }
+
+        autoPlay = gsap.delayedCall(interval, advance).pause();
+
+        function advance(){
+          goTo((current + 1) % slides.length);
+        }
+
+        function goTo(idx){
+          if (isAnimating || idx===current) return;
+          isAnimating = true;
+
+          const prevSlide = slides[current];
+          const nextSlide = slides[idx];
+
+          const tl = gsap.timeline({
+            onComplete:()=>{
+              isAnimating = false;
+              current = idx;
+              autoPlay.restart();
+            }
+          });
+
+          tl.to(prevSlide, {autoAlpha:0, duration:0.8, ease:'power2.inOut'})
+            .set(prevSlide, {pointerEvents:'none'})
+            .set(nextSlide, {pointerEvents:'auto'})
+            .to(nextSlide, {autoAlpha:1, duration:0.8, ease:'power2.inOut'}, "<")
+            .add(()=>{ animateContent(nextSlide); setActiveDot(idx); });
+
+          autoPlay.restart();
+        }
+
+        const prevBtn = root.querySelector('.swiper-button-prev');
+        const nextBtn = root.querySelector('.swiper-button-next');
+        if (prevBtn){
+          prevBtn.addEventListener('click', e=>{ e.preventDefault(); goTo((current-1+slides.length)%slides.length); });
+        }
+        if (nextBtn){
+          nextBtn.addEventListener('click', e=>{ e.preventDefault(); advance(); });
+        }
+
+        dots.forEach(dot=>{
+          dot.addEventListener('click', e=>{
+            e.preventDefault();
+            goTo(parseInt(dot.dataset.slide, 10));
+          });
+        });
+
+        autoPlay.play();
+
+        ctxCleanup = () => autoPlay.kill();
+
+      }, root);
+
+    }catch(err){
+      console.error('[gsap-anim] init error', err);
+    }
+  }
+
+  if (window.gsap){
+    start();
+  } else {
+    console.error('[gsap-anim] GSAP failed to load');
+  }
+}
+
+document.addEventListener('DOMContentLoaded', initAnimation);
+
+// ─── Contact modal logic ─────────────────────────────────────────────────
+(function(){
+  const modal    = document.getElementById('contactModal');
+  const form     = document.getElementById('contactForm');
+  const success  = document.getElementById('contactSuccess');
+  const closeBtn = document.getElementById('modalClose');
+
+  function openModal(){
+    modal.classList.add('open');
+    form.style.display = '';
+    success.classList.remove('show');
+    form.reset();
+    setTimeout(()=>modal.querySelector('input')?.focus(), 50);
+  }
+  function closeModal(){
+    modal.classList.remove('open');
+  }
+
+  document.querySelectorAll('[data-cta]').forEach(btn=>{
+    btn.addEventListener('click', openModal);
+  });
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', e=>{ if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', e=>{
+    if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+  });
+
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const data = {
+      name:    form.name.value.trim(),
+      email:   form.email.value.trim(),
+      message: form.message.value.trim(),
+    };
+    // Static-site fallback: open the user's mail client with a prefilled draft.
+    const subject = encodeURIComponent('GraphMailer enquiry from ' + data.name);
+    const body    = encodeURIComponent(
+      'Name: '    + data.name    + '\n' +
+      'Email: '   + data.email   + '\n\n' +
+      data.message
+    );
+    window.location.href = 'mailto:hello@graphmailer.app?subject=' + subject + '&body=' + body;
+
+    form.style.display = 'none';
+    success.classList.add('show');
+  });
+})();
+</script>
+
+</body>
+</html>
