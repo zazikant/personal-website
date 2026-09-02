@@ -30,12 +30,22 @@
     height: 100%;
     object-fit: cover;
     z-index: 0;
+    /* Bias toward the right so the app UI stays visible behind the right edge
+       while the left side becomes breathing room for the text overlay. */
+    object-position: right center;
   }
 
   .hero-scrim {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.25) 45%, rgba(0,0,0,0.65) 100%);
+    /* Stronger left-side gradient so white text stays readable over the
+       mostly-white app background, fading to lighter on the right so the
+       UI peeks through. */
+    background: linear-gradient(90deg,
+      rgba(0,0,0,0.85) 0%,
+      rgba(0,0,0,0.75) 25%,
+      rgba(0,0,0,0.45) 55%,
+      rgba(0,0,0,0.30) 100%);
     z-index: 1;
   }
 
@@ -267,7 +277,7 @@
 
   <!-- Slide 1 — Office 365 native -->
   <div class="hero-section">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1633419461186-7d40a38105ec?w=1600&q=80" alt="">
+    <img class="hero-bg" src="images/slide1-settings.png" alt="GraphMailer Settings showing Connect with Microsoft">
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Office 365 Native</div>
@@ -279,7 +289,7 @@
 
   <!-- Slide 2 — Tracking -->
   <div class="hero-section">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&q=80" alt="">
+    <img class="hero-bg" src="images/slide2-batches.png" alt="GraphMailer Batches showing 3 completed campaigns">
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Live Engagement</div>
@@ -291,7 +301,7 @@
 
   <!-- Slide 3 — Bulk + Manage -->
   <div class="hero-section">
-    <img class="hero-bg" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1600&q=80" alt="">
+    <img class="hero-bg" src="images/slide3-compose.png" alt="GraphMailer Compose tab with direct HTML editor">
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Bulk + Manage</div>
