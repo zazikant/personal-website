@@ -5,9 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GraphMailer — Office 365 email marketing, done right</title>
 <meta name="description" content="Bulk email marketing built natively on Microsoft Graph / Office 365. Open & click tracking, scheduled batches, contact management, sortable reports.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0b0d10; }
+  body { font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background:#0b0d10; }
 
   /* ─── Hero carousel ───────────────────────────────────────────────────── */
   .hero-section {
@@ -42,45 +45,47 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 14px;
-    max-width: 560px;
-    padding: 60px 48px;
+    gap: 32px;
+    max-width: 1100px;
+    padding: 100px 96px;
     margin-top: auto;
     margin-bottom: auto;
   }
 
   .hero-eyebrow {
-    font-size: 13px;
-    letter-spacing: 0.14em;
+    font-size: 20px;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    font-weight: 600;
-    opacity: 0.85;
+    font-weight: 800;
+    opacity: 0.9;
   }
 
   .hero-title {
-    font-size: clamp(28px, 4vw, 48px);
-    font-weight: 700;
-    line-height: 1.15;
+    font-size: clamp(56px, 8vw, 112px);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
   }
 
   .hero-desc {
-    font-size: 16px;
+    font-size: 24px;
     line-height: 1.5;
     opacity: 0.9;
-    max-width: 460px;
+    max-width: 800px;
+    font-weight: 400;
   }
 
   .hero-cta {
     display: inline-block;
     width: fit-content;
-    margin-top: 8px;
-    padding: 12px 26px;
+    margin-top: 18px;
+    padding: 22px 44px;
     background: #ffffff;
     color: #111111;
     text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    border-radius: 4px;
+    font-weight: 700;
+    font-size: 22px;
+    border-radius: 2px;
     transition: transform 0.2s ease, background 0.2s ease;
     cursor: pointer;
     border: none;
@@ -95,21 +100,23 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 3;
-    background: rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.18);
     border: none;
     color: #fff;
-    width: 40px;
-    height: 40px;
+    width: 84px;
+    height: 84px;
     border-radius: 50%;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 40px;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background 0.2s ease, transform 0.2s ease;
   }
-  .hero-nav-btn:hover { background: rgba(255,255,255,0.3); }
-  .swiper-button-prev { left: 16px; }
-  .swiper-button-next { right: 16px; }
+  .hero-nav-btn:hover { background: rgba(255,255,255,0.35); }
+  .swiper-button-prev { left: 36px; }
+  .swiper-button-next { right: 36px; }
 
   /* slide indicator dots */
   .hero-dots {
@@ -134,11 +141,20 @@
   .hero-dot.active { background: #fff; transform: scale(1.25); }
 
   @media (min-width: 992px) {
-    .hero-content { width: 50%; }
+    .hero-content { width: 70%; }
   }
 
   @media (max-width: 700px) {
-    .hero-content { padding: 32px 24px; }
+    .hero-content { padding: 72px 36px; gap: 28px; max-width: 100%; }
+    .hero-eyebrow { font-size: 22px; letter-spacing: 0.2em; }
+    .hero-title { font-size: clamp(56px, 14vw, 80px); line-height: 1.02; }
+    .hero-desc { font-size: 26px; line-height: 1.5; max-width: 100%; }
+    .hero-cta { padding: 22px 40px; font-size: 24px; margin-top: 16px; }
+    .hero-nav-btn { width: 80px; height: 80px; font-size: 38px; }
+    .swiper-button-prev { left: 14px; }
+    .swiper-button-next { right: 14px; }
+    .hero-dots { bottom: 28px; gap: 12px; }
+    .hero-dot { width: 12px; height: 12px; }
   }
 
   /* ─── Contact modal ───────────────────────────────────────────────────── */
