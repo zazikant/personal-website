@@ -1016,6 +1016,39 @@
   }
   .contact-success h3 { font-size: 20px; margin-bottom: 8px; font-weight: 700; }
   .contact-success p { font-size: 14px; opacity: 0.72; line-height: 1.55; }
+
+  /* Contact form loading + error states */
+  .contact-submit.loading {
+    opacity: 0.75;
+    pointer-events: none;
+  }
+  .contact-submit .spinner {
+    display: none;
+    width: 14px; height: 14px;
+    border: 2px solid rgba(6,35,29,0.25);
+    border-top-color: #06231d;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .contact-submit.loading .spinner { display: inline-block; }
+  .contact-submit.loading .submit-label::before { content: 'Sending'; }
+  .contact-submit.loading .submit-text { display: none; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .contact-error {
+    display: none;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(248,113,113,0.08);
+    border: 1px solid rgba(248,113,113,0.3);
+    border-radius: 6px;
+    font-size: 13px;
+    color: #fca5a5;
+    line-height: 1.5;
+  }
+  .contact-error.show { display: block; }
 </style>
 </head>
 <body>
@@ -1473,8 +1506,12 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
       <label for="cf-msg">Message</label>
       <textarea id="cf-msg" name="message" placeholder="What are you trying to do? Any questions about BYOK, deployment, or features?" required></textarea>
 
-      <button type="submit" class="contact-submit">Send message →</button>
+      <button type="submit" class="contact-submit" id="contactSubmit">
+        <span class="spinner"></span><span class="submit-label"><span class="submit-text">Send message →</span></span>
+      </button>
     </form>
+
+    <div class="contact-error" id="contactError"></div>
 
     <div class="contact-success" id="contactSuccess">
       <div class="check">✓</div>
@@ -1710,21 +1747,26 @@ function initConceptSlider() {
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   Contact modal — a simple sign-up / enquiry form. On submit it
-   shows a success state. Wire this up to your backend or a form
-   service (e.g. Formspree, Resend) when you're ready to collect leads.
+   Contact modal — posts the form to /api/contact (Vercel serverless
+   function that sends email via SMTP). Shows loading, success, and
+   error states.
    ════════════════════════════════════════════════════════════════════ */
 function initContactModal() {
-  const modal    = document.getElementById('contactModal');
-  const form     = document.getElementById('contactForm');
-  const success  = document.getElementById('contactSuccess');
-  const closeBtn = document.getElementById('modalClose');
-  const nameInput= document.getElementById('cf-name');
+  const modal     = document.getElementById('contactModal');
+  const form      = document.getElementById('contactForm');
+  const success   = document.getElementById('contactSuccess');
+  const errorBox  = document.getElementById('contactError');
+  const submitBtn = document.getElementById('contactSubmit');
+  const closeBtn  = document.getElementById('modalClose');
+  const nameInput = document.getElementById('cf-name');
 
   function openModal() {
     modal.classList.add('open');
     form.style.display = '';
     success.classList.remove('show');
+    errorBox.classList.remove('show');
+    errorBox.textContent = '';
+    submitBtn.classList.remove('loading');
     form.reset();
     setTimeout(() => nameInput?.focus(), 60);
   }
@@ -1739,13 +1781,57 @@ function initContactModal() {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
 
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
-    // Demo: just show success. Replace with a real POST to your backend
-    // or a form service (Formspree, Resend, etc.) when ready.
-    form.style.display = 'none';
-    success.classList.add('show');
+
+    // Collect form data
+    const payload = {
+      name:    form.name.value.trim(),
+      email:   form.email.value.trim(),
+      company: form.company.value.trim(),
+      plan:    form.plan.value,
+      message: form.message.value.trim(),
+    };
+
+    // Basic client-side validation
+    if (!payload.name || !payload.email || !payload.message) {
+      showError('Please fill in your name, email, and message.');
+      return;
+    }
+
+    // Loading state
+    submitBtn.classList.add('loading');
+    errorBox.classList.remove('show');
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (res.ok && data.ok) {
+        // Success — show success state
+        form.style.display = 'none';
+        success.classList.add('show');
+      } else {
+        // Server returned an error
+        showError(data.error || 'Something went wrong. Please try again or email us directly.');
+      }
+    } catch (err) {
+      console.error('[contact] network error:', err);
+      showError('Could not reach the server. Please check your connection and try again.');
+    } finally {
+      submitBtn.classList.remove('loading');
+    }
   });
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.add('show');
+  }
 }
 
 /* ════════════════════════════════════════════════════════════════════

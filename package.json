@@ -1,0 +1,12 @@
+{
+  "name": "doquerag-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "DoqueRAG — retrieval-augmented knowledge system landing page",
+  "dependencies": {
+    "nodemailer": "^6.10.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

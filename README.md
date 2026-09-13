@@ -29,8 +29,41 @@ The site is a static `index.html` — no build step, no framework, no server. GS
 3. Framework Preset: **Other** (no build).
 4. Output directory: leave blank (root).
 5. Deploy.
+6. **Set the `SMTP_PASS` environment variable** (see Contact Form below).
 
-Vercel serves `index.html` as a static site. No build, no env vars, no server.
+Vercel serves `index.html` as a static site and deploys `/api/contact.js` as a serverless function automatically. The only env var you need to set is `SMTP_PASS`.
+
+### Contact form (SMTP email)
+
+The contact form posts to `/api/contact` (a Vercel serverless function in `api/contact.js`) which sends email via SMTP using [nodemailer](https://nodemailer.com/).
+
+**Setup — set one environment variable in Vercel:**
+
+1. Go to Vercel → your project → **Settings** → **Environment Variables**.
+2. Add:
+   - **Key:** `SMTP_PASS`
+   - **Value:** your SMTP password
+   - **Environments:** Production (and Preview if you want to test)
+3. Redeploy (Vercel will pick up the new env var on the next deploy).
+
+All other SMTP settings have working defaults (see `.env.example`):
+
+| Variable | Default | Purpose |
+|----------|---------|---------|
+| `SMTP_PASS` | *(none — must set)* | Password for the sending account |
+| `SMTP_HOST` | `mail.gemengserv.net` | SMTP server hostname |
+| `SMTP_PORT` | `587` | SMTP port (587 for TLS, 465 for SSL) |
+| `SMTP_USER` | `news@gemengserv.net` | Sending email address |
+| `MAIL_TO` | `shashikant.zarekar@gemengserv.com` | Where submissions are sent |
+
+**If your email is hosted on Google Workspace**, change:
+- `SMTP_HOST` → `smtp.gmail.com`
+- `SMTP_PORT` → `587`
+- `SMTP_PASS` → an [App Password](https://myaccount.google.com/apppasswords) (regular passwords won't work with 2FA enabled)
+
+**If your email is hosted on Office 365**, change:
+- `SMTP_HOST` → `smtp.office365.com`
+- `SMTP_PORT` → `587`
 
 ### Local preview
 
@@ -38,6 +71,13 @@ Vercel serves `index.html` as a static site. No build, no env vars, no server.
 npx serve .
 # or
 python -m http.server 8000
+```
+
+To test the contact form locally, install dependencies and run with environment variables:
+
+```bash
+npm install
+SMTP_PASS="your-password" npx vercel dev
 ```
 
 ## Stack
@@ -54,5 +94,5 @@ python -m http.server 8000
 - Add or remove feature cards in the `.features-grid` block.
 - Edit pricing in the `#pricing` section — monthly price, one-time price, and feature lists.
 - Add or remove API tabs in the `.api-tabs` block and matching snippets in the `snippets` object inside `initApiTabs()`. Replace dummy `https://api.doquerag.app` with your real API URL.
-- Wire the contact form in `initContactModal()` to your backend or a form service (Formspree, Resend, etc.).
+- Wire the contact form: already wired to `/api/contact` (see Contact Form section above).
 - Brand colors live in the `<style>` block; primary accent is `#5eead4`.
