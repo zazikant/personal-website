@@ -1,14 +1,7 @@
 {
   "framework": null,
-  "buildCommand": "echo \"Static site — no build step\"",
   "outputDirectory": ".",
   "rewrites": [
     { "source": "/api/contact", "destination": "/api/contact.js" }
-  ],
-  "functions": {
-    "api/contact.js": {
-      "memory": 256,
-      "maxDuration": 10
-    }
-  }
+  ]
 }
