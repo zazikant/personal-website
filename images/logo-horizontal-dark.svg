@@ -1,0 +1,50 @@
+<svg viewBox="0 0 380 120" xmlns="http://www.w3.org/2000/svg">
+  <rect width="380" height="120" fill="#0B0D10"/>
+  <g transform="translate(0, 0)">
+    
+    <!-- Document body with dog-ear fold (also forms the D silhouette) -->
+    <!-- Outer document: rounded rect with folded top-right corner -->
+    <path d="M 24 18
+             L 78 18
+             L 96 36
+             L 96 100
+             Q 96 104 92 104
+             L 28 104
+             Q 24 104 24 100
+             Z"
+          fill="none" stroke="#5EEAD4" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- Dog-ear fold line -->
+    <path d="M 78 18 L 78 36 L 96 36"
+          fill="none" stroke="#5EEAD4" stroke-width="6" stroke-linejoin="round"/>
+
+    <!-- D curve: thick stroke on the left + curve, reinforcing the D -->
+    <path d="M 24 18 L 28 18 M 24 104 L 28 104
+             M 42 28 L 42 94 Q 42 100 48 100"
+          fill="none" stroke="#5EEAD4" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Network nodes inside the document (embedding points) -->
+    <g fill="#5EEAD4">
+      <circle cx="58" cy="48" r="5.5"/>
+      <circle cx="76" cy="62" r="5.5"/>
+      <circle cx="60" cy="78" r="5.5"/>
+    </g>
+
+    <!-- Connections between nodes -->
+    <path d="M 58 48 L 76 62 L 60 78"
+          fill="none" stroke="#5EEAD4" stroke-width="2.5" stroke-opacity="0.6"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Q tail: diagonal stroke exiting the document bottom-right -->
+    <path d="M 72 82 L 100 110"
+          fill="none" stroke="#5EEAD4" stroke-width="6" stroke-linecap="round"/>
+    
+  </g>
+  <g transform="translate(120, 43)">
+    <text x="0" y="25.5"
+  font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif"
+  font-size="34" font-weight="700" letter-spacing="-0.02em">
+  <tspan fill="#FFFFFF">Doque</tspan><tspan fill="#5EEAD4">RAG</tspan>
+</text>
+  </g>
+</svg>

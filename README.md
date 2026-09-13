@@ -1,6 +1,6 @@
-# Second Brain — personal RAG website
+# DoqueRAG — personal RAG website
 
-Single-page landing site for **Second Brain**, a personal RAG (Retrieval-Augmented Generation) knowledge assistant.
+Single-page landing site for **DoqueRAG**, a retrieval-augmented knowledge system that turns personal documents into searchable, trustworthy answers.
 
 The site is a static `index.html` — no build step, no framework, no server. GSAP (loaded from CDN) handles all slide transitions. The contact form is a simple demo form that shows a success state on submit (wire it to your backend or a form service when ready).
 
@@ -12,7 +12,7 @@ The site is a static `index.html` — no build step, no framework, no server. GS
 - **Features grid** — 9 features: query expansion, document aggregation, LLM reducer, two retrieval modes, metadata filters, Add/Replace/Delete lifecycle, source citation, streaming answers, index reset.
 - **Pricing** — two plans: $50/month (monthly subscription) and $1,000 (one-time purchase). BYOK note: Supabase, Pinecone, and LLM API keys are bring-your-own; recommended model GLM 5.1, charged at provider actuals.
 - **Tech stack** — Next.js, Pinecone, NVIDIA embeddings, Supabase, LLM reducer, LiteParse, custom chunking, translation pipeline.
-- **API reference** — interactive tabbed code snippets for every endpoint (`/api/query`, `/api/upload`, `/api/ingest`, `/api/documents`, `/api/index/reset`) with one-click copy. All URLs are dummy (`https://api.second-brain.app`) — replace with your real endpoint at deploy time.
+- **API reference** — interactive tabbed code snippets for every endpoint (`/api/query`, `/api/upload`, `/api/ingest`, `/api/documents`, `/api/index/reset`) with one-click copy. All URLs are dummy (`https://api.doquerag.app`) — replace with your real endpoint at deploy time.
 - **Contact form** — a sign-up / enquiry form (name, email, company, plan selector, message). Shows a success state on submit. All CTAs across the site open this modal.
 
 ## Files
@@ -53,6 +53,6 @@ python -m http.server 8000
 - Edit the six concept captions in the `captions` array inside `initConceptSlider()`.
 - Add or remove feature cards in the `.features-grid` block.
 - Edit pricing in the `#pricing` section — monthly price, one-time price, and feature lists.
-- Add or remove API tabs in the `.api-tabs` block and matching snippets in the `snippets` object inside `initApiTabs()`. Replace dummy `https://api.second-brain.app` with your real API URL.
+- Add or remove API tabs in the `.api-tabs` block and matching snippets in the `snippets` object inside `initApiTabs()`. Replace dummy `https://api.doquerag.app` with your real API URL.
 - Wire the contact form in `initContactModal()` to your backend or a form service (Formspree, Resend, etc.).
 - Brand colors live in the `<style>` block; primary accent is `#5eead4`.

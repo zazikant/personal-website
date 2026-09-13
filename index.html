@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Second Brain — your personal RAG knowledge assistant</title>
-<meta name="description" content="A second-brain RAG system. Drop in PDFs, markdown, or raw text; ask questions in plain English; get cited, synthesized answers backed by your own documents.">
+<title>DoqueRAG — retrieval-augmented knowledge system</title>
+<meta name="description" content="DoqueRAG — a retrieval-augmented knowledge system that turns personal documents into searchable, trustworthy answers. Drop in PDFs, markdown, or raw text; ask questions in plain English; get cited, synthesized answers.">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="192x192" href="images/favicon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -48,7 +52,23 @@
     display: flex;
     align-items: center;
     gap: 10px;
+    text-decoration: none;
+    color: #fff;
   }
+  .topnav .brand .brand-logo {
+    height: 32px;
+    width: auto;
+    display: block;
+  }
+  .topnav .brand .brand-text {
+    font-family: "Inter", sans-serif;
+    font-weight: 700;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+  }
+  .topnav .brand .brand-text .rag { color: #5eead4; }
   .topnav .brand .dot {
     width: 10px; height: 10px;
     border-radius: 50%;
@@ -1002,10 +1022,10 @@
 
 <!-- ─── Top navigation ───────────────────────────────────────────────────── -->
 <nav class="topnav">
-  <div class="brand">
-    <span class="dot"></span>
-    Second Brain
-  </div>
+  <a href="#" class="brand">
+    <img src="images/logo-icon.svg" alt="DoqueRAG" class="brand-logo">
+    <span class="brand-text">Doque<span class="rag">RAG</span></span>
+  </a>
   <div class="nav-links">
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
@@ -1024,8 +1044,9 @@
     <div class="hero-grid"></div>
     <div class="hero-scrim"></div>
     <div class="hero-content">
-      <div class="hero-eyebrow">Personal RAG Knowledge Assistant</div>
-      <h1 class="hero-title">Your <span class="accent">second brain</span>, always on.</h1>
+      <img src="images/logo-horizontal-dark.svg" alt="DoqueRAG" style="height:64px;width:auto;margin-bottom:8px;max-width:100%;">
+      <div class="hero-eyebrow">Retrieval-Augmented Knowledge System</div>
+      <h1 class="hero-title">Your <span class="accent">documents</span>, turned into answers.</h1>
       <p class="hero-desc">Drop in PDFs, markdown, or raw text. Ask questions in plain English. Get cited, synthesized answers drawn only from your own documents — no hallucinated filler, no lost context, no third-party trackers.</p>
       <div class="hero-cta-row">
         <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
@@ -1100,7 +1121,7 @@
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">Six Words, One Pipeline</div>
-      <h2 class="section-title">The second brain, in telegraphic form.</h2>
+      <h2 class="section-title">The pipeline, in telegraphic form.</h2>
       <p class="section-desc">Each step of the RAG pipeline distilled to a single word. Click through to see how raw documents become cited answers.</p>
     </div>
 
@@ -1204,7 +1225,7 @@
       <div class="feature">
         <span class="feature-icon">🧹</span>
         <h3>Index Reset</h3>
-        <p>One call to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting a second brain from scratch.</p>
+        <p>One call to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
       </div>
     </div>
   </div>
@@ -1216,7 +1237,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Pricing</div>
       <h2 class="section-title">Simple, transparent pricing.</h2>
-      <p class="section-desc">Two ways to use Second Brain. Subscribe monthly or buy it outright. Infrastructure is always BYOK — you bring the keys, you pay actuals.</p>
+      <p class="section-desc">Two ways to use DoqueRAG. Subscribe monthly or buy it outright. Infrastructure is always BYOK — you bring the keys, you pay actuals.</p>
     </div>
 
     <div class="pricing-grid">
@@ -1258,7 +1279,7 @@
       <div class="note-icon">🔑</div>
       <div class="note-body">
         <h4>Bring your own keys (BYOK)</h4>
-        <p>Both plans exclude infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal second brain: under $10.</p>
+        <p>Both plans exclude infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
       </div>
     </div>
   </div>
@@ -1324,7 +1345,7 @@
     <div class="section-head">
       <div class="section-eyebrow">API Reference</div>
       <h2 class="section-title">Talk to the brain directly.</h2>
-      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://api.second-brain.app</code></p>
+      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://api.doquerag.app</code></p>
     </div>
 
     <div class="api-grid">
@@ -1357,7 +1378,7 @@
           <button class="copy-btn" id="copyApiBtn">Copy</button>
         </div>
         <pre id="api-code-block"><span class="c"># Ask a question — conversational mode (top-K = 12)</span>
-curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
+curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{
     "query": "What is the architecture?",
@@ -1383,7 +1404,7 @@ curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
 <!-- ─── CTA banner ───────────────────────────────────────────────────────── -->
 <section id="cta-banner">
   <div class="container">
-    <h2>Ready to build your second brain?</h2>
+    <h2>Ready to build your DoqueRAG?</h2>
     <p>Start at $50/month or buy it outright for $1,000. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
     <button class="hero-cta" data-cta style="margin: 0 auto;">Get started <span class="arrow">→</span></button>
   </div>
@@ -1394,8 +1415,11 @@ curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
   <div class="container">
     <div class="footer-grid">
       <div class="footer-brand">
-        <h3><span class="dot"></span>Second Brain</h3>
-        <p>A personal RAG knowledge assistant — ingest documents, ask questions in plain English, and get cited, synthesized answers backed only by your own source material.</p>
+        <a href="#" class="brand">
+          <img src="images/logo-icon.svg" alt="DoqueRAG" style="height:28px;width:auto;vertical-align:middle;margin-right:10px;">
+          <span style="font-size:18px;font-weight:800;letter-spacing:-0.01em;">Doque<span style="color:#5eead4;">RAG</span></span>
+        </a>
+        <p style="margin-top:12px;">A retrieval-augmented knowledge system — ingest documents, ask questions in plain English, and get cited, synthesized answers backed only by your own source material.</p>
       </div>
       <div class="footer-col">
         <h4>Product</h4>
@@ -1416,7 +1440,7 @@ curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Second Brain. All rights reserved.</span>
+      <span>© 2026 DoqueRAG. All rights reserved.</span>
     </div>
   </div>
 </footer>
@@ -1464,7 +1488,7 @@ curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
 <script>
 /* ════════════════════════════════════════════════════════════════════
    Hero carousel — adapted from the original GraphMailer carousel,
-   re-themed for the Second Brain RAG project.
+   re-themed for the DoqueRAG project.
    ════════════════════════════════════════════════════════════════════ */
 function initHeroCarousel() {
   function start() {
@@ -1736,23 +1760,23 @@ function initApiTabs() {
   const snippets = {
     query: {
       label: 'POST /api/query',
-      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
+      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
     },
     upload: {
       label: 'POST /api/upload',
-      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
+      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
     },
     ingest: {
       label: 'POST /api/ingest',
-      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
+      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
     },
     documents: {
       label: 'GET /api/documents',
-      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://api.second-brain.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
+      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://api.doquerag.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
     },
     reset: {
       label: 'DELETE /api/index/reset',
-      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://api.second-brain.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
+      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://api.doquerag.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
     }
   };
 
