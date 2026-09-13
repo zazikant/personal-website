@@ -726,7 +726,147 @@
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   }
 
-  /* ─── Query modal (replaces contact modal) ───────────────────────────── */
+  /* ─── Pricing ──────────────────────────────────────────────────────── */
+  #pricing {
+    background: #0b0d10;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .price-card {
+    background: #14181d;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 40px 36px;
+    position: relative;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .price-card:hover {
+    border-color: rgba(94,234,212,0.35);
+    transform: translateY(-4px);
+  }
+  .price-card.featured {
+    border-color: rgba(94,234,212,0.4);
+  }
+  .price-card.featured::before {
+    content: 'Most popular';
+    position: absolute;
+    top: -12px;
+    left: 36px;
+    background: #5eead4;
+    color: #06231d;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 3px;
+  }
+  .price-name {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: #5eead4;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .price-amount {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .price-amount .currency { font-size: 28px; vertical-align: top; opacity: 0.7; margin-right: 4px; }
+  .price-period {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 28px;
+  }
+  .price-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 32px;
+  }
+  .price-features li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.78);
+    line-height: 1.5;
+    padding: 7px 0 7px 28px;
+    position: relative;
+  }
+  .price-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 7px;
+    color: #5eead4;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .price-cta {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    background: #5eead4;
+    color: #06231d;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    text-align: center;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .price-cta:hover { background: #7df0db; transform: translateY(-1px); }
+  .price-cta.ghost {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .price-cta.ghost:hover { background: rgba(255,255,255,0.08); }
+  .price-note {
+    max-width: 880px;
+    margin: 32px auto 0;
+    padding: 24px 28px;
+    background: rgba(94,234,212,0.04);
+    border: 1px solid rgba(94,234,212,0.15);
+    border-radius: 8px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .price-note .note-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+  }
+  .price-note .note-body h4 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: #5eead4;
+  }
+  .price-note .note-body p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.7);
+  }
+  .price-note .note-body p code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: #5eead4;
+  }
+  @media (max-width: 760px) {
+    .pricing-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ─── Contact modal ────────────────────────────────────────────────── */
   .modal-backdrop {
     position: fixed;
     inset: 0;
@@ -744,7 +884,7 @@
     color: #fff;
     border-radius: 10px;
     width: 100%;
-    max-width: 640px;
+    max-width: 480px;
     padding: 36px;
     position: relative;
     box-shadow: 0 24px 80px rgba(0,0,0,0.6);
@@ -778,68 +918,52 @@
     margin-bottom: 22px;
     line-height: 1.55;
   }
-  .query-form { display: flex; flex-direction: column; gap: 14px; }
-  .query-form label {
+  .contact-form { display: flex; flex-direction: column; gap: 0; }
+  .contact-form label {
     display: block;
     font-size: 12px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     opacity: 0.65;
     margin-bottom: 6px;
+    margin-top: 16px;
     font-weight: 600;
   }
-  .query-form textarea {
+  .contact-form label:first-of-type { margin-top: 0; }
+  .contact-form input,
+  .contact-form textarea,
+  .contact-form select {
     width: 100%;
     background: #0b0d10;
     border: 1px solid rgba(255,255,255,0.12);
     border-radius: 6px;
-    padding: 14px 14px;
+    padding: 12px 14px;
     color: #fff;
-    font-size: 15px;
+    font-size: 14px;
     font-family: inherit;
-    resize: vertical;
-    min-height: 90px;
     transition: border-color 0.2s ease;
   }
-  .query-form textarea:focus {
+  .contact-form input:focus,
+  .contact-form textarea:focus,
+  .contact-form select:focus {
     outline: none;
     border-color: #5eead4;
   }
-  .mode-row {
-    display: flex;
-    gap: 8px;
-    margin-top: 4px;
+  .contact-form textarea {
+    resize: vertical;
+    min-height: 90px;
   }
-  .mode-pill {
-    flex: 1;
-    background: #0b0d10;
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.7);
-    padding: 12px 14px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-family: inherit;
-    font-size: 13px;
-    text-align: left;
-    transition: all 0.2s ease;
+  .contact-form select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' fill-opacity='0.5' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
   }
-  .mode-pill .pill-title {
-    font-weight: 700;
-    display: block;
-    margin-bottom: 3px;
-  }
-  .mode-pill .pill-desc {
-    font-size: 11px;
-    opacity: 0.7;
-    line-height: 1.4;
-  }
-  .mode-pill.active {
-    border-color: #5eead4;
-    background: rgba(94,234,212,0.08);
-    color: #fff;
-  }
-  .query-submit {
-    margin-top: 8px;
+  .contact-form select option { background: #14181d; }
+  .contact-submit {
+    margin-top: 24px;
     padding: 14px 22px;
     background: #5eead4;
     color: #06231d;
@@ -850,124 +974,28 @@
     cursor: pointer;
     font-family: inherit;
     transition: background 0.2s ease, transform 0.15s ease;
-    display: inline-flex;
+  }
+  .contact-submit:hover { background: #7df0db; transform: translateY(-1px); }
+  .contact-success {
+    display: none;
+    text-align: center;
+    padding: 28px 0 12px;
+  }
+  .contact-success.show { display: block; }
+  .contact-success .check {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: rgba(94,234,212,0.12);
+    border: 2px solid #5eead4;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-  }
-  .query-submit:hover { background: #7df0db; transform: translateY(-1px); }
-  .query-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-  .query-result {
-    margin-top: 24px;
-    display: none;
-  }
-  .query-result.show { display: block; }
-  .query-result .result-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 14px;
-    font-size: 12px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-size: 28px;
     color: #5eead4;
-    font-weight: 700;
+    margin: 0 auto 20px;
   }
-  .query-result .result-head .status-dot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: #5eead4;
-    box-shadow: 0 0 10px rgba(94,234,212,0.6);
-  }
-  .query-result .answer {
-    background: #0b0d10;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 6px;
-    padding: 18px;
-    font-size: 14px;
-    line-height: 1.65;
-    color: rgba(255,255,255,0.92);
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  .query-result .sources {
-    margin-top: 16px;
-  }
-  .query-result .sources h4 {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  .query-result .sources .src-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .query-result .sources .src-chip {
-    background: rgba(94,234,212,0.08);
-    border: 1px solid rgba(94,234,212,0.25);
-    color: #5eead4;
-    padding: 5px 10px;
-    border-radius: 3px;
-    font-size: 12px;
-    font-family: "JetBrains Mono", monospace;
-  }
-  .query-result .debug {
-    margin-top: 16px;
-    font-family: "JetBrains Mono", monospace;
-    font-size: 11px;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.6;
-    padding: 12px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 4px;
-  }
-  .query-result .error-msg {
-    background: rgba(248,113,113,0.08);
-    border: 1px solid rgba(248,113,113,0.3);
-    color: #fca5a5;
-    padding: 14px 16px;
-    border-radius: 6px;
-    font-size: 13px;
-    line-height: 1.5;
-  }
-  .loading-spinner {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 2px solid rgba(6,35,29,0.3);
-    border-top-color: #06231d;
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* Suggestion chips for empty query */
-  .suggestions {
-    margin-top: 14px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .suggestion-chip {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.75);
-    padding: 7px 12px;
-    border-radius: 4px;
-    font-size: 12px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: all 0.2s ease;
-  }
-  .suggestion-chip:hover {
-    border-color: rgba(94,234,212,0.4);
-    color: #5eead4;
-    background: rgba(94,234,212,0.06);
-  }
+  .contact-success h3 { font-size: 20px; margin-bottom: 8px; font-weight: 700; }
+  .contact-success p { font-size: 14px; opacity: 0.72; line-height: 1.55; }
 </style>
 </head>
 <body>
@@ -981,9 +1009,10 @@
   <div class="nav-links">
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
     <a href="#stack">Stack</a>
     <a href="#api">API</a>
-    <button class="nav-cta" data-cta>Ask the brain</button>
+    <button class="nav-cta" data-cta>Get started</button>
   </div>
 </nav>
 
@@ -999,7 +1028,7 @@
       <h1 class="hero-title">Your <span class="accent">second brain</span>, always on.</h1>
       <p class="hero-desc">Drop in PDFs, markdown, or raw text. Ask questions in plain English. Get cited, synthesized answers drawn only from your own documents — no hallucinated filler, no lost context, no third-party trackers.</p>
       <div class="hero-cta-row">
-        <button class="hero-cta" data-cta>Ask the brain <span class="arrow">→</span></button>
+        <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
         <a href="#how" class="hero-cta ghost">See how it works</a>
       </div>
     </div>
@@ -1014,7 +1043,7 @@
       <h1 class="hero-title">PDFs, markdown, raw text — all become <span class="accent">searchable vectors</span>.</h1>
       <p class="hero-desc">Upload files up to 4.5 MB or paste raw text. Each document is chunked, embedded with NVIDIA embeddings, and indexed in Pinecone with full metadata — doc_type, project, version, uploaded_at — so you can filter and trace every answer back to its source.</p>
       <div class="hero-cta-row">
-        <button class="hero-cta" data-cta>Try a query <span class="arrow">→</span></button>
+        <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
         <a href="#api" class="hero-cta ghost">View the API</a>
       </div>
     </div>
@@ -1029,7 +1058,7 @@
       <h1 class="hero-title">Ask in plain English. Get <span class="accent">cited answers</span>.</h1>
       <p class="hero-desc">Query expansion handles synonyms automatically — “owner” matches “lead”, “database” matches “postgres”. An LLM reducer merges the most relevant chunks into one coherent answer with conflict detection, and every response lists its source filenames so you can verify.</p>
       <div class="hero-cta-row">
-        <button class="hero-cta" data-cta>Ask now <span class="arrow">→</span></button>
+        <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
         <a href="#features" class="hero-cta ghost">See the features</a>
       </div>
     </div>
@@ -1044,8 +1073,8 @@
       <h1 class="hero-title"><span class="accent">Conversational</span> for exploration.<br><span class="accent">Precise</span> for facts.</h1>
       <p class="hero-desc">Conversational mode pulls top-12 chunks for broad, exploratory questions. Precise mode narrows to top-5 for exact, factual answers. Switch modes per question — same index, two retrieval shapes.</p>
       <div class="hero-cta-row">
-        <button class="hero-cta" data-cta>Try both modes <span class="arrow">→</span></button>
-        <a href="#concepts" class="hero-cta ghost">See the concepts</a>
+        <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
+        <a href="#pricing" class="hero-cta ghost">See pricing</a>
       </div>
     </div>
   </div>
@@ -1181,6 +1210,60 @@
   </div>
 </section>
 
+<!-- ─── Pricing ────────────────────────────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing.</h2>
+      <p class="section-desc">Two ways to use Second Brain. Subscribe monthly or buy it outright. Infrastructure is always BYOK — you bring the keys, you pay actuals.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="price-name">Monthly</div>
+        <div class="price-amount"><span class="currency">$</span>50</div>
+        <div class="price-period">per month · cancel anytime</div>
+        <ul class="price-features">
+          <li>Full access to all features</li>
+          <li>Conversational + Precise retrieval modes</li>
+          <li>Query expansion & document aggregation</li>
+          <li>LLM reducer with conflict detection</li>
+          <li>Source citation on every answer</li>
+          <li>Streaming responses via /api/query-stream</li>
+          <li>Add · Replace · Delete document lifecycle</li>
+          <li>Email support</li>
+        </ul>
+        <button class="price-cta" data-cta>Start monthly →</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">One-time purchase</div>
+        <div class="price-amount"><span class="currency">$</span>1,000</div>
+        <div class="price-period">one-time · lifetime license</div>
+        <ul class="price-features">
+          <li>Everything in Monthly, forever</li>
+          <li>Full source code (self-hosted)</li>
+          <li>Lifetime updates & patches</li>
+          <li>Deploy on your own infrastructure</li>
+          <li>No vendor lock-in</li>
+          <li>Priority support (90 days)</li>
+          <li>Commercial use included</li>
+        </ul>
+        <button class="price-cta ghost" data-cta>Buy outright →</button>
+      </div>
+    </div>
+
+    <div class="price-note">
+      <div class="note-icon">🔑</div>
+      <div class="note-body">
+        <h4>Bring your own keys (BYOK)</h4>
+        <p>Both plans exclude infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal second brain: under $10.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── Tech stack ───────────────────────────────────────────────────────── -->
 <section class="section" id="stack">
   <div class="container">
@@ -1241,7 +1324,7 @@
     <div class="section-head">
       <div class="section-eyebrow">API Reference</div>
       <h2 class="section-title">Talk to the brain directly.</h2>
-      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://rag-document-assistant-2.vercel.app</code></p>
+      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://api.second-brain.app</code></p>
     </div>
 
     <div class="api-grid">
@@ -1274,7 +1357,7 @@
           <button class="copy-btn" id="copyApiBtn">Copy</button>
         </div>
         <pre id="api-code-block"><span class="c"># Ask a question — conversational mode (top-K = 12)</span>
-curl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/query"</span> \
+curl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{
     "query": "What is the architecture?",
@@ -1300,9 +1383,9 @@ curl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/qu
 <!-- ─── CTA banner ───────────────────────────────────────────────────────── -->
 <section id="cta-banner">
   <div class="container">
-    <h2>Ask your second brain something.</h2>
-    <p>The brain is live. Drop a question below and get a cited, synthesized answer in seconds — drawn from documents already indexed in the system.</p>
-    <button class="hero-cta" data-cta style="margin: 0 auto;">Open the query box <span class="arrow">→</span></button>
+    <h2>Ready to build your second brain?</h2>
+    <p>Start at $50/month or buy it outright for $1,000. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
+    <button class="hero-cta" data-cta style="margin: 0 auto;">Get started <span class="arrow">→</span></button>
   </div>
 </section>
 
@@ -1318,72 +1401,61 @@ curl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/qu
         <h4>Product</h4>
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
         <a href="#concepts">Concepts</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
         <a href="#stack">Tech stack</a>
+        <a href="#api">API reference</a>
       </div>
       <div class="footer-col">
-        <h4>API</h4>
-        <a href="#api">Reference</a>
-        <a href="https://rag-document-assistant-2.vercel.app/api/documents" target="_blank" rel="noopener">List documents</a>
-        <a href="https://github.com/zazikant/rag-document-assistant" target="_blank" rel="noopener">Source repo</a>
-      </div>
-      <div class="footer-col">
-        <h4>Author</h4>
-        <a href="https://github.com/zazikant" target="_blank" rel="noopener">GitHub</a>
-        <a href="#" data-cta>Ask the brain</a>
+        <h4>Get started</h4>
+        <a href="#" data-cta>Request a demo</a>
+        <a href="#" data-cta>Talk to us</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Shashikant Zarekar. Built on Next.js · Pinecone · NVIDIA embeddings.</span>
-      <a href="https://github.com/zazikant/personal-website" target="_blank" rel="noopener">view source ↗</a>
+      <span>© 2026 Second Brain. All rights reserved.</span>
     </div>
   </div>
 </footer>
 
-<!-- ─── Query modal (replaces the old contact / mailto modal) ────────────── -->
-<div class="modal-backdrop" id="queryModal" role="dialog" aria-modal="true" aria-labelledby="queryModalTitle">
+<!-- ─── Contact modal ────────────────────────────────────────────────────── -->
+<div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
   <div class="modal">
     <button class="modal-close" id="modalClose" aria-label="Close">×</button>
 
-    <h2 id="queryModalTitle">Ask the second brain</h2>
-    <p class="lead">Type a question. The brain will retrieve the most relevant chunks from indexed documents, synthesize a single answer, and list every source filename it used.</p>
+    <h2 id="contactModalTitle">Get started</h2>
+    <p class="lead">Tell us a bit about yourself and which plan you're interested in. We'll get back within one business day.</p>
 
-    <form class="query-form" id="queryForm">
-      <div>
-        <label for="qf-query">Your question</label>
-        <textarea id="qf-query" name="query" placeholder="e.g. What is the architecture of this project?" required></textarea>
-        <div class="suggestions">
-          <button type="button" class="suggestion-chip">What is the architecture?</button>
-          <button type="button" class="suggestion-chip">Who is the project lead?</button>
-          <button type="button" class="suggestion-chip">What technologies are used?</button>
-        </div>
-      </div>
+    <form class="contact-form" id="contactForm">
+      <label for="cf-name">Name</label>
+      <input id="cf-name" name="name" type="text" required autocomplete="name" placeholder="Your name">
 
-      <div>
-        <label>Retrieval mode</label>
-        <div class="mode-row">
-          <button type="button" class="mode-pill active" data-mode="conversational">
-            <span class="pill-title">Conversational</span>
-            <span class="pill-desc">top-K = 12 · broad exploration</span>
-          </button>
-          <button type="button" class="mode-pill" data-mode="precise">
-            <span class="pill-title">Precise</span>
-            <span class="pill-desc">top-K = 5 · exact facts</span>
-          </button>
-        </div>
-      </div>
+      <label for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
 
-      <button type="submit" class="query-submit" id="querySubmit">
-        <span class="submit-label">Ask the brain →</span>
-      </button>
+      <label for="cf-company">Company <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
+      <input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Where do you work?">
+
+      <label for="cf-plan">Plan</label>
+      <select id="cf-plan" name="plan">
+        <option value="monthly">Monthly — $50/month</option>
+        <option value="onetime">One-time purchase — $1,000</option>
+        <option value="notsure">Not sure yet — help me decide</option>
+      </select>
+
+      <label for="cf-msg">Message</label>
+      <textarea id="cf-msg" name="message" placeholder="What are you trying to do? Any questions about BYOK, deployment, or features?" required></textarea>
+
+      <button type="submit" class="contact-submit">Send message →</button>
     </form>
 
-    <div class="query-result" id="queryResult">
-      <div class="result-head">
-        <span class="status-dot"></span>
-        <span id="resultHeadLabel">Answer</span>
-      </div>
-      <div id="resultBody"></div>
+    <div class="contact-success" id="contactSuccess">
+      <div class="check">✓</div>
+      <h3>Thanks — we'll be in touch.</h3>
+      <p>Your message has been received. Expect a reply within one business day.</p>
     </div>
   </div>
 </div>
@@ -1614,32 +1686,23 @@ function initConceptSlider() {
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   Query modal — replaces the old mailto contact form. Sends real
-   queries to the live RAG API and renders the synthesized answer.
+   Contact modal — a simple sign-up / enquiry form. On submit it
+   shows a success state. Wire this up to your backend or a form
+   service (e.g. Formspree, Resend) when you're ready to collect leads.
    ════════════════════════════════════════════════════════════════════ */
-function initQueryModal() {
-  const modal     = document.getElementById('queryModal');
-  const form      = document.getElementById('queryForm');
-  const submitBtn = document.getElementById('querySubmit');
-  const submitLbl = submitBtn.querySelector('.submit-label');
-  const resultBox = document.getElementById('queryResult');
-  const resultHead= document.getElementById('resultHeadLabel');
-  const resultBody= document.getElementById('resultBody');
-  const closeBtn  = document.getElementById('modalClose');
-  const queryInput= document.getElementById('qf-query');
-  const modePills = document.querySelectorAll('.mode-pill');
-  const suggestions = document.querySelectorAll('.suggestion-chip');
-
-  const API_BASE = 'https://rag-document-assistant-2.vercel.app';
-  let currentMode = 'conversational';
+function initContactModal() {
+  const modal    = document.getElementById('contactModal');
+  const form     = document.getElementById('contactForm');
+  const success  = document.getElementById('contactSuccess');
+  const closeBtn = document.getElementById('modalClose');
+  const nameInput= document.getElementById('cf-name');
 
   function openModal() {
     modal.classList.add('open');
     form.style.display = '';
-    resultBox.classList.remove('show');
+    success.classList.remove('show');
     form.reset();
-    modePills.forEach(p => p.classList.toggle('active', p.dataset.mode === currentMode));
-    setTimeout(() => queryInput?.focus(), 60);
+    setTimeout(() => nameInput?.focus(), 60);
   }
   function closeModal() { modal.classList.remove('open'); }
 
@@ -1652,97 +1715,12 @@ function initQueryModal() {
     if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
   });
 
-  modePills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      currentMode = pill.dataset.mode;
-      modePills.forEach(p => p.classList.toggle('active', p === pill));
-    });
-  });
-
-  suggestions.forEach(chip => {
-    chip.addEventListener('click', () => {
-      queryInput.value = chip.textContent.trim();
-      queryInput.focus();
-    });
-  });
-
-  function renderAnswer(data) {
-    const answer = data.answer || '(no answer returned)';
-    const sources = Array.isArray(data.sources) ? data.sources : [];
-    const debug = data.debug || {};
-    const aggregated = data.aggregatedContext || '';
-
-    let html = '<div class="answer">' + escapeHtml(answer) + '</div>';
-
-    if (aggregated) {
-      html += '<div class="sources"><h4>Aggregated context</h4><div class="answer" style="padding:12px;font-size:13px;">' + escapeHtml(aggregated) + '</div></div>';
-    }
-
-    if (sources.length) {
-      html += '<div class="sources"><h4>Sources (' + sources.length + ')</h4><div class="src-chips">' +
-        sources.map(s => '<span class="src-chip">' + escapeHtml(s) + '</span>').join('') +
-        '</div></div>';
-    }
-
-    if (Object.keys(debug).length) {
-      html += '<div class="debug">' +
-        'hitsFound: ' + (debug.hitsFound ?? '—') + ' · ' +
-        'documentsAggregated: ' + (debug.documentsAggregated ?? '—') + ' · ' +
-        'reducerUsed: ' + (debug.reducerUsed ?? '—') +
-        '</div>';
-    }
-
-    resultHead.textContent = 'Answer';
-    resultBody.innerHTML = html;
-    resultBox.classList.add('show');
-  }
-
-  function renderError(msg) {
-    resultHead.textContent = 'Error';
-    resultBody.innerHTML = '<div class="error-msg">' + escapeHtml(msg) + '</div>';
-    resultBox.classList.add('show');
-  }
-
-  function escapeHtml(str) {
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#39;');
-  }
-
-  form.addEventListener('submit', async e => {
+  form.addEventListener('submit', e => {
     e.preventDefault();
-    const query = queryInput.value.trim();
-    if (!query) return;
-
-    // Loading state
-    submitBtn.disabled = true;
-    submitLbl.innerHTML = '<span class="loading-spinner"></span> Querying the brain…';
-    resultBox.classList.remove('show');
-
-    try {
-      const res = await fetch(API_BASE + '/api/query', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ query: query, mode: currentMode })
-      });
-
-      if (!res.ok) {
-        const txt = await res.text().catch(() => '');
-        throw new Error('HTTP ' + res.status + ' — ' + (txt || res.statusText));
-      }
-
-      const data = await res.json();
-      renderAnswer(data);
-    } catch (err) {
-      console.error('[query] error', err);
-      renderError('Could not reach the second brain. ' + (err.message || 'Network error.') + ' The API may be rate-limited or unreachable from this network. Try again in a moment.');
-    } finally {
-      submitBtn.disabled = false;
-      submitLbl.textContent = 'Ask the brain →';
-    }
+    // Demo: just show success. Replace with a real POST to your backend
+    // or a form service (Formspree, Resend, etc.) when ready.
+    form.style.display = 'none';
+    success.classList.add('show');
   });
 }
 
@@ -1758,23 +1736,23 @@ function initApiTabs() {
   const snippets = {
     query: {
       label: 'POST /api/query',
-      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
+      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
     },
     upload: {
       label: 'POST /api/upload',
-      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
+      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
     },
     ingest: {
       label: 'POST /api/ingest',
-      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://rag-document-assistant-2.vercel.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
+      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://api.second-brain.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
     },
     documents: {
       label: 'GET /api/documents',
-      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://rag-document-assistant-2.vercel.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
+      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://api.second-brain.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
     },
     reset: {
       label: 'DELETE /api/index/reset',
-      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://rag-document-assistant-2.vercel.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
+      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://api.second-brain.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
     }
   };
 
@@ -1811,7 +1789,7 @@ function initApiTabs() {
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
   initConceptSlider();
-  initQueryModal();
+  initContactModal();
   initApiTabs();
 });
 </script>
