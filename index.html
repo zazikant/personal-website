@@ -321,6 +321,101 @@
     color: rgba(255,255,255,0.7);
   }
 
+  /* ─── Concepts slider (from gallery-demo, image removed) ─────────────── */
+  #concepts {
+    background: linear-gradient(180deg, #0b0d10 0%, #0e1116 100%);
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+  }
+  #concepts .section-head { margin-bottom: 48px; }
+
+  #concept-gallery {
+    max-width: 980px;
+    margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    padding: 56px 0 24px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  #concept-stage {
+    position: relative;
+    width: 100%;
+    min-height: 240px;
+  }
+  .concept-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 18px;
+    width: 100%;
+    padding: 8px 4px;
+  }
+  .concept-num {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12px;
+    color: #5eead4;
+    letter-spacing: 0.18em;
+  }
+  .concept-title {
+    font-size: clamp(48px, 9vw, 110px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    color: #fff;
+  }
+  .concept-title .period { color: #5eead4; }
+  .concept-text {
+    font-size: clamp(16px, 2vw, 20px);
+    line-height: 1.55;
+    color: rgba(255,255,255,0.78);
+    max-width: 720px;
+  }
+  #concept-next {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 1px solid rgba(94,234,212,0.5);
+    background: rgba(94,234,212,0.08);
+    color: #5eead4;
+    cursor: pointer;
+    margin-top: 24px;
+    font-size: 22px;
+    user-select: none;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #concept-next:hover {
+    background: rgba(94,234,212,0.2);
+    transform: translateX(4px);
+  }
+  #concept-progress {
+    display: flex;
+    gap: 6px;
+    margin-top: 24px;
+  }
+  .concept-bar {
+    flex: 1;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    overflow: hidden;
+    position: relative;
+  }
+  .concept-bar.active::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: #5eead4;
+    transform-origin: left;
+    animation: barFill 5s linear forwards;
+  }
+  @keyframes barFill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
   /* ─── How it works ───────────────────────────────────────────────────── */
   #how {
     background: #0b0d10;
@@ -1436,9 +1531,10 @@
     <span class="brand-text">Doque<span class="rag">RAG</span></span>
   </a>
   <div class="nav-links">
+    <a href="#demo">Try demo</a>
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
-    <a href="#demo">Try demo</a>
+    <a href="#concepts">Concepts</a>
     <a href="#pricing">Pricing</a>
     <a href="#stack">Stack</a>
     <a href="#api">API</a>
@@ -1600,6 +1696,24 @@
   </div>
 </section>
 
+
+<!-- ─── Concepts slider (adapted from gallery-demo.html, image removed) ──── -->
+<section class="section" id="concepts">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Six Words, One Pipeline</div>
+      <p class="section-desc">Each step of the RAG pipeline distilled to a single word. Click through to see how raw documents become cited answers.</p>
+    </div>
+
+    <div id="concept-gallery">
+      <div id="concept-stage"></div>
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px;">
+        <button id="concept-next" role="button" tabindex="0" aria-label="Next concept">→</button>
+        <div id="concept-progress" style="flex:1; max-width:520px;"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ─── How it works ─────────────────────────────────────────────────────── -->
 <section class="section" id="how">
@@ -2057,6 +2171,127 @@ function initHeroCarousel() {
   if (window.gsap) start();
   else console.error('[hero] GSAP failed to load');
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   Concepts slider — adapted from gallery-demo.html.
+   Image layer removed; slides are text-only. Captions re-themed
+   around the six steps of the RAG pipeline.
+   ════════════════════════════════════════════════════════════════════ */
+function initConceptSlider() {
+  function start() {
+    if (!window.gsap) {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js';
+      s.onload = start;
+      s.onerror = () => console.warn('GSAP failed; concept slider skipped');
+      document.head.appendChild(s);
+      return;
+    }
+
+    const root = document.getElementById('concept-gallery');
+    if (!root || root.dataset.telegraphicInit) return;
+    root.dataset.telegraphicInit = '1';
+
+    gsap.context(() => {
+      const stage = document.getElementById('concept-stage');
+      const nextBtn = document.getElementById('concept-next');
+      const progress = document.getElementById('concept-progress');
+      if (!stage || !nextBtn || !progress) return;
+
+      const captions = [
+        { title: 'Ingest',      text: 'PDFs, markdown, plain text — every document enters the brain through a single endpoint. Files up to 4.5 MB, raw text of any reasonable length, metadata tags for filtering later.' },
+        { title: 'Chunk',       text: 'Documents split into semantic chunks with overlap. Each chunk carries its filename, doc_type, project, and version — so retrieval can be scoped and every answer can be traced back to its source.' },
+        { title: 'Embed',       text: 'NVIDIA embedding models turn each chunk into a high-dimensional vector that captures meaning, not just keywords. Synonyms match. Paraphrases match. The brain understands intent.' },
+        { title: 'Retrieve',    text: 'Pinecone finds the most relevant chunks in milliseconds. Query expansion rewrites synonyms before retrieval. Top-K is pulled, grouped by filename, and reranked by avgScore × log(chunkCount + 1).' },
+        { title: 'Synthesize',  text: 'An LLM reducer merges the most relevant chunks into one coherent answer. It extracts key points, detects conflicts across sources, and produces a unified response — not a stitched-together list.' },
+        { title: 'Cite',        text: 'Every answer ships with a sources array of filenames. Only files that still exist in the documents table are returned. Deleted docs are never cited. You can verify everything.' }
+      ];
+
+      const slides = [];
+      captions.forEach((cap, i) => {
+        const slide = document.createElement('div');
+        slide.className = 'concept-slide';
+        slide.innerHTML =
+          '<div class="concept-num">' + String(i + 1).padStart(2, '0') + ' / 06</div>' +
+          '<div class="concept-title">' + cap.title + '<span class="period">.</span></div>' +
+          '<div class="concept-text">' + cap.text + '</div>';
+        stage.appendChild(slide);
+        slides.push(slide);
+      });
+
+      // Progress bars
+      captions.forEach((_, i) => {
+        const bar = document.createElement('div');
+        bar.className = 'concept-bar' + (i === 0 ? ' active' : '');
+        progress.appendChild(bar);
+      });
+      const bars = progress.querySelectorAll('.concept-bar');
+
+      let current = 0;
+      let animating = false;
+
+      gsap.set(slides, { position: 'absolute', top: 0, left: 0, width: '100%', opacity: 0, xPercent: 100 });
+      gsap.set(slides[0], { opacity: 1, xPercent: 0 });
+      stage.style.height = slides[0].offsetHeight + 'px';
+
+      function setActiveBar(idx) {
+        bars.forEach((b, i) => {
+          b.classList.remove('active');
+          // force reflow to restart animation
+          if (i === idx) {
+            void b.offsetWidth;
+            b.classList.add('active');
+          }
+        });
+      }
+
+      function goTo(next) {
+        if (animating) return;
+        animating = true;
+        const dir = next > current ? 1 : -1;
+        const outSlide = slides[current];
+        const inSlide = slides[next];
+        current = next;
+
+        gsap.timeline({ onComplete: () => { animating = false; } })
+          .to(outSlide, { xPercent: -100 * dir, opacity: 0, duration: 0.55, ease: 'power2.inOut' }, 0)
+          .fromTo(inSlide,
+            { xPercent: 100 * dir, opacity: 0 },
+            { xPercent: 0, opacity: 1, duration: 0.55, ease: 'power2.inOut' }, 0)
+          .fromTo(inSlide.querySelectorAll('.concept-num, .concept-title, .concept-text'),
+            { y: 24, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.45, stagger: 0.1, ease: 'power2.out' }, 0.25);
+
+        setActiveBar(current);
+      }
+
+      function nextSlide() { goTo((current + 1) % slides.length); }
+
+      nextBtn.addEventListener('click', nextSlide);
+      nextBtn.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+      });
+
+      let timer = gsap.delayedCall(5, function repeat() {
+        nextSlide();
+        timer.restart(true);
+      });
+
+      gsap.from(root, { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out' });
+
+      window.addEventListener('resize', () => {
+        stage.style.height = slides[current].offsetHeight + 'px';
+      });
+    }, root);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+}
+
 
 /* ════════════════════════════════════════════════════════════════════
    Contact modal — posts the form to /api/contact (Vercel serverless
@@ -2638,6 +2873,7 @@ function initDemo() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
+  initConceptSlider();
   initContactModal();
   initApiTabs();
   initDemo();
