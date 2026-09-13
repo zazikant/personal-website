@@ -383,9 +383,14 @@
     color: #5eead4;
     cursor: pointer;
     margin-top: 24px;
-    font-size: 22px;
+    padding: 0;
+    line-height: 1;
     user-select: none;
     transition: background 0.2s ease, transform 0.2s ease;
+  }
+  #concept-next svg {
+    display: block;
+    flex-shrink: 0;
   }
   #concept-next:hover {
     background: rgba(94,234,212,0.2);
@@ -1703,7 +1708,12 @@
     <div id="concept-gallery">
       <div id="concept-stage"></div>
       <div style="display:flex; align-items:center; justify-content:space-between; gap:24px;">
-        <button id="concept-next" role="button" tabindex="0" aria-label="Next concept">→</button>
+        <button id="concept-next" role="button" tabindex="0" aria-label="Next concept">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="13 6 19 12 13 18"></polyline>
+          </svg>
+        </button>
         <div id="concept-progress" style="flex:1; max-width:520px;"></div>
       </div>
     </div>
