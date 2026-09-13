@@ -1725,32 +1725,35 @@
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">How It Works</div>
-      <h2 class="section-title">Three steps from document to answer.</h2>
-      <p class="section-desc">No model training, no fine-tuning, no infrastructure to babysit. Just upload, ask, and read.</p>
+      <h2 class="section-title">From messy PDFs to answers you can cite in 30 seconds.</h2>
+      <p class="section-desc">No model training, no fine-tuning, no infrastructure to babysit. Drop a document in, ask a question, get an answer with the source file attached.</p>
     </div>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">01 / INGEST</div>
         <div class="step-icon">📄</div>
-        <h3>Upload or paste</h3>
-        <p>POST a PDF (FormData or base64), a markdown file, or raw text to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:13px;">/api/upload</code> or <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:13px;">/api/ingest</code>. Files up to 4.5 MB are accepted — the Vercel serverless payload limit. Metadata like <em>doc_type</em>, <em>project</em>, and <em>version</em> is stored alongside every chunk so you can filter later.</p>
+        <h3>Drop a document in</h3>
+        <p>Upload a PDF, markdown, or raw text. We handle the parsing — no cleanup, no formatting fixes needed on your end. Every chunk is tagged with its filename, <em>doc_type</em>, <em>project</em>, and <em>version</em> so you can filter later.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> Drop a 200-page PDF, we handle the parsing.</p>
         <span class="step-tag">POST /api/upload · /api/ingest</span>
       </div>
 
       <div class="step">
         <div class="step-num">02 / INDEX</div>
         <div class="step-icon">🧠</div>
-        <h3>Chunk, embed, store</h3>
-        <p>Documents are split into semantic chunks, embedded with NVIDIA embedding models, and upserted into a Pinecone vector index. Each chunk carries its filename, doc_type, project, version, and uploaded_at — so retrieval can be filtered and every answer can be traced back to its exact source document.</p>
+        <h3>We remember where every fact came from</h3>
+        <p>Each document is chunked, embedded, and stored with full provenance — filename, version, page, and upload timestamp. So v2 of a policy doesn't get mixed with v1, and retrieval can be scoped to a single project or release.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> We remember which file, version, and page each fact came from.</p>
         <span class="step-tag">NVIDIA embeddings · Pinecone</span>
       </div>
 
       <div class="step">
         <div class="step-num">03 / ANSWER</div>
         <div class="step-icon">💬</div>
-        <h3>Retrieve, reduce, cite</h3>
-        <p>Query expansion rewrites synonyms before retrieval. Top-K chunks are pulled from Pinecone, grouped by filename, and reranked by <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">avgScore * log(chunkCount + 1)</code>. An LLM reducer synthesizes a single answer with conflict detection and lists every source filename.</p>
+        <h3>Ask a question, get a cited answer</h3>
+        <p>Query expansion catches synonyms automatically — "owner" matches "lead" and "manager". An LLM reducer synthesizes the most relevant chunks into one coherent answer, detects conflicts across sources, and lists every filename it used.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
         <span class="step-tag">POST /api/query · /api/query-stream</span>
       </div>
     </div>
@@ -1931,6 +1934,14 @@
       <div class="section-eyebrow">API Reference</div>
       <h2 class="section-title">Talk to the brain directly.</h2>
       <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://api.doquerag.app</code></p>
+    </div>
+
+    <div style="max-width:880px;margin:0 auto 32px;padding:14px 20px;border-radius:8px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);display:flex;align-items:flex-start;gap:12px;">
+      <span style="font-size:18px;flex-shrink:0;">⚠️</span>
+      <div>
+        <strong style="font-size:13px;color:#fbbf24;">File size limit:</strong>
+        <span style="font-size:13px;color:rgba(255,255,255,0.7);"> PDF uploads must be under 4.5 MB (Vercel serverless payload limit). For larger files, split before upload or use the raw text ingest endpoint.</span>
+      </div>
     </div>
 
     <div class="api-grid">
