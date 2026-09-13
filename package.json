@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "description": "DoqueRAG — retrieval-augmented knowledge system landing page",
+  "scripts": {
+    "build": "echo \"Static site — no build step required\""
+  },
   "dependencies": {
     "nodemailer": "^6.10.1"
   },
