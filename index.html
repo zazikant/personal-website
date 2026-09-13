@@ -321,101 +321,6 @@
     color: rgba(255,255,255,0.7);
   }
 
-  /* ─── Concepts slider (from gallery-demo, image removed) ─────────────── */
-  #concepts {
-    background: linear-gradient(180deg, #0b0d10 0%, #0e1116 100%);
-    border-top: 1px solid rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-  }
-  #concepts .section-head { margin-bottom: 48px; }
-
-  #concept-gallery {
-    max-width: 980px;
-    margin: 0 auto;
-    position: relative;
-    overflow: hidden;
-    padding: 56px 0 24px;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-  #concept-stage {
-    position: relative;
-    width: 100%;
-    min-height: 240px;
-  }
-  .concept-slide {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 18px;
-    width: 100%;
-    padding: 8px 4px;
-  }
-  .concept-num {
-    font-family: "JetBrains Mono", monospace;
-    font-size: 12px;
-    color: #5eead4;
-    letter-spacing: 0.18em;
-  }
-  .concept-title {
-    font-size: clamp(48px, 9vw, 110px);
-    font-weight: 900;
-    letter-spacing: -0.04em;
-    line-height: 0.95;
-    color: #fff;
-  }
-  .concept-title .period { color: #5eead4; }
-  .concept-text {
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.55;
-    color: rgba(255,255,255,0.78);
-    max-width: 720px;
-  }
-  #concept-next {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 1px solid rgba(94,234,212,0.5);
-    background: rgba(94,234,212,0.08);
-    color: #5eead4;
-    cursor: pointer;
-    margin-top: 24px;
-    font-size: 22px;
-    user-select: none;
-    transition: background 0.2s ease, transform 0.2s ease;
-  }
-  #concept-next:hover {
-    background: rgba(94,234,212,0.2);
-    transform: translateX(4px);
-  }
-  #concept-progress {
-    display: flex;
-    gap: 6px;
-    margin-top: 24px;
-  }
-  .concept-bar {
-    flex: 1;
-    height: 2px;
-    background: rgba(255,255,255,0.1);
-    overflow: hidden;
-    position: relative;
-  }
-  .concept-bar.active::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: #5eead4;
-    transform-origin: left;
-    animation: barFill 5s linear forwards;
-  }
-  @keyframes barFill {
-    from { transform: scaleX(0); }
-    to { transform: scaleX(1); }
-  }
-
   /* ─── How it works ───────────────────────────────────────────────────── */
   #how {
     background: #0b0d10;
@@ -656,20 +561,165 @@
     .api-tab { white-space: nowrap; }
   }
 
+  /* ─── Documents panel (demo sidebar) ─────────────────────────────────── */
+  .demo-layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .demo-docs-panel {
+    background: #141414;
+    border: 1px solid #262626;
+    border-right: none;
+    border-radius: 12px 0 0 12px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .demo-docs-header {
+    padding: 14px 16px;
+    border-bottom: 1px solid #262626;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .demo-docs-header h3 {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ededed;
+    margin: 0;
+  }
+  .demo-docs-count {
+    font-size: 11px;
+    color: #a1a1aa;
+    background: rgba(255,255,255,0.05);
+    padding: 2px 7px;
+    border-radius: 10px;
+  }
+  .demo-docs-add {
+    margin: 12px;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px dashed #262626;
+    background: transparent;
+    color: #a1a1aa;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-family: inherit;
+  }
+  .demo-docs-add:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+    background: rgba(59,130,246,0.05);
+  }
+  .demo-docs-add svg { width: 14px; height: 14px; }
+  .demo-docs-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 8px 8px;
+    max-height: 460px;
+  }
+  .demo-docs-list::-webkit-scrollbar { width: 4px; }
+  .demo-docs-list::-webkit-scrollbar-track { background: transparent; }
+  .demo-docs-list::-webkit-scrollbar-thumb { background: #262626; border-radius: 2px; }
+  .demo-doc-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s ease;
+    margin-bottom: 2px;
+  }
+  .demo-doc-item:hover { background: rgba(255,255,255,0.04); }
+  .demo-doc-item.new {
+    animation: demo-doc-flash 1.2s ease-out;
+  }
+  @keyframes demo-doc-flash {
+    0% { background: rgba(59,130,246,0.2); }
+    100% { background: transparent; }
+  }
+  .demo-doc-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    background: rgba(59,130,246,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .demo-doc-icon svg { width: 14px; height: 14px; color: #3b82f6; }
+  .demo-doc-info { flex: 1; min-width: 0; }
+  .demo-doc-name {
+    font-size: 12px;
+    font-weight: 500;
+    color: #ededed;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+  }
+  .demo-doc-meta {
+    font-size: 10px;
+    color: #71717a;
+    font-family: ui-monospace, "JetBrains Mono", monospace;
+    line-height: 1.4;
+  }
+  .demo-doc-delete {
+    background: none;
+    border: none;
+    color: #52525b;
+    cursor: pointer;
+    padding: 2px;
+    border-radius: 4px;
+    opacity: 0;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+  .demo-doc-item:hover .demo-doc-delete { opacity: 1; }
+  .demo-doc-delete:hover { color: #ef4444; background: rgba(239,68,68,0.1); }
+  .demo-doc-delete svg { width: 12px; height: 12px; }
+
+  .demo-chat-panel {
+    background: #141414;
+    border: 1px solid #262626;
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  @media (max-width: 700px) {
+    .demo-layout { grid-template-columns: 1fr; }
+    .demo-docs-panel {
+      border-radius: 12px 12px 0 0;
+      border-right: 1px solid #262626;
+      border-bottom: none;
+    }
+    .demo-chat-panel {
+      border-radius: 0 0 12px 12px;
+    }
+    .demo-docs-list { max-height: 200px; }
+  }
+
   /* ─── Live demo (RAG app UI replica) ─────────────────────────────────── */
   #demo {
     background: #0a0a0a;
     border-top: 1px solid rgba(255,255,255,0.04);
   }
-  .demo-wrapper {
-    max-width: 720px;
-    margin: 0 auto;
-    background: #141414;
-    border: 1px solid #262626;
-    border-radius: 12px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
+  .demo-chat-panel {
+    /* styles moved to .demo-chat-panel in documents panel CSS above */
   }
 
   /* Demo header */
@@ -1476,24 +1526,80 @@
 
 </div>
 
-<!-- ─── Concepts slider (adapted from gallery-demo.html, image removed) ──── -->
-<section class="section" id="concepts">
+<!-- ─── Live demo (RAG app UI replica — two-pane with documents + chat) ──── -->
+<section class="section" id="demo">
   <div class="container">
     <div class="section-head">
-      <div class="section-eyebrow">Six Words, One Pipeline</div>
-      <h2 class="section-title">The pipeline, in telegraphic form.</h2>
-      <p class="section-desc">Each step of the RAG pipeline distilled to a single word. Click through to see how raw documents become cited answers.</p>
+      <div class="section-eyebrow">Live Preview</div>
+      <h2 class="section-title">Try the interface.</h2>
+      <p class="section-desc">This is a UI replica of the DoqueRAG app — not connected to a live backend. Add a document, type a question, and watch the streaming response with live pipeline log. Purely cosmetic.</p>
     </div>
 
-    <div id="concept-gallery">
-      <div id="concept-stage"></div>
-      <div style="display:flex; align-items:center; justify-content:space-between; gap:24px;">
-        <button id="concept-next" role="button" tabindex="0" aria-label="Next concept">→</button>
-        <div id="concept-progress" style="flex:1; max-width:520px;"></div>
+    <div class="demo-layout">
+      <!-- Documents Panel -->
+      <div class="demo-docs-panel">
+        <div class="demo-docs-header">
+          <h3>Documents</h3>
+          <span class="demo-docs-count" id="demoDocsCount">3</span>
+        </div>
+        <button class="demo-docs-add" id="demoAddDoc">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+          </svg>
+          Add Document
+        </button>
+        <div class="demo-docs-list" id="demoDocsList">
+          <!-- Documents populated by JS -->
+        </div>
+      </div>
+
+      <!-- Chat Panel -->
+      <div class="demo-chat-panel">
+        <!-- Header -->
+        <div class="demo-header">
+          <div class="demo-header-icon">
+            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
+            </svg>
+          </div>
+          <div>
+            <div class="demo-header-title">RAG Assistant</div>
+            <div class="demo-header-sub" id="demoDocCount">3 documents indexed</div>
+          </div>
+        </div>
+
+        <!-- Messages -->
+        <div class="demo-messages" id="demoMessages">
+          <div class="demo-empty" id="demoEmpty">
+            <div class="demo-empty-icon">
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+              </svg>
+            </div>
+            <h3>Upload some documents and ask questions!</h3>
+            <p>Add a document on the left, then type a question below to query it with AI-powered search.</p>
+          </div>
+        </div>
+
+        <!-- Input -->
+        <div class="demo-input-area">
+          <form class="demo-input-form" id="demoForm">
+            <textarea class="demo-input" id="demoInput" placeholder="Ask a question about your documents…" rows="1"></textarea>
+            <button type="submit" class="demo-send-btn" id="demoSend" disabled>
+              <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
+              </svg>
+            </button>
+          </form>
+          <p class="demo-input-hint">Press Enter to send · Shift+Enter for new line</p>
+        </div>
       </div>
     </div>
+
+    <div class="demo-disclaimer">↑ UI preview only · responses are pre-written · no data is sent anywhere</div>
   </div>
 </section>
+
 
 <!-- ─── How it works ─────────────────────────────────────────────────────── -->
 <section class="section" id="how">
@@ -1761,60 +1867,6 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
   </div>
 </section>
 
-<!-- ─── Live demo (RAG app UI replica — streaming + thinking log) ───────── -->
-<section class="section" id="demo">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-eyebrow">Live Preview</div>
-      <h2 class="section-title">Try the interface.</h2>
-      <p class="section-desc">This is a UI replica of the DoqueRAG app — not connected to a live backend. Type a question and watch the streaming response with live pipeline log. Purely cosmetic.</p>
-    </div>
-
-    <div class="demo-wrapper">
-      <!-- Header -->
-      <div class="demo-header">
-        <div class="demo-header-icon">
-          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
-          </svg>
-        </div>
-        <div>
-          <div class="demo-header-title">RAG Assistant</div>
-          <div class="demo-header-sub" id="demoDocCount">3 documents indexed</div>
-        </div>
-      </div>
-
-      <!-- Messages -->
-      <div class="demo-messages" id="demoMessages">
-        <div class="demo-empty" id="demoEmpty">
-          <div class="demo-empty-icon">
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
-            </svg>
-          </div>
-          <h3>Upload some documents and ask questions!</h3>
-          <p>Add your PDF or text documents on the left, then come back here to query them with AI-powered search.</p>
-        </div>
-      </div>
-
-      <!-- Input -->
-      <div class="demo-input-area">
-        <form class="demo-input-form" id="demoForm">
-          <textarea class="demo-input" id="demoInput" placeholder="Ask a question about your documents…" rows="1"></textarea>
-          <button type="submit" class="demo-send-btn" id="demoSend" disabled>
-            <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />
-            </svg>
-          </button>
-        </form>
-        <p class="demo-input-hint">Press Enter to send · Shift+Enter for new line</p>
-      </div>
-    </div>
-
-    <div class="demo-disclaimer">↑ UI preview only · responses are pre-written · no data is sent anywhere</div>
-  </div>
-</section>
-
 <!-- ─── CTA banner ───────────────────────────────────────────────────────── -->
 <section id="cta-banner">
   <div class="container">
@@ -1840,8 +1892,7 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
         <a href="#how">How it works</a>
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
-        <a href="#concepts">Concepts</a>
-      </div>
+          </div>
       <div class="footer-col">
         <h4>Resources</h4>
         <a href="#stack">Tech stack</a>
@@ -2008,126 +2059,6 @@ function initHeroCarousel() {
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   Concepts slider — adapted from gallery-demo.html.
-   Image layer removed; slides are text-only. Captions re-themed
-   around the six steps of the RAG pipeline.
-   ════════════════════════════════════════════════════════════════════ */
-function initConceptSlider() {
-  function start() {
-    if (!window.gsap) {
-      const s = document.createElement('script');
-      s.src = 'https://cdn.jsdelivr.net/npm/gsap@3.13/dist/gsap.min.js';
-      s.onload = start;
-      s.onerror = () => console.warn('GSAP failed; concept slider skipped');
-      document.head.appendChild(s);
-      return;
-    }
-
-    const root = document.getElementById('concept-gallery');
-    if (!root || root.dataset.telegraphicInit) return;
-    root.dataset.telegraphicInit = '1';
-
-    gsap.context(() => {
-      const stage = document.getElementById('concept-stage');
-      const nextBtn = document.getElementById('concept-next');
-      const progress = document.getElementById('concept-progress');
-      if (!stage || !nextBtn || !progress) return;
-
-      const captions = [
-        { title: 'Ingest',      text: 'PDFs, markdown, plain text — every document enters the brain through a single endpoint. Files up to 4.5 MB, raw text of any reasonable length, metadata tags for filtering later.' },
-        { title: 'Chunk',       text: 'Documents split into semantic chunks with overlap. Each chunk carries its filename, doc_type, project, and version — so retrieval can be scoped and every answer can be traced back to its source.' },
-        { title: 'Embed',       text: 'NVIDIA embedding models turn each chunk into a high-dimensional vector that captures meaning, not just keywords. Synonyms match. Paraphrases match. The brain understands intent.' },
-        { title: 'Retrieve',    text: 'Pinecone finds the most relevant chunks in milliseconds. Query expansion rewrites synonyms before retrieval. Top-K is pulled, grouped by filename, and reranked by avgScore × log(chunkCount + 1).' },
-        { title: 'Synthesize',  text: 'An LLM reducer merges the most relevant chunks into one coherent answer. It extracts key points, detects conflicts across sources, and produces a unified response — not a stitched-together list.' },
-        { title: 'Cite',        text: 'Every answer ships with a sources array of filenames. Only files that still exist in the documents table are returned. Deleted docs are never cited. You can verify everything.' }
-      ];
-
-      const slides = [];
-      captions.forEach((cap, i) => {
-        const slide = document.createElement('div');
-        slide.className = 'concept-slide';
-        slide.innerHTML =
-          '<div class="concept-num">' + String(i + 1).padStart(2, '0') + ' / 06</div>' +
-          '<div class="concept-title">' + cap.title + '<span class="period">.</span></div>' +
-          '<div class="concept-text">' + cap.text + '</div>';
-        stage.appendChild(slide);
-        slides.push(slide);
-      });
-
-      // Progress bars
-      captions.forEach((_, i) => {
-        const bar = document.createElement('div');
-        bar.className = 'concept-bar' + (i === 0 ? ' active' : '');
-        progress.appendChild(bar);
-      });
-      const bars = progress.querySelectorAll('.concept-bar');
-
-      let current = 0;
-      let animating = false;
-
-      gsap.set(slides, { position: 'absolute', top: 0, left: 0, width: '100%', opacity: 0, xPercent: 100 });
-      gsap.set(slides[0], { opacity: 1, xPercent: 0 });
-      stage.style.height = slides[0].offsetHeight + 'px';
-
-      function setActiveBar(idx) {
-        bars.forEach((b, i) => {
-          b.classList.remove('active');
-          // force reflow to restart animation
-          if (i === idx) {
-            void b.offsetWidth;
-            b.classList.add('active');
-          }
-        });
-      }
-
-      function goTo(next) {
-        if (animating) return;
-        animating = true;
-        const dir = next > current ? 1 : -1;
-        const outSlide = slides[current];
-        const inSlide = slides[next];
-        current = next;
-
-        gsap.timeline({ onComplete: () => { animating = false; } })
-          .to(outSlide, { xPercent: -100 * dir, opacity: 0, duration: 0.55, ease: 'power2.inOut' }, 0)
-          .fromTo(inSlide,
-            { xPercent: 100 * dir, opacity: 0 },
-            { xPercent: 0, opacity: 1, duration: 0.55, ease: 'power2.inOut' }, 0)
-          .fromTo(inSlide.querySelectorAll('.concept-num, .concept-title, .concept-text'),
-            { y: 24, opacity: 0 },
-            { y: 0, opacity: 1, duration: 0.45, stagger: 0.1, ease: 'power2.out' }, 0.25);
-
-        setActiveBar(current);
-      }
-
-      function nextSlide() { goTo((current + 1) % slides.length); }
-
-      nextBtn.addEventListener('click', nextSlide);
-      nextBtn.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); nextSlide(); }
-      });
-
-      let timer = gsap.delayedCall(5, function repeat() {
-        nextSlide();
-        timer.restart(true);
-      });
-
-      gsap.from(root, { opacity: 0, y: 40, duration: 0.8, ease: 'power2.out' });
-
-      window.addEventListener('resize', () => {
-        stage.style.height = slides[current].offsetHeight + 'px';
-      });
-    }, root);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', start);
-  } else {
-    start();
-  }
-}
-
-/* ════════════════════════════════════════════════════════════════════
    Contact modal — posts the form to /api/contact (Vercel serverless
    function that sends email via SMTP). Shows loading, success, and
    error states.
@@ -2286,6 +2217,81 @@ function initDemo() {
   const formEl     = document.getElementById('demoForm');
 
   if (!messagesEl || !inputEl || !sendBtn) return;
+
+  // ── Documents panel ─────────────────────────────────────────────────
+  const docsListEl   = document.getElementById('demoDocsList');
+  const docsCountEl  = document.getElementById('demoDocsCount');
+  const addDocBtn    = document.getElementById('demoAddDoc');
+  const docCountEl2  = document.getElementById('demoDocCount');
+
+  const FILE_SVG_SMALL = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" /></svg>';
+  const TRASH_SVG = '<svg fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" /></svg>';
+
+  // Initial dummy documents
+  let documents = [
+    { name: 'architecture.pdf', size: '2.4 MB', chunks: 18, uploaded: '2 hours ago' },
+    { name: 'retrieval-pipeline.md', size: '12 KB', chunks: 5, uploaded: '5 hours ago' },
+    { name: 'security-overview.md', size: '8 KB', chunks: 3, uploaded: '1 day ago' },
+  ];
+
+  const dummyFilenames = [
+    'meeting-notes.md', 'project-spec.pdf', 'api-docs.md', 'research-paper.pdf',
+    'config.yaml', 'user-guide.md', 'changelog.txt', 'design-spec.pdf',
+    'data-dictionary.md', 'runbook.pdf', 'retrospective.md', 'roadmap.pdf'
+  ];
+  let dummyIdx = 0;
+
+  function renderDocs() {
+    if (!docsListEl) return;
+    docsListEl.innerHTML = '';
+    for (const doc of documents) {
+      const item = document.createElement('div');
+      item.className = 'demo-doc-item';
+      item.innerHTML =
+        '<div class="demo-doc-icon">' + FILE_SVG_SMALL + '</div>' +
+        '<div class="demo-doc-info">' +
+          '<div class="demo-doc-name">' + escapeHtml(doc.name) + '</div>' +
+          '<div class="demo-doc-meta">' + doc.chunks + ' chunks · ' + doc.size + '</div>' +
+        '</div>' +
+        '<button class="demo-doc-delete" title="Delete">' + TRASH_SVG + '</button>';
+      // Delete handler
+      item.querySelector('.demo-doc-delete').addEventListener('click', (e) => {
+        e.stopPropagation();
+        documents = documents.filter(d => d.name !== doc.name);
+        renderDocs();
+      });
+      docsListEl.appendChild(item);
+    }
+    // Update counts
+    if (docsCountEl) docsCountEl.textContent = documents.length;
+    if (docCountEl2) {
+      docCountEl2.textContent = documents.length + ' document' + (documents.length !== 1 ? 's' : '') + ' indexed';
+    }
+    // Update empty state visibility
+    if (emptyEl) {
+      emptyEl.style.display = messagesEl.children.length > 0 ? 'none' : '';
+    }
+  }
+
+  function addDummyDoc() {
+    const name = dummyFilenames[dummyIdx % dummyFilenames.length];
+    dummyIdx++;
+    const isPdf = name.endsWith('.pdf');
+    const size = isPdf ? (Math.random() * 3 + 0.5).toFixed(1) + ' MB' : (Math.random() * 20 + 4).toFixed(0) + ' KB';
+    const chunks = isPdf ? Math.floor(Math.random() * 20 + 5) : Math.floor(Math.random() * 8 + 2);
+    documents.unshift({ name, size, chunks, uploaded: 'just now' });
+    renderDocs();
+    // Flash the new doc
+    const firstItem = docsListEl.querySelector('.demo-doc-item');
+    if (firstItem) firstItem.classList.add('new');
+  }
+
+  if (addDocBtn) {
+    addDocBtn.addEventListener('click', addDummyDoc);
+  }
+
+  renderDocs();
+
 
   // ── Pre-written Q&A pairs ──────────────────────────────────────────
   const responses = [
@@ -2632,7 +2638,6 @@ function initDemo() {
 
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
-  initConceptSlider();
   initContactModal();
   initApiTabs();
   initDemo();
