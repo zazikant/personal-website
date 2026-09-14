@@ -3117,7 +3117,9 @@ function initDemo() {
     appendUserMessage(text);
 
     const response = findResponse(text);
-    const bubble = createAssistantPlaceholder();
+
+    // Create pipeline log FIRST (between user message and assistant answer)
+    // so the pipeline process is visible while the answer streams in below it
     const pipelineLog = createPipelineLog();
     eventCount = 0;
 
@@ -3134,6 +3136,9 @@ function initDemo() {
 
     // Small gap before streaming starts
     await sleep(300);
+
+    // Now create the assistant message and stream the answer INTO it
+    const bubble = createAssistantPlaceholder();
 
     // Stream the answer
     await streamAnswer(bubble, response.answer, response.sources);
