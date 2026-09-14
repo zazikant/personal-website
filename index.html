@@ -214,7 +214,7 @@
 
   .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
 
-  /* ─── Floating promo image (always visible on hero) ───────────────────── */
+  /* ─── Floating promo video (always visible on hero, desktop only) ──────── */
   .hero-video {
     position: absolute;
     right: 48px;
@@ -228,15 +228,14 @@
     z-index: 5;
     pointer-events: none;
   }
-  .hero-video img {
+  .hero-video iframe {
     width: 100%;
     height: 100%;
     border: none;
     display: block;
-    object-fit: cover;
   }
   .hero-video::after {
-    content: 'DoqueRAG';
+    content: 'LIVE DEMO';
     position: absolute;
     top: 8px;
     left: 8px;
@@ -859,7 +858,7 @@
     border-top: 1px solid rgba(255,255,255,0.04);
   }
   .demo-promo-mobile {
-    display: none;
+    display: block;
     width: 100%;
     max-width: 260px;
     height: auto;
@@ -867,9 +866,6 @@
     border-radius: 14px;
     border: 1px solid rgba(255,255,255,0.15);
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  @media (max-width: 768px) {
-    .demo-promo-mobile { display: block; }
   }
   .demo-chat-panel {
     /* styles moved to .demo-chat-panel in documents panel CSS above */
@@ -1781,9 +1777,14 @@
 <button class="hero-nav-btn swiper-button-prev" aria-label="Previous slide">‹</button>
   <button class="hero-nav-btn swiper-button-next" aria-label="Next slide">›</button>
 
-  <!-- Floating demo image — always visible on top of all slides -->
+  <!-- Floating demo video — always visible on top of all slides (desktop) -->
   <div class="hero-video">
-    <img src="images/hero-promo.png" alt="DoqueRAG — chat with your memory" />
+    <iframe
+      src="https://www.youtube.com/embed/usKM4Ku0DTM?loop=1&playlist=usKM4Ku0DTM&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1"
+      title="DoqueRAG demo"
+      frameborder="0"
+      allow="autoplay; encrypted-media; picture-in-picture"
+      allowfullscreen></iframe>
   </div>
 
   <div class="hero-dots" role="tablist">
