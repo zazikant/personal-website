@@ -3162,6 +3162,37 @@ function initDemo() {
     inputEl.style.height = Math.min(inputEl.scrollHeight, 100) + 'px';
     sendBtn.disabled = !inputEl.value.trim() || isStreaming;
   });
+
+  // ── Auto-play a preloaded question to show off the pipeline ────────
+  // Plays once when the demo section scrolls into view (or 2.5s after
+  // load if already visible). After it finishes, the user can type
+  // their own questions.
+  const preloadedQuestion = 'What is DoqueRAG?';
+  let hasAutoPlayed = false;
+
+  function autoPlayDemo() {
+    if (hasAutoPlayed || isStreaming) return;
+    hasAutoPlayed = true;
+    inputEl.value = preloadedQuestion;
+    send();
+  }
+
+  // Use IntersectionObserver to trigger when demo is visible
+  const demoSection = document.getElementById('demo');
+  if (demoSection && 'IntersectionObserver' in window) {
+    const demoObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          setTimeout(autoPlayDemo, 800);
+          demoObserver.disconnect();
+        }
+      }
+    }, { threshold: 0.25 });
+    demoObserver.observe(demoSection);
+  } else {
+    // Fallback: just auto-play after 2.5s
+    setTimeout(autoPlayDemo, 2500);
+  }
 }
 
 
