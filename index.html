@@ -910,7 +910,7 @@
     overflow-y: auto;
     padding: 16px 20px;
     min-height: 380px;
-    max-height: 480px;
+    max-height: 600px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -3035,7 +3035,8 @@ function initDemo() {
       '</div>' +
       '<div class="demo-pipeline-log-body"></div>';
     messagesEl.appendChild(log);
-    scrollToBottom();
+    // Scroll the pipeline log into view so it's visible
+    setTimeout(() => { log.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
     return {
       el: log,
       body: log.querySelector('.demo-pipeline-log-body'),
@@ -3131,7 +3132,8 @@ function initDemo() {
       pipelineLog.body.appendChild(node);
       pipelineLog.count.textContent = 'live pipeline log (' + eventCount + ' events)';
       pipelineLog.body.scrollTop = pipelineLog.body.scrollHeight;
-      scrollToBottom();
+      // Keep the pipeline log visible during events
+      pipelineLog.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
     // Small gap before streaming starts
