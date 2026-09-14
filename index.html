@@ -3079,6 +3079,10 @@ function initDemo() {
     // Replace loading dots with streaming text
     bubble.innerHTML = '<span class="demo-cursor"></span>';
 
+    // Find the pipeline log element (it's the previous sibling of this assistant row)
+    const assistantRow = bubble.closest('.demo-msg-row');
+    const pipelineLogEl = assistantRow ? assistantRow.previousElementSibling : null;
+
     const words = text.split(' ');
     let displayed = '';
 
@@ -3086,9 +3090,14 @@ function initDemo() {
       await sleep(25 + Math.random() * 45);
       displayed += (i > 0 ? ' ' : '') + words[i];
       bubble.innerHTML = escapeHtml(displayed) + '<span class="demo-cursor"></span>';
-      // Scroll the bubble into view (block:'end' puts it at bottom of viewport,
-      // keeping the pipeline log visible above it)
-      bubble.scrollIntoView({ behavior: 'auto', block: 'end' });
+      // Pin the pipeline log at the top of the messages viewport
+      if (pipelineLogEl) {
+        const msgRect = messagesEl.getBoundingClientRect();
+        const logRect = pipelineLogEl.getBoundingClientRect();
+        messagesEl.scrollTop += logRect.top - msgRect.top - 8;
+      } else {
+        scrollToBottom();
+      }
     }
 
     // Finalize: remove cursor, add sources
@@ -3101,7 +3110,14 @@ function initDemo() {
       html += '</div>';
     }
     bubble.innerHTML = html;
-    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    // Final scroll: keep pipeline log visible at top, answer below it
+    if (pipelineLogEl) {
+      const msgRect = messagesEl.getBoundingClientRect();
+      const logRect = pipelineLogEl.getBoundingClientRect();
+      messagesEl.scrollTop += logRect.top - msgRect.top - 8;
+    } else {
+      scrollToBottom();
+    }
   }
 
   function scrollToBottom() {
@@ -3135,8 +3151,10 @@ function initDemo() {
       pipelineLog.body.appendChild(node);
       pipelineLog.count.textContent = 'live pipeline log (' + eventCount + ' events)';
       pipelineLog.body.scrollTop = pipelineLog.body.scrollHeight;
-      // Keep the pipeline log visible during events
-      pipelineLog.el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      // Pin the pipeline log at the top of the messages viewport
+      const msgRect = messagesEl.getBoundingClientRect();
+      const logRect = pipelineLog.el.getBoundingClientRect();
+      messagesEl.scrollTop += logRect.top - msgRect.top - 8;
     }
 
     // Small gap before streaming starts
