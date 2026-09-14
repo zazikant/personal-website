@@ -858,6 +858,19 @@
     background: #0a0a0a;
     border-top: 1px solid rgba(255,255,255,0.04);
   }
+  .demo-promo-mobile {
+    display: none;
+    width: 100%;
+    max-width: 260px;
+    height: auto;
+    margin: 0 auto 28px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  @media (max-width: 768px) {
+    .demo-promo-mobile { display: block; }
+  }
   .demo-chat-panel {
     /* styles moved to .demo-chat-panel in documents panel CSS above */
   }
@@ -1789,6 +1802,7 @@
 <!-- ─── Live demo (RAG app UI replica — two-pane with documents + chat) ──── -->
 <section class="section" id="demo">
   <div class="container">
+    <img src="images/hero-promo.png" alt="DoqueRAG — chat with your memory" class="demo-promo-mobile" />
     <div class="section-head">
       <div class="section-eyebrow">Live Preview</div>
       <h2 class="section-title">Try the interface.</h2>
