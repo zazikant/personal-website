@@ -110,7 +110,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 60vh;
     width: 100%;
     color: #fff;
     overflow: hidden;
@@ -212,7 +212,7 @@
   .hero-cta.ghost:hover { background: rgba(255,255,255,0.08); box-shadow: none; }
   .hero-cta .arrow { font-size: 18px; }
 
-  .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
+  .hero-wrapper { position: relative; width: 100%; min-height: 60vh; overflow: hidden; }
 
   /* ─── Floating promo video (always visible on hero, desktop only) ──────── */
   .hero-video {
@@ -315,15 +315,16 @@
     .hero-content { width: 78%; }
   }
   @media (max-width: 700px) {
-    .hero-content { padding: 100px 28px 80px; gap: 22px; max-width: 100%; }
+    .hero-wrapper, .hero-section { min-height: 500px; }
+    .hero-content { padding: 80px 28px 70px; gap: 18px; max-width: 100%; }
     .hero-eyebrow { font-size: 12px; }
-    .hero-title { font-size: clamp(40px, 11vw, 64px); }
-    .hero-desc { font-size: 17px; max-width: 100%; }
-    .hero-cta { padding: 14px 22px; font-size: 15px; }
+    .hero-title { font-size: clamp(28px, 8vw, 44px); }
+    .hero-desc { font-size: 15px; max-width: 100%; }
+    .hero-cta { padding: 12px 20px; font-size: 14px; }
     .hero-nav-btn { width: 44px; height: 44px; font-size: 20px; }
     .swiper-button-prev { left: 14px; }
     .swiper-button-next { right: 14px; }
-    .hero-dots { bottom: 22px; gap: 6px; }
+    .hero-dots { bottom: 16px; gap: 6px; }
     .hero-dot { width: 18px; }
     .hero-dot.active { width: 30px; }
     .hero-slide-counter { display: none; }
@@ -2299,7 +2300,7 @@ function initHeroCarousel() {
         s.style.opacity = i === 0 ? 1 : 0;
         s.style.pointerEvents = i === 0 ? 'auto' : 'none';
       });
-      root.style.minHeight = '100vh';
+      root.style.minHeight = '60vh';
 
       let autoPlay;
       const counter = root.querySelector('.hero-slide-counter .cur');
