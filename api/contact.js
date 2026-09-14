@@ -15,7 +15,7 @@ const nodemailer = require('nodemailer');
 
 const SMTP_HOST = process.env.SMTP_HOST || 'mail.gemengserv.net';
 const SMTP_PORT = parseInt(process.env.SMTP_PORT || '465', 10);
-const SMTP_USER = process.env.SMTP_USER || 'shashikant';
+const SMTP_USER = process.env.SMTP_USER || 'news@gemengserv.net';
 const SMTP_PASS = process.env.SMTP_PASS; // REQUIRED
 const MAIL_TO   = process.env.MAIL_TO   || 'shashikant.zarekar@gemengserv.com';
 
