@@ -3021,7 +3021,8 @@ function initDemo() {
         '</div>' +
       '</div>';
     messagesEl.appendChild(row);
-    scrollToBottom();
+    // DON'T scrollToBottom — keep the pipeline log above visible
+    // The bubble will scroll into view when streaming starts
     return row.querySelector('.demo-bubble');
   }
 
@@ -3085,7 +3086,9 @@ function initDemo() {
       await sleep(25 + Math.random() * 45);
       displayed += (i > 0 ? ' ' : '') + words[i];
       bubble.innerHTML = escapeHtml(displayed) + '<span class="demo-cursor"></span>';
-      scrollToBottom();
+      // Scroll the bubble into view (block:'end' puts it at bottom of viewport,
+      // keeping the pipeline log visible above it)
+      bubble.scrollIntoView({ behavior: 'auto', block: 'end' });
     }
 
     // Finalize: remove cursor, add sources
@@ -3098,7 +3101,7 @@ function initDemo() {
       html += '</div>';
     }
     bubble.innerHTML = html;
-    scrollToBottom();
+    bubble.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }
 
   function scrollToBottom() {
