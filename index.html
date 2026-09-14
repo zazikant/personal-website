@@ -1229,9 +1229,9 @@
   }
   .pricing-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
     gap: 24px;
-    max-width: 880px;
+    max-width: 440px;
     margin: 0 auto;
   }
   .price-card {
@@ -1279,6 +1279,32 @@
     margin-bottom: 6px;
   }
   .price-amount .currency { font-size: 28px; vertical-align: top; opacity: 0.7; margin-right: 4px; }
+  .price-original {
+    font-size: 24px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    text-decoration: line-through;
+    margin-right: 10px;
+  }
+  .price-original .currency { font-size: 16px; vertical-align: top; opacity: 0.7; margin-right: 2px; }
+  .price-new {
+    display: flex;
+    align-items: baseline;
+    gap: 0;
+    margin-bottom: 6px;
+  }
+  .price-badge {
+    display: inline-block;
+    background: rgba(94,234,212,0.15);
+    color: #5eead4;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 16px;
+  }
   .price-period {
     font-size: 14px;
     color: rgba(255,255,255,0.55);
@@ -1720,6 +1746,50 @@
   </div>
 </section>
 
+<!-- ─── Pricing ────────────────────────────────────────────────────────── -->
+<section class="section" id="pricing">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Pricing</div>
+      <h2 class="section-title">Simple, transparent pricing.</h2>
+      <p class="section-desc">One plan. Everything included. Infrastructure is BYOK — you bring the keys, you pay actuals.</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="price-card featured">
+        <div class="price-badge">Launch offer · 60% off</div>
+        <div class="price-name">Monthly</div>
+        <div class="price-new">
+          <span class="price-amount"><span class="currency">$</span>20</span>
+        </div>
+        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:4px;">
+          <span class="price-original"><span class="currency">$</span>50</span> per month
+        </div>
+        <div class="price-period">cancel anytime</div>
+        <ul class="price-features">
+          <li>Full access to all features</li>
+          <li>Conversational + Precise retrieval modes</li>
+          <li>Query expansion & document aggregation</li>
+          <li>LLM reducer with conflict detection</li>
+          <li>Source citation on every answer</li>
+          <li>Streaming responses via /api/query-stream</li>
+          <li>Add · Replace · Delete document lifecycle</li>
+          <li>Email support</li>
+        </ul>
+        <button class="price-cta" data-cta>Start monthly →</button>
+      </div>
+    </div>
+
+    <div class="price-note">
+      <div class="note-icon">🔑</div>
+      <div class="note-body">
+        <h4>Bring your own keys (BYOK)</h4>
+        <p>The monthly plan excludes infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── How it works ─────────────────────────────────────────────────────── -->
 <section class="section" id="how">
   <div class="container">
@@ -1814,60 +1884,6 @@
         <span class="feature-icon">🧹</span>
         <h3>Index Reset</h3>
         <p>One call to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Pricing ────────────────────────────────────────────────────────── -->
-<section class="section" id="pricing">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-eyebrow">Pricing</div>
-      <h2 class="section-title">Simple, transparent pricing.</h2>
-      <p class="section-desc">Two ways to use DoqueRAG. Subscribe monthly or buy it outright. Infrastructure is always BYOK — you bring the keys, you pay actuals.</p>
-    </div>
-
-    <div class="pricing-grid">
-      <div class="price-card featured">
-        <div class="price-name">Monthly</div>
-        <div class="price-amount"><span class="currency">$</span>50</div>
-        <div class="price-period">per month · cancel anytime</div>
-        <ul class="price-features">
-          <li>Full access to all features</li>
-          <li>Conversational + Precise retrieval modes</li>
-          <li>Query expansion & document aggregation</li>
-          <li>LLM reducer with conflict detection</li>
-          <li>Source citation on every answer</li>
-          <li>Streaming responses via /api/query-stream</li>
-          <li>Add · Replace · Delete document lifecycle</li>
-          <li>Email support</li>
-        </ul>
-        <button class="price-cta" data-cta>Start monthly →</button>
-      </div>
-
-      <div class="price-card">
-        <div class="price-name">One-time purchase</div>
-        <div class="price-amount"><span class="currency">$</span>1,000</div>
-        <div class="price-period">one-time · lifetime license</div>
-        <ul class="price-features">
-          <li>Everything in Monthly, forever</li>
-          <li>Full source code (self-hosted)</li>
-          <li>Lifetime updates & patches</li>
-          <li>Deploy on your own infrastructure</li>
-          <li>No vendor lock-in</li>
-          <li>Priority support (90 days)</li>
-          <li>Commercial use included</li>
-        </ul>
-        <button class="price-cta ghost" data-cta>Buy outright →</button>
-      </div>
-    </div>
-
-    <div class="price-note">
-      <div class="note-icon">🔑</div>
-      <div class="note-body">
-        <h4>Bring your own keys (BYOK)</h4>
-        <p>Both plans exclude infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
       </div>
     </div>
   </div>
@@ -2001,7 +2017,7 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
 <section id="cta-banner">
   <div class="container">
     <h2>Ready to build your DoqueRAG?</h2>
-    <p>Start at $50/month or buy it outright for $1,000. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
+    <p>Just $20/month — launch offer, 60% off the regular $50. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
     <button class="hero-cta" data-cta style="margin: 0 auto;">Get started <span class="arrow">→</span></button>
   </div>
 </section>
@@ -2066,8 +2082,7 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
 
       <label for="cf-plan">Plan</label>
       <select id="cf-plan" name="plan">
-        <option value="monthly">Monthly — $50/month</option>
-        <option value="onetime">One-time purchase — $1,000</option>
+        <option value="monthly">Monthly — $20/month (launch offer)</option>
         <option value="notsure">Not sure yet — help me decide</option>
       </select>
 
