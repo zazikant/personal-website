@@ -78,7 +78,7 @@ module.exports = async (req, res) => {
   }
 
   const planLabels = {
-    monthly: 'Monthly — $20/month (launch offer)',
+    monthly: 'Monthly — $50/month (launch offer)',
     notsure: 'Not sure yet — help me decide'
   };
   const planLabel = planLabels[plan] || plan || '—';
