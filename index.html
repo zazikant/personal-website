@@ -2166,8 +2166,8 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
   <div class="modal">
     <button class="modal-close" id="modalClose" aria-label="Close">×</button>
 
-    <h2 id="contactModalTitle">Get started</h2>
-    <p class="lead">Tell us a bit about yourself and which plan you're interested in. We'll get back within one business day.</p>
+    <h2 id="contactModalTitle">Contact us</h2>
+    <p class="lead">Send us a message and we'll get back within one business day.</p>
 
     <form class="contact-form" id="contactForm">
       <label for="cf-name">Name</label>
@@ -2495,18 +2495,45 @@ function initContactModal() {
       countrySelect.appendChild(opt);
     });
 
-    // Auto-detect country from IP
-    fetch('https://ipapi.co/json/')
-      .then(r => r.json())
-      .then(data => {
-        if (data && data.country_code) {
-          const match = countryCodes.find(c => c.country === data.country_code);
-          if (match) {
-            countrySelect.value = match.code;
-          }
-        }
-      })
-      .catch(() => { /* silent fail — user picks manually */ });
+    // Auto-detect country from IP — try multiple providers as fallback
+    function setCountry(code) {
+      if (!code) return;
+      const match = countryCodes.find(c => c.country === code.toUpperCase());
+      if (match) countrySelect.value = match.code;
+    }
+
+    // Try each provider until one works
+    async function detectCountry() {
+      const providers = [
+        // ip-api.com (no auth, returns countryCode)
+        async () => {
+          const r = await fetch('https://ip-api.com/json/?fields=countryCode');
+          const d = await r.json();
+          return d.countryCode || null;
+        },
+        // ipapi.co (no auth, returns country_code)
+        async () => {
+          const r = await fetch('https://ipapi.co/json/');
+          const d = await r.json();
+          return d.country_code || null;
+        },
+        // ipinfo.io (no auth needed for basic geo)
+        async () => {
+          const r = await fetch('https://ipinfo.io/json/');
+          const d = await r.json();
+          return d.country || null;
+        },
+      ];
+
+      for (const provider of providers) {
+        try {
+          const code = await provider();
+          if (code) { setCountry(code); return; }
+        } catch (e) { /* try next provider */ }
+      }
+    }
+
+    detectCountry();
   }
 
   function openModal() {
