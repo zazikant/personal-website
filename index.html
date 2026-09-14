@@ -1388,6 +1388,94 @@
     .pricing-grid { grid-template-columns: 1fr; }
   }
 
+  /* ─── Cookie consent popup ──────────────────────────────────────────── */
+  .cookie-popup {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    max-width: 420px;
+    background: #14181d;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    z-index: 90;
+    transform: translateY(150%);
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    pointer-events: none;
+  }
+  .cookie-popup.show {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .cookie-popup-icon {
+    font-size: 28px;
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .cookie-popup h3 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #fff;
+  }
+  .cookie-popup p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 18px;
+  }
+  .cookie-popup p a {
+    color: #5eead4;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .cookie-popup-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .cookie-btn {
+    flex: 1;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: inherit;
+    transition: background 0.2s ease, transform 0.15s ease;
+  }
+  .cookie-btn:hover { transform: translateY(-1px); }
+  .cookie-btn.accept {
+    background: #5eead4;
+    color: #06231d;
+  }
+  .cookie-btn.accept:hover { filter: brightness(1.1); }
+  .cookie-btn.decline {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .cookie-btn.decline:hover {
+    background: rgba(255,255,255,0.06);
+    color: #fff;
+  }
+
+  @media (max-width: 520px) {
+    .cookie-popup {
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      max-width: none;
+      padding: 20px;
+    }
+    .cookie-popup-actions { flex-direction: column; }
+    .cookie-btn { width: 100%; }
+  }
+
   /* ─── Contact modal ────────────────────────────────────────────────── */
   .modal-backdrop {
     position: fixed;
@@ -2061,6 +2149,17 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
     </div>
   </div>
 </footer>
+
+<!-- ─── Cookie consent popup ─────────────────────────────────────────────── -->
+<div class="cookie-popup" id="cookiePopup" role="dialog" aria-labelledby="cookieTitle">
+  <div class="cookie-popup-icon">🍪</div>
+  <h3 id="cookieTitle">Manage cookies</h3>
+  <p>We use cookies to remember your preferences and understand how you use the site. You can accept all, or decline non-essential cookies. Read our <a href="#" id="cookiePolicyLink">cookie policy</a>.</p>
+  <div class="cookie-popup-actions">
+    <button class="cookie-btn decline" id="cookieDecline">Decline</button>
+    <button class="cookie-btn accept" id="cookieAccept">Accept all</button>
+  </div>
+</div>
 
 <!-- ─── Contact modal ────────────────────────────────────────────────────── -->
 <div class="modal-backdrop" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="contactModalTitle">
@@ -2908,12 +3007,57 @@ function initDemo() {
 }
 
 
+/* ════════════════════════════════════════════════════════════════════
+   Cookie consent popup — shows after 1.5s if no choice saved yet.
+   Persists accept/decline in localStorage for 1 year.
+   ════════════════════════════════════════════════════════════════════ */
+function initCookiePopup() {
+  const popup     = document.getElementById('cookiePopup');
+  const acceptBtn = document.getElementById('cookieAccept');
+  const declineBtn= document.getElementById('cookieDecline');
+  if (!popup || !acceptBtn || !declineBtn) return;
+
+  const STORAGE_KEY = 'doquerag-cookie-consent';
+  const EXPIRY_MS   = 365 * 24 * 60 * 60 * 1000; // 1 year
+
+  // Check if user already made a choice
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const data = JSON.parse(saved);
+      if (data.timestamp && (Date.now() - data.timestamp < EXPIRY_MS)) {
+        return; // still valid, don't show popup
+      }
+    }
+  } catch(e) { /* ignore */ }
+
+  // Show popup after 1.5s delay
+  setTimeout(() => {
+    popup.classList.add('show');
+  }, 1500);
+
+  function saveChoice(choice) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({
+        choice: choice,
+        timestamp: Date.now()
+      }));
+    } catch(e) { /* ignore */ }
+    popup.classList.remove('show');
+  }
+
+  acceptBtn.addEventListener('click', () => saveChoice('accepted'));
+  declineBtn.addEventListener('click', () => saveChoice('declined'));
+}
+
+
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
   initConceptSlider();
   initContactModal();
   initApiTabs();
   initDemo();
+  initCookiePopup();
 });
 </script>
 
