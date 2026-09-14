@@ -214,6 +214,45 @@
 
   .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
 
+  /* ─── Floating video (Trust slide) ──────────────────────────────────── */
+  .hero-video {
+    position: absolute;
+    right: 60px;
+    bottom: 80px;
+    width: 220px;
+    height: 391px;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-video iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+  .hero-video::after {
+    content: 'LIVE DEMO';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: rgba(94,234,212,0.85);
+    color: #06231d;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    padding: 3px 7px;
+    border-radius: 3px;
+    z-index: 3;
+    pointer-events: none;
+  }
+  @media (max-width: 991px) {
+    .hero-video { display: none; }
+  }
+
   .hero-nav-btn {
     position: absolute;
     top: 50%;
@@ -1692,6 +1731,14 @@
         <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
         <a href="#how" class="hero-cta ghost">See how it works</a>
       </div>
+    </div>
+    <div class="hero-video">
+      <iframe
+        src="https://www.youtube.com/embed/usKM4Ku0DTM?loop=1&playlist=usKM4Ku0DTM&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&rel=0&playsinline=1"
+        title="DoqueRAG demo"
+        frameborder="0"
+        allow="autoplay; encrypted-media; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
   </div>
 
