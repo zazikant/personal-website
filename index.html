@@ -2176,6 +2176,14 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
       <label for="cf-email">Email</label>
       <input id="cf-email" name="email" type="email" required autocomplete="email" placeholder="you@company.com">
 
+      <label for="cf-phone">Phone <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
+      <div style="display:flex;gap:8px;">
+        <select id="cf-country" name="country" style="width:120px;flex-shrink:0;background:#0b0d10;border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:12px 14px;color:#fff;font-size:14px;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' fill-opacity='0.5' d='M6 8L0 0h12z'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;">
+          <option value="" style="background:#14181d;">Code</option>
+        </select>
+        <input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" style="flex:1;">
+      </div>
+
       <label for="cf-company">Company <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
       <input id="cf-company" name="company" type="text" autocomplete="organization" placeholder="Where do you work?">
 
@@ -2442,6 +2450,64 @@ function initContactModal() {
   const submitBtn = document.getElementById('contactSubmit');
   const closeBtn  = document.getElementById('modalClose');
   const nameInput = document.getElementById('cf-name');
+  const countrySelect = document.getElementById('cf-country');
+
+  // ── Populate country codes + auto-detect from IP ──────────────────
+  const countryCodes = [
+    { code: '+93', country: 'AF' }, { code: '+355', country: 'AL' },
+    { code: '+213', country: 'DZ' }, { code: '+61', country: 'AU' },
+    { code: '+43', country: 'AT' }, { code: '+880', country: 'BD' },
+    { code: '+32', country: 'BE' }, { code: '+55', country: 'BR' },
+    { code: '+1', country: 'CA' }, { code: '+86', country: 'CN' },
+    { code: '+45', country: 'DK' }, { code: '+20', country: 'EG' },
+    { code: '+358', country: 'FI' }, { code: '+33', country: 'FR' },
+    { code: '+49', country: 'DE' }, { code: '+30', country: 'GR' },
+    { code: '+852', country: 'HK' }, { code: '+36', country: 'HU' },
+    { code: '+354', country: 'IS' }, { code: '+91', country: 'IN' },
+    { code: '+62', country: 'ID' }, { code: '+98', country: 'IR' },
+    { code: '+353', country: 'IE' }, { code: '+972', country: 'IL' },
+    { code: '+39', country: 'IT' }, { code: '+81', country: 'JP' },
+    { code: '+254', country: 'KE' }, { code: '+82', country: 'KR' },
+    { code: '+965', country: 'KW' }, { code: '+961', country: 'LB' },
+    { code: '+60', country: 'MY' }, { code: '+960', country: 'MV' },
+    { code: '+52', country: 'MX' }, { code: '+31', country: 'NL' },
+    { code: '+64', country: 'NZ' }, { code: '+47', country: 'NO' },
+    { code: '+968', country: 'OM' }, { code: '+92', country: 'PK' },
+    { code: '+63', country: 'PH' }, { code: '+48', country: 'PL' },
+    { code: '+351', country: 'PT' }, { code: '+974', country: 'QA' },
+    { code: '+40', country: 'RO' }, { code: '+7', country: 'RU' },
+    { code: '+966', country: 'SA' }, { code: '+65', country: 'SG' },
+    { code: '+27', country: 'ZA' }, { code: '+34', country: 'ES' },
+    { code: '+94', country: 'LK' }, { code: '+46', country: 'SE' },
+    { code: '+41', country: 'CH' }, { code: '+886', country: 'TW' },
+    { code: '+66', country: 'TH' }, { code: '+90', country: 'TR' },
+    { code: '+971', country: 'AE' }, { code: '+44', country: 'GB' },
+    { code: '+1', country: 'US' }, { code: '+84', country: 'VN' },
+  ];
+
+  if (countrySelect) {
+    // Populate dropdown
+    countryCodes.forEach(c => {
+      const opt = document.createElement('option');
+      opt.value = c.code;
+      opt.textContent = c.country + ' ' + c.code;
+      opt.style.background = '#14181d';
+      countrySelect.appendChild(opt);
+    });
+
+    // Auto-detect country from IP
+    fetch('https://ipapi.co/json/')
+      .then(r => r.json())
+      .then(data => {
+        if (data && data.country_code) {
+          const match = countryCodes.find(c => c.country === data.country_code);
+          if (match) {
+            countrySelect.value = match.code;
+          }
+        }
+      })
+      .catch(() => { /* silent fail — user picks manually */ });
+  }
 
   function openModal() {
     modal.classList.add('open');
@@ -2468,9 +2534,14 @@ function initContactModal() {
     e.preventDefault();
 
     // Collect form data
+    const countryCode = form.country ? form.country.value : '';
+    const phoneRaw = form.phone ? form.phone.value.trim() : '';
+    const phone = phoneRaw ? (countryCode + ' ' + phoneRaw) : '';
+
     const payload = {
       name:    form.name.value.trim(),
       email:   form.email.value.trim(),
+      phone:   phone,
       company: form.company.value.trim(),
       plan:    form.plan.value,
       message: form.message.value.trim(),
