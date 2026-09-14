@@ -1735,8 +1735,8 @@
     <div class="hero-scrim"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Why You Can Trust It</div>
-      <h1 class="hero-title">100% accuracy. Complete answers. <span class="accent">Zero hallucination risk.</span></h1>
-      <p class="hero-desc">Every answer is synthesized only from chunks retrieved from your own documents — never the model's training data. Source filenames are cited on every response. If a fact isn't in your docs, the system says so instead of making things up.</p>
+      <h1 class="hero-title">Answers only from your documents. <span class="accent">Every response cited.</span></h1>
+      <p class="hero-desc">Every answer is drawn only from chunks retrieved from your own documents — never the model's training data. Source filenames are cited on every response. If a fact isn't in your docs, the system says so instead of guessing.</p>
       <div class="hero-cta-row">
         <button class="hero-cta" data-cta>Get started <span class="arrow">→</span></button>
         <a href="#how" class="hero-cta ghost">See how it works</a>
@@ -1929,7 +1929,7 @@
     </div>
 
     <div class="price-note">
-      <div class="note-icon">🔑</div>
+      <div class="note-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="5.5"/><path d="M21 2l-9.6 9.6"/><path d="M15.5 7.5l3 3L22 7l-3-3"/></svg></div>
       <div class="note-body">
         <h4>Bring your own keys (BYOK)</h4>
         <p>The monthly plan excludes infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
@@ -1950,7 +1950,7 @@
     <div class="steps">
       <div class="step">
         <div class="step-num">01 / INGEST</div>
-        <div class="step-icon">📄</div>
+        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></div>
         <h3>Drop a document in</h3>
         <p>Upload a PDF, markdown, or raw text. We handle the parsing — no cleanup, no formatting fixes needed on your end. Every chunk is tagged with its filename, <em>doc_type</em>, <em>project</em>, and <em>version</em> so you can filter later.</p>
         <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> Drop a 200-page PDF, we handle the parsing.</p>
@@ -1959,7 +1959,7 @@
 
       <div class="step">
         <div class="step-num">02 / INDEX</div>
-        <div class="step-icon">🧠</div>
+        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div>
         <h3>We remember where every fact came from</h3>
         <p>Each document is chunked, embedded, and stored with full provenance — filename, version, page, and upload timestamp. So v2 of a policy doesn't get mixed with v1, and retrieval can be scoped to a single project or release.</p>
         <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> We remember which file, version, and page each fact came from.</p>
@@ -1968,7 +1968,7 @@
 
       <div class="step">
         <div class="step-num">03 / ANSWER</div>
-        <div class="step-icon">💬</div>
+        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
         <h3>Ask a question, get a cited answer</h3>
         <p>Query expansion catches synonyms automatically — "owner" matches "lead" and "manager". An LLM reducer synthesizes the most relevant chunks into one coherent answer, detects conflicts across sources, and lists every filename it used.</p>
         <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
@@ -1989,47 +1989,47 @@
 
     <div class="features-grid">
       <div class="feature">
-        <span class="feature-icon">🔍</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
         <h3>Query Expansion</h3>
         <p>Synonyms are expanded automatically. “Owner” matches “responsible”, “lead”, “manager”. “API” matches “endpoint”, “rest”, “service”. Recall goes up without you rewriting the question.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">📚</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span>
         <h3>Document Aggregation</h3>
         <p>Chunks are grouped by filename and reranked by <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">avgScore * log(chunkCount + 1)</code>. Multiple relevant chunks from the same doc merge into one coherent context window.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">⚗️</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .963L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg></span>
         <h3>LLM Reducer</h3>
         <p>A dedicated reducer LLM synthesizes multi-chunk answers, extracts key points, detects conflicting information across sources, and produces a single unified response — not a stitched-together list.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">🎯</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
         <h3>Two Retrieval Modes</h3>
         <p>Conversational mode (top-K=12) for broad exploration. Precise mode (top-K=5) for specific facts. Switch per question — same index, different retrieval shape, no re-indexing.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">🏷️</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg></span>
         <h3>Metadata Filters</h3>
         <p>Filter queries by <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">doc_type</code>, <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">project</code>, or <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">version</code>. Scope a question to a single project, a specific doc type, or a tagged release.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">🔁</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></span>
         <h3>Add · Replace · Delete</h3>
         <p>Upload modes handle the full lifecycle. Replace auto-deletes old chunks at the same filename before inserting new ones — no stale duplicates, no manual cleanup, no orphaned vectors.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">📎</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8l-8.57 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
         <h3>Source Citation</h3>
         <p>Every answer includes a <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">sources</code> array of filenames. Only files that still exist in the documents table are returned — deleted docs are never cited.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">⚡</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
         <h3>Streaming Answers</h3>
         <p>Use <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">/api/query-stream</code> for token-by-token streaming. Same retrieval, same citations, faster perceived latency for chat-style UIs.</p>
       </div>
       <div class="feature">
-        <span class="feature-icon">🧹</span>
+        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></span>
         <h3>Index Reset</h3>
         <p>One call to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
       </div>
@@ -2048,42 +2048,42 @@
 
     <div class="stack-grid">
       <div class="stack-card">
-        <span class="stack-emoji">▲</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13.73 4a2 2 0 0 0-3.46 0L2.46 20a2 2 0 0 0 1.73 3h15.62a2 2 0 0 0 1.73-3z"/></svg></span>
         <h4>Next.js</h4>
         <p>App router + route handlers on Vercel serverless</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">📗</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></span>
         <h4>Pinecone</h4>
         <p>Vector index for chunk storage + ANN retrieval</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">🟢</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9" rx="1"/><path d="M15 2v2"/><path d="M15 20v2"/><path d="M2 15h2"/><path d="M2 9h2"/><path d="M20 15h2"/><path d="M20 9h2"/><path d="M9 2v2"/><path d="M9 20v2"/></svg></span>
         <h4>NVIDIA Embeddings</h4>
         <p>Semantic embeddings via NVIDIA NIM API</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">🟩</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" x2="2" y1="12" y2="12"/><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><line x1="6" x2="6.01" y1="16" y2="16"/><line x1="10" x2="10.01" y1="16" y2="16"/></svg></span>
         <h4>Supabase</h4>
         <p>Documents table + verified source validation</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">🤖</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></span>
         <h4>LLM Reducer</h4>
         <p>Multi-chunk synthesis + conflict detection</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">📄</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></span>
         <h4>LiteParse</h4>
         <p>PDF / TXT / MD parsing pipeline</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">✂️</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" x2="8.12" y1="4" y2="15.88"/><line x1="14.47" x2="14.47" y1="14.48" y2="14.48"/><line x1="8.12" x2="20" y1="15.88" y2="4"/></svg></span>
         <h4>Custom Chunking</h4>
         <p>Semantic chunking with overlap + hashing</p>
       </div>
       <div class="stack-card">
-        <span class="stack-emoji">🌐</span>
+        <span class="stack-emoji"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></span>
         <h4>Translation Pipeline</h4>
         <p>Optional streaming translation route</p>
       </div>
@@ -2097,11 +2097,11 @@
     <div class="section-head">
       <div class="section-eyebrow">API Reference</div>
       <h2 class="section-title">Talk to the brain directly.</h2>
-      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://api.doquerag.app</code></p>
+      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://doquerag.vercel.app</code></p>
     </div>
 
     <div style="max-width:880px;margin:0 auto 32px;padding:14px 20px;border-radius:8px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);display:flex;align-items:flex-start;gap:12px;">
-      <span style="font-size:18px;flex-shrink:0;">⚠️</span>
+      <span style="font-size:18px;flex-shrink:0;color:#fbbf24;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
       <div>
         <strong style="font-size:13px;color:#fbbf24;">File size limit:</strong>
         <span style="font-size:13px;color:rgba(255,255,255,0.7);"> PDF uploads must be under 4.5 MB (Vercel serverless payload limit). For larger files, split before upload or use the raw text ingest endpoint.</span>
@@ -2138,7 +2138,7 @@
           <button class="copy-btn" id="copyApiBtn">Copy</button>
         </div>
         <pre id="api-code-block"><span class="c"># Ask a question — conversational mode (top-K = 12)</span>
-curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
+curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
   -H <span class="s">"Content-Type: application/json"</span> \
   -d <span class="s">'{
     "query": "What is the architecture?",
@@ -2212,7 +2212,7 @@ curl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \
 
 <!-- ─── Cookie consent popup ─────────────────────────────────────────────── -->
 <div class="cookie-popup" id="cookiePopup" role="dialog" aria-labelledby="cookieTitle">
-  <div class="cookie-popup-icon">🍪</div>
+  <div class="cookie-popup-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg></div>
   <h3 id="cookieTitle">Manage cookies</h3>
   <p>We use cookies to remember your preferences and understand how you use the site. You can accept all, or decline non-essential cookies. Read our <a href="#" id="cookiePolicyLink">cookie policy</a>.</p>
   <div class="cookie-popup-actions">
@@ -2687,23 +2687,23 @@ function initApiTabs() {
   const snippets = {
     query: {
       label: 'POST /api/query',
-      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
+      code: '<span class="c"># Ask a question — conversational mode (top-K = 12)</span>\ncurl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "query": "What is the architecture?",\n    "mode": "conversational"\n  }\'</span>\n\n<span class="c"># Response</span>\n{\n  <span class="k">"answer"</span>: <span class="s">"The synthesized answer..."</span>,\n  <span class="k">"sources"</span>: [<span class="s">"doc1.md"</span>, <span class="s">"doc2.pdf"</span>],\n  <span class="k">"aggregatedContext"</span>: <span class="s">"Key Points: ..."</span>,\n  <span class="k">"debug"</span>: {\n    <span class="k">"hitsFound"</span>: <span class="u">7</span>,\n    <span class="k">"documentsAggregated"</span>: <span class="u">3</span>,\n    <span class="k">"reducerUsed"</span>: <span class="u">true</span>\n  }\n}'
     },
     upload: {
       label: 'POST /api/upload',
-      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
+      code: '<span class="c"># Upload a PDF via FormData (must be &lt; 4.5 MB)</span>\ncurl -X POST <span class="s">"https://doquerag.vercel.app/api/upload"</span> \\\n  -F <span class="s">"file=@/path/to/file.pdf"</span> \\\n  -F <span class="s">"name=file.pdf"</span> \\\n  -F <span class="s">"mode=Add"</span>\n\n<span class="c"># Modes: Add · Replace · Delete</span>\n<span class="c"># Replace auto-deletes old chunks at the same filename</span>\n\n<span class="c"># Or upload raw text as JSON</span>\ncurl -X POST <span class="s">"https://doquerag.vercel.app/api/upload"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "type": "text",\n    "content": "Your raw text content here",\n    "name": "document.txt",\n    "mode": "Add"\n  }\'</span>'
     },
     ingest: {
       label: 'POST /api/ingest',
-      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://api.doquerag.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
+      code: '<span class="c"># Ingest raw text with metadata</span>\ncurl -X POST <span class="s">"https://doquerag.vercel.app/api/ingest"</span> \\\n  -H <span class="s">"Content-Type: application/json"</span> \\\n  -d <span class="s">\'{\n    "content": "Your content here",\n    "filename": "filename.txt",\n    "metadata": {\n      "doc_type": "token",\n      "project": "gem",\n      "version": "1.0"\n    }\n  }\'</span>'
     },
     documents: {
       label: 'GET /api/documents',
-      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://api.doquerag.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
+      code: '<span class="c"># List all indexed documents</span>\ncurl -X GET <span class="s">"https://doquerag.vercel.app/api/documents"</span>\n\n<span class="c"># Response</span>\n[\n  { <span class="k">"name"</span>: <span class="s">"doc1.pdf"</span>, <span class="k">"chunks"</span>: <span class="u">24</span>, <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-12T…"</span> },\n  { <span class="k">"name"</span>: <span class="s">"notes.md"</span>, <span class="k">"chunks"</span>: <span class="u">8</span>,  <span class="k">"uploaded_at"</span>: <span class="s">"2026-09-11T…"</span> }\n]'
     },
     reset: {
       label: 'DELETE /api/index/reset',
-      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://api.doquerag.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
+      code: '<span class="c"># ⚠ Wipes ALL Pinecone records — irreversible</span>\ncurl -X DELETE <span class="s">"https://doquerag.vercel.app/api/index/reset"</span>\n\n<span class="c"># Response</span>\n{ <span class="k">"status"</span>: <span class="s">"Index reset complete"</span> }'
     }
   };
 
@@ -2925,7 +2925,7 @@ function initDemo() {
     },
     {
       keywords: ['cite', 'citation', 'source', 'verify', 'trace'],
-      answer: "Every answer ships with a sources array listing the filenames the reducer used. Only files that still exist in the documents table are returned \u2014 if a document was deleted, it is never cited. This means every claim in the answer can be traced back to a specific file you uploaded.",
+      answer: "Every answer ships with a sources array listing the filenames used. Only files that still exist in the documents table are returned \u2014 if a document was deleted, it is never cited. This means every claim in the answer can be traced back to a specific file you uploaded.",
       sources: ['citation-system.md', 'source-validation.pdf'],
       pipeline: [
         { delay: 300, type: 'stage-start', stage: 'embed-query' },
