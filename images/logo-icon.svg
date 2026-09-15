@@ -24,7 +24,7 @@
           fill="none" stroke="#5EEAD4" stroke-width="6" stroke-linecap="round"/>
 
     <!-- Network nodes inside the document (embedding points) -->
-    <g fill="#5EEAD4">
+    <g fill="#0d9488">
       <circle cx="58" cy="48" r="5.5"/>
       <circle cx="76" cy="62" r="5.5"/>
       <circle cx="60" cy="78" r="5.5"/>

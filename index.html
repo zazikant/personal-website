@@ -17,12 +17,12 @@
   html { scroll-behavior: smooth; }
   body {
     font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background: #0b0d10;
-    color: #fff;
+    background: #f8f9fa;
+    color: #1a1a1a;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
-  ::selection { background: rgba(94, 234, 212, 0.3); color: #fff; }
+  ::selection { background: rgba(13, 148, 136, 0.2); color: #1a1a1a; }
 
   /* ─── Page shell ─────────────────────────────────────────────────────── */
   .container {
@@ -40,10 +40,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 18px 32px;
-    background: rgba(11, 13, 16, 0.72);
+    background: rgba(248, 249, 250, 0.85);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
   }
   .topnav .brand {
     font-weight: 800;
@@ -53,7 +53,7 @@
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    color: #fff;
+    color: #1a1a1a;
   }
   .topnav .brand .brand-logo {
     height: 32px;
@@ -68,12 +68,12 @@
     display: flex;
     align-items: center;
   }
-  .topnav .brand .brand-text .rag { color: #5eead4; }
+  .topnav .brand .brand-text .rag { color: #0d9488; }
   .topnav .brand .dot {
     width: 10px; height: 10px;
     border-radius: 50%;
-    background: #5eead4;
-    box-shadow: 0 0 16px rgba(94,234,212,0.65);
+    background: #0d9488;
+    box-shadow: 0 0 16px rgba(13,148,136,0.65);
   }
   .topnav .nav-links {
     display: flex;
@@ -81,16 +81,16 @@
     align-items: center;
   }
   .topnav .nav-links a {
-    color: rgba(255,255,255,0.72);
+    color: rgba(0,0,0,0.68);
     text-decoration: none;
     font-size: 14px;
     font-weight: 500;
     transition: color 0.2s ease;
   }
-  .topnav .nav-links a:hover { color: #fff; }
+  .topnav .nav-links a:hover { color: #1a1a1a; }
   .topnav .nav-cta {
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
     padding: 9px 18px;
     border-radius: 4px;
     font-weight: 700;
@@ -100,7 +100,7 @@
     font-family: inherit;
     transition: transform 0.15s ease, box-shadow 0.2s ease;
   }
-  .topnav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(94,234,212,0.35); }
+  .topnav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.35); }
   @media (max-width: 720px) {
     .topnav .nav-links a:not(.nav-cta) { display: none; }
   }
@@ -112,28 +112,28 @@
     flex-direction: column;
     min-height: 100vh;
     width: 100%;
-    color: #fff;
+    color: #1a1a1a;
     overflow: hidden;
-    background: radial-gradient(circle at 75% 40%, rgba(94,234,212,0.08), transparent 55%),
-                radial-gradient(circle at 15% 80%, rgba(129,140,248,0.07), transparent 55%),
-                #0b0d10;
+    background: radial-gradient(circle at 75% 40%, rgba(13,148,136,0.06), transparent 55%),
+                radial-gradient(circle at 15% 80%, rgba(37,99,235,0.05), transparent 55%),
+                #f8f9fa;
   }
   .hero-scrim {
     position: absolute;
     inset: 0;
     background: linear-gradient(90deg,
-      rgba(11,13,16,0.92) 0%,
-      rgba(11,13,16,0.78) 35%,
-      rgba(11,13,16,0.45) 70%,
-      rgba(11,13,16,0.25) 100%);
+      rgba(248,249,250,0.95) 0%,
+      rgba(248,249,250,0.80) 35%,
+      rgba(248,249,250,0.40) 70%,
+      rgba(248,249,250,0.10) 100%);
     z-index: 1;
   }
   .hero-grid {
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(94,234,212,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(94,234,212,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(13,148,136,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(13,148,136,0.06) 1px, transparent 1px);
     background-size: 48px 48px;
     mask-image: radial-gradient(circle at 70% 50%, black 25%, transparent 75%);
     -webkit-mask-image: radial-gradient(circle at 70% 50%, black 25%, transparent 75%);
@@ -156,7 +156,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     font-weight: 700;
-    color: #5eead4;
+    color: #0d9488;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -164,7 +164,7 @@
   .hero-eyebrow::before {
     content: '';
     width: 24px; height: 1px;
-    background: #5eead4;
+    background: #0d9488;
   }
   .hero-title {
     font-size: clamp(26px, 4.2vw, 55px);
@@ -173,11 +173,11 @@
     letter-spacing: -0.025em;
     max-width: 900px;
   }
-  .hero-title .accent { color: #5eead4; }
+  .hero-title .accent { color: #0d9488; }
   .hero-desc {
     font-size: 13px;
     line-height: 1.55;
-    color: rgba(255,255,255,0.78);
+    color: rgba(0,0,0,0.73);
     max-width: 640px;
     font-weight: 400;
   }
@@ -192,8 +192,8 @@
     align-items: center;
     gap: 10px;
     padding: 16px 28px;
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
     text-decoration: none;
     font-weight: 700;
     font-size: 16px;
@@ -203,13 +203,13 @@
     border: none;
     font-family: inherit;
   }
-  .hero-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(94,234,212,0.35); background: #7df0db; }
+  .hero-cta:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(13,148,136,0.35); background: #7df0db; }
   .hero-cta.ghost {
     background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.25);
+    color: #1a1a1a;
+    border: 1px solid rgba(0,0,0,0.18);
   }
-  .hero-cta.ghost:hover { background: rgba(255,255,255,0.08); box-shadow: none; }
+  .hero-cta.ghost:hover { background: rgba(0,0,0,0.08); box-shadow: none; }
   .hero-cta .arrow { font-size: 18px; }
 
   .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
@@ -223,8 +223,8 @@
     height: 356px;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid rgba(255,255,255,0.15);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    border: 1px solid rgba(0,0,0,0.12);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     z-index: 5;
     pointer-events: none;
   }
@@ -239,8 +239,8 @@
     position: absolute;
     top: 8px;
     left: 8px;
-    background: rgba(94,234,212,0.85);
-    color: #06231d;
+    background: rgba(13,148,136,0.85);
+    color: #ffffff;
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -258,9 +258,9 @@
     top: 50%;
     transform: translateY(-50%);
     z-index: 3;
-    background: rgba(255,255,255,0.10);
-    border: 1px solid rgba(255,255,255,0.18);
-    color: #fff;
+    background: rgba(0,0,0,0.04);
+    border: 1px solid rgba(0,0,0,0.14);
+    color: #1a1a1a;
     width: 56px;
     height: 56px;
     border-radius: 50%;
@@ -273,7 +273,7 @@
     transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     backdrop-filter: blur(8px);
   }
-  .hero-nav-btn:hover { background: rgba(94,234,212,0.25); border-color: rgba(94,234,212,0.5); }
+  .hero-nav-btn:hover { background: rgba(13,148,136,0.25); border-color: rgba(13,148,136,0.5); }
   .swiper-button-prev { left: 32px; }
   .swiper-button-next { right: 32px; }
 
@@ -291,13 +291,13 @@
     width: 28px;
     height: 4px;
     border-radius: 2px;
-    background: rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.18);
     border: none;
     cursor: pointer;
     padding: 0;
     transition: background 0.25s ease, width 0.25s ease;
   }
-  .hero-dot.active { background: #5eead4; width: 44px; }
+  .hero-dot.active { background: #0d9488; width: 44px; }
 
   .hero-slide-counter {
     position: absolute;
@@ -306,10 +306,10 @@
     z-index: 3;
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(0,0,0,0.5);
     letter-spacing: 0.08em;
   }
-  .hero-slide-counter .cur { color: #5eead4; font-weight: 600; }
+  .hero-slide-counter .cur { color: #0d9488; font-weight: 600; }
 
   @media (min-width: 992px) {
     .hero-content { width: 65%; }
@@ -344,7 +344,7 @@
     letter-spacing: 0.22em;
     text-transform: uppercase;
     font-weight: 700;
-    color: #5eead4;
+    color: #0d9488;
     margin-bottom: 18px;
   }
   .section-title {
@@ -357,14 +357,14 @@
   .section-desc {
     font-size: 18px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.65);
   }
 
   /* ─── Concepts slider (from gallery-demo, image removed) ─────────────── */
   #concepts {
-    background: linear-gradient(180deg, #0b0d10 0%, #0e1116 100%);
-    border-top: 1px solid rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    background: linear-gradient(180deg, #ffffff 0%, #f1f3f5 100%);
+    border-top: 1px solid rgba(0,0,0,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
     padding: 40px 0;
   }
 
@@ -374,8 +374,8 @@
     position: relative;
     overflow: hidden;
     padding: 0;
-    border-top: 1px solid rgba(255,255,255,0.06);
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(0,0,0,0.08);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
   }
   #concept-stage {
     position: relative;
@@ -393,7 +393,7 @@
   .concept-num {
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
-    color: #5eead4;
+    color: #0d9488;
     letter-spacing: 0.18em;
   }
   .concept-title {
@@ -401,13 +401,13 @@
     font-weight: 900;
     letter-spacing: -0.04em;
     line-height: 0.95;
-    color: #fff;
+    color: #1a1a1a;
   }
-  .concept-title .period { color: #5eead4; }
+  .concept-title .period { color: #0d9488; }
   .concept-text {
     font-size: clamp(16px, 2vw, 20px);
     line-height: 1.55;
-    color: rgba(255,255,255,0.78);
+    color: rgba(0,0,0,0.73);
     max-width: 720px;
   }
   #concept-next {
@@ -417,9 +417,9 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    border: 1px solid rgba(94,234,212,0.5);
-    background: rgba(94,234,212,0.08);
-    color: #5eead4;
+    border: 1px solid rgba(13,148,136,0.5);
+    background: rgba(13,148,136,0.08);
+    color: #0d9488;
     cursor: pointer;
     margin-top: 16px;
     padding: 0;
@@ -432,7 +432,7 @@
     flex-shrink: 0;
   }
   #concept-next:hover {
-    background: rgba(94,234,212,0.2);
+    background: rgba(13,148,136,0.2);
     transform: translateX(4px);
   }
   #concept-progress {
@@ -443,7 +443,7 @@
   .concept-bar {
     flex: 1;
     height: 2px;
-    background: rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.10);
     overflow: hidden;
     position: relative;
   }
@@ -451,7 +451,7 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: #5eead4;
+    background: #0d9488;
     transform-origin: left;
     animation: barFill 5s linear forwards;
   }
@@ -462,7 +462,7 @@
 
   /* ─── How it works ───────────────────────────────────────────────────── */
   #how {
-    background: #0b0d10;
+    background: #f8f9fa;
   }
   .steps {
     display: grid;
@@ -470,29 +470,29 @@
     gap: 32px;
   }
   .step {
-    background: #14181d;
-    border: 1px solid rgba(255,255,255,0.06);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 8px;
     padding: 36px 32px;
     position: relative;
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .step:hover {
-    border-color: rgba(94,234,212,0.4);
+    border-color: rgba(13,148,136,0.4);
     transform: translateY(-4px);
   }
   .step-num {
     font-family: "JetBrains Mono", monospace;
     font-size: 13px;
-    color: #5eead4;
+    color: #0d9488;
     letter-spacing: 0.15em;
     margin-bottom: 20px;
   }
   .step-icon {
     width: 44px; height: 44px;
     border-radius: 8px;
-    background: rgba(94,234,212,0.1);
-    border: 1px solid rgba(94,234,212,0.25);
+    background: rgba(13,148,136,0.1);
+    border: 1px solid rgba(13,148,136,0.25);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -508,15 +508,15 @@
   .step p {
     font-size: 15px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.65);
   }
   .step .step-tag {
     margin-top: 18px;
     display: inline-block;
     font-family: "JetBrains Mono", monospace;
     font-size: 11px;
-    color: rgba(255,255,255,0.5);
-    background: rgba(255,255,255,0.04);
+    color: rgba(0,0,0,0.45);
+    background: rgba(0,0,0,0.02);
     padding: 4px 8px;
     border-radius: 3px;
     letter-spacing: 0.05em;
@@ -527,24 +527,24 @@
 
   /* ─── Features grid ──────────────────────────────────────────────────── */
   #features {
-    background: #0e1116;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #f1f3f5;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
   .features-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 8px;
     overflow: hidden;
   }
   .feature {
-    background: #0e1116;
+    background: #f1f3f5;
     padding: 36px 32px;
     transition: background 0.2s ease;
   }
-  .feature:hover { background: #14181d; }
+  .feature:hover { background: #ffffff; }
   .feature-icon {
     font-size: 28px;
     margin-bottom: 18px;
@@ -558,7 +558,7 @@
   .feature p {
     font-size: 14px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.68);
+    color: rgba(0,0,0,0.63);
   }
   @media (max-width: 880px) {
     .features-grid { grid-template-columns: 1fr; }
@@ -566,7 +566,7 @@
 
   /* ─── Tech stack ─────────────────────────────────────────────────────── */
   #stack {
-    background: #0b0d10;
+    background: #f8f9fa;
   }
   .stack-grid {
     display: grid;
@@ -574,15 +574,15 @@
     gap: 16px;
   }
   .stack-card {
-    background: #14181d;
-    border: 1px solid rgba(255,255,255,0.06);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 6px;
     padding: 24px;
     text-align: center;
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .stack-card:hover {
-    border-color: rgba(94,234,212,0.4);
+    border-color: rgba(13,148,136,0.4);
     transform: translateY(-2px);
   }
   .stack-card .stack-emoji {
@@ -597,7 +597,7 @@
   }
   .stack-card p {
     font-size: 12px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(0,0,0,0.5);
     line-height: 1.4;
   }
   @media (max-width: 880px) {
@@ -606,8 +606,8 @@
 
   /* ─── API reference ──────────────────────────────────────────────────── */
   #api {
-    background: #0e1116;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #f1f3f5;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
   .api-grid {
     display: grid;
@@ -622,8 +622,8 @@
   }
   .api-tab {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.06);
-    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.08);
+    color: rgba(0,0,0,0.65);
     padding: 14px 18px;
     border-radius: 6px;
     cursor: pointer;
@@ -641,38 +641,38 @@
     font-weight: 700;
     padding: 3px 7px;
     border-radius: 3px;
-    background: rgba(94,234,212,0.12);
-    color: #5eead4;
+    background: rgba(13,148,136,0.12);
+    color: #0d9488;
   }
   .api-tab .method.post { background: rgba(129,140,248,0.15); color: #a5b4fc; }
   .api-tab .method.del { background: rgba(248,113,113,0.15); color: #fca5a5; }
-  .api-tab .method.get { background: rgba(94,234,212,0.12); color: #5eead4; }
+  .api-tab .method.get { background: rgba(13,148,136,0.12); color: #0d9488; }
   .api-tab.active {
-    background: #14181d;
-    border-color: rgba(94,234,212,0.4);
-    color: #fff;
+    background: #ffffff;
+    border-color: rgba(13,148,136,0.4);
+    color: #1a1a1a;
   }
-  .api-tab:hover { color: #fff; }
+  .api-tab:hover { color: #1a1a1a; }
   .api-code {
-    background: #0b0d10;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #1e1e2e;
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 8px;
     overflow: hidden;
   }
   .api-code-head {
     padding: 12px 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(0,0,0,0.08);
     display: flex;
     align-items: center;
     justify-content: space-between;
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(0,0,0,0.5);
   }
   .api-code-head .copy-btn {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.15);
-    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.12);
+    color: rgba(0,0,0,0.65);
     padding: 4px 10px;
     border-radius: 3px;
     font-size: 11px;
@@ -680,7 +680,7 @@
     font-family: inherit;
     transition: all 0.2s ease;
   }
-  .api-code-head .copy-btn:hover { background: rgba(94,234,212,0.1); color: #5eead4; border-color: rgba(94,234,212,0.4); }
+  .api-code-head .copy-btn:hover { background: rgba(13,148,136,0.1); color: #0d9488; border-color: rgba(13,148,136,0.4); }
   .api-code pre {
     margin: 0;
     padding: 22px 24px;
@@ -691,7 +691,7 @@
     overflow-x: auto;
   }
   .api-code pre .k { color: #c084fc; }
-  .api-code pre .s { color: #5eead4; }
+  .api-code pre .s { color: #0d9488; }
   .api-code pre .c { color: #6b7280; font-style: italic; }
   .api-code pre .u { color: #fbbf24; }
   @media (max-width: 880px) {
@@ -709,8 +709,8 @@
     margin: 0 auto;
   }
   .demo-docs-panel {
-    background: #141414;
-    border: 1px solid #262626;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
     border-right: none;
     border-radius: 12px 0 0 12px;
     display: flex;
@@ -719,7 +719,7 @@
   }
   .demo-docs-header {
     padding: 14px 16px;
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid #e5e7eb;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -727,13 +727,13 @@
   .demo-docs-header h3 {
     font-size: 13px;
     font-weight: 600;
-    color: #ededed;
+    color: #1a1a1a;
     margin: 0;
   }
   .demo-docs-count {
     font-size: 11px;
     color: #a1a1aa;
-    background: rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.03);
     padding: 2px 7px;
     border-radius: 10px;
   }
@@ -741,7 +741,7 @@
     margin: 12px;
     padding: 10px;
     border-radius: 8px;
-    border: 1px dashed #262626;
+    border: 1px dashed #e5e7eb;
     background: transparent;
     color: #a1a1aa;
     font-size: 13px;
@@ -768,7 +768,7 @@
   }
   .demo-docs-list::-webkit-scrollbar { width: 4px; }
   .demo-docs-list::-webkit-scrollbar-track { background: transparent; }
-  .demo-docs-list::-webkit-scrollbar-thumb { background: #262626; border-radius: 2px; }
+  .demo-docs-list::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 2px; }
   .demo-doc-item {
     display: flex;
     align-items: flex-start;
@@ -779,7 +779,7 @@
     transition: background 0.15s ease;
     margin-bottom: 2px;
   }
-  .demo-doc-item:hover { background: rgba(255,255,255,0.04); }
+  .demo-doc-item:hover { background: rgba(0,0,0,0.02); }
   .demo-doc-item.new {
     animation: demo-doc-flash 1.2s ease-out;
   }
@@ -803,7 +803,7 @@
   .demo-doc-name {
     font-size: 12px;
     font-weight: 500;
-    color: #ededed;
+    color: #1a1a1a;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -831,8 +831,8 @@
   .demo-doc-delete svg { width: 12px; height: 12px; }
 
   .demo-chat-panel {
-    background: #141414;
-    border: 1px solid #262626;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
     border-radius: 0 12px 12px 0;
     display: flex;
     flex-direction: column;
@@ -843,7 +843,7 @@
     .demo-layout { grid-template-columns: 1fr; }
     .demo-docs-panel {
       border-radius: 12px 12px 0 0;
-      border-right: 1px solid #262626;
+      border-right: 1px solid #e5e7eb;
       border-bottom: none;
     }
     .demo-chat-panel {
@@ -854,8 +854,8 @@
 
   /* ─── Live demo (RAG app UI replica) ─────────────────────────────────── */
   #demo {
-    background: #0a0a0a;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #ffffff;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
   .demo-promo-mobile {
     display: block;
@@ -864,7 +864,7 @@
     height: auto;
     margin: 0 auto 28px;
     border-radius: 14px;
-    border: 1px solid rgba(255,255,255,0.15);
+    border: 1px solid rgba(0,0,0,0.12);
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
   }
   .demo-chat-panel {
@@ -877,7 +877,7 @@
     align-items: center;
     gap: 12px;
     padding: 14px 20px;
-    border-bottom: 1px solid #262626;
+    border-bottom: 1px solid #e5e7eb;
   }
   .demo-header-icon {
     height: 32px;
@@ -892,12 +892,12 @@
   .demo-header-icon svg {
     height: 18px;
     width: 18px;
-    color: #fff;
+    color: #1a1a1a;
   }
   .demo-header-title {
     font-size: 14px;
     font-weight: 600;
-    color: #ededed;
+    color: #1a1a1a;
   }
   .demo-header-sub {
     font-size: 12px;
@@ -916,8 +916,8 @@
     gap: 16px;
   }
   .demo-messages::-webkit-scrollbar { width: 6px; }
-  .demo-messages::-webkit-scrollbar-track { background: #141414; }
-  .demo-messages::-webkit-scrollbar-thumb { background: #262626; border-radius: 3px; }
+  .demo-messages::-webkit-scrollbar-track { background: #f9fafb; }
+  .demo-messages::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 3px; }
   .demo-messages::-webkit-scrollbar-thumb:hover { background: #404040; }
 
   /* Empty state */
@@ -943,7 +943,7 @@
   .demo-empty h3 {
     font-size: 18px;
     font-weight: 600;
-    color: #ededed;
+    color: #1a1a1a;
     margin-bottom: 8px;
   }
   .demo-empty p {
@@ -977,7 +977,7 @@
     align-items: center;
     justify-content: center;
   }
-  .demo-msg-label-avatar svg { height: 12px; width: 12px; color: #fff; }
+  .demo-msg-label-avatar svg { height: 12px; width: 12px; color: #1a1a1a; }
   .demo-msg-label-text {
     font-size: 12px;
     font-weight: 500;
@@ -1000,12 +1000,12 @@
   }
   .demo-msg-row.user .demo-bubble {
     background: #3b82f6;
-    color: #fff;
+    color: #1a1a1a;
   }
   .demo-msg-row.assistant .demo-bubble {
-    background: rgba(255,255,255,0.05);
-    color: #ededed;
-    border: 1px solid #262626;
+    background: rgba(0,0,0,0.03);
+    color: #1a1a1a;
+    border: 1px solid #e5e7eb;
   }
   .demo-msg-row.assistant.error .demo-bubble {
     background: rgba(239,68,68,0.1);
@@ -1116,7 +1116,7 @@
   /* Input area */
   .demo-input-area {
     padding: 16px 20px;
-    border-top: 1px solid #262626;
+    border-top: 1px solid #e5e7eb;
   }
   .demo-input-form {
     display: flex;
@@ -1127,9 +1127,9 @@
     border-radius: 8px;
     padding: 10px 16px;
     font-size: 14px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid #262626;
-    color: #ededed;
+    background: rgba(0,0,0,0.03);
+    border: 1px solid #e5e7eb;
+    color: #1a1a1a;
     font-family: inherit;
     outline: none;
     resize: none;
@@ -1146,7 +1146,7 @@
     border-radius: 8px;
     border: none;
     background: #3b82f6;
-    color: #fff;
+    color: #1a1a1a;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1155,7 +1155,7 @@
   }
   .demo-send-btn:hover:not(:disabled) { background: #2563eb; }
   .demo-send-btn:disabled {
-    background: rgba(255,255,255,0.05);
+    background: rgba(0,0,0,0.03);
     color: #a1a1aa;
     cursor: not-allowed;
   }
@@ -1163,7 +1163,7 @@
   .demo-input-hint {
     font-size: 11px;
     text-align: center;
-    color: #262626;
+    color: #e5e7eb;
     margin-top: 8px;
   }
 
@@ -1183,8 +1183,8 @@
 
   /* ─── Query CTA banner ───────────────────────────────────────────────── */
   #cta-banner {
-    background: radial-gradient(circle at 50% 50%, rgba(94,234,212,0.08), transparent 60%), #0b0d10;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    background: radial-gradient(circle at 50% 50%, rgba(13,148,136,0.08), transparent 60%), #f8f9fa;
+    border-top: 1px solid rgba(0,0,0,0.06);
     text-align: center;
     padding: 110px 0;
   }
@@ -1197,7 +1197,7 @@
   }
   #cta-banner p {
     font-size: 18px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.65);
     max-width: 620px;
     margin: 0 auto 36px;
     line-height: 1.6;
@@ -1205,8 +1205,8 @@
 
   /* ─── Footer ─────────────────────────────────────────────────────────── */
   footer {
-    background: #08090c;
-    border-top: 1px solid rgba(255,255,255,0.06);
+    background: #f1f3f5;
+    border-top: 1px solid rgba(0,0,0,0.08);
     padding: 60px 0 36px;
   }
   .footer-grid {
@@ -1226,11 +1226,11 @@
   .footer-brand h3 .dot {
     width: 9px; height: 9px;
     border-radius: 50%;
-    background: #5eead4;
+    background: #0d9488;
   }
   .footer-brand p {
     font-size: 14px;
-    color: rgba(255,255,255,0.6);
+    color: rgba(0,0,0,0.55);
     line-height: 1.6;
     max-width: 360px;
   }
@@ -1238,34 +1238,34 @@
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.45);
+    color: rgba(0,0,0,0.4);
     margin-bottom: 16px;
     font-weight: 600;
   }
   .footer-col a {
     display: block;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.65);
     text-decoration: none;
     font-size: 14px;
     margin-bottom: 10px;
     transition: color 0.2s ease;
   }
-  .footer-col a:hover { color: #5eead4; }
+  .footer-col a:hover { color: #0d9488; }
   .footer-bottom {
-    border-top: 1px solid rgba(255,255,255,0.06);
+    border-top: 1px solid rgba(0,0,0,0.08);
     padding-top: 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     font-size: 13px;
-    color: rgba(255,255,255,0.45);
+    color: rgba(0,0,0,0.4);
   }
   .footer-bottom a {
-    color: rgba(255,255,255,0.45);
+    color: rgba(0,0,0,0.4);
     text-decoration: none;
     transition: color 0.2s ease;
   }
-  .footer-bottom a:hover { color: #5eead4; }
+  .footer-bottom a:hover { color: #0d9488; }
   @media (max-width: 720px) {
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
@@ -1273,8 +1273,8 @@
 
   /* ─── Pricing ──────────────────────────────────────────────────────── */
   #pricing {
-    background: #0b0d10;
-    border-top: 1px solid rgba(255,255,255,0.04);
+    background: #f8f9fa;
+    border-top: 1px solid rgba(0,0,0,0.06);
   }
   .pricing-grid {
     display: grid;
@@ -1284,27 +1284,27 @@
     margin: 0 auto;
   }
   .price-card {
-    background: #14181d;
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
     border-radius: 10px;
     padding: 40px 36px;
     position: relative;
     transition: border-color 0.2s ease, transform 0.2s ease;
   }
   .price-card:hover {
-    border-color: rgba(94,234,212,0.35);
+    border-color: rgba(13,148,136,0.35);
     transform: translateY(-4px);
   }
   .price-card.featured {
-    border-color: rgba(94,234,212,0.4);
+    border-color: rgba(13,148,136,0.4);
   }
   .price-card.featured::before {
     content: 'Most popular';
     position: absolute;
     top: -12px;
     left: 36px;
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -1316,7 +1316,7 @@
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: #5eead4;
+    color: #0d9488;
     font-weight: 700;
     margin-bottom: 16px;
   }
@@ -1331,7 +1331,7 @@
   .price-original {
     font-size: 24px;
     font-weight: 600;
-    color: rgba(255,255,255,0.4);
+    color: rgba(0,0,0,0.38);
     text-decoration: line-through;
     margin-right: 10px;
   }
@@ -1344,8 +1344,8 @@
   }
   .price-badge {
     display: inline-block;
-    background: rgba(94,234,212,0.15);
-    color: #5eead4;
+    background: rgba(13,148,136,0.15);
+    color: #0d9488;
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 0.08em;
@@ -1356,7 +1356,7 @@
   }
   .price-period {
     font-size: 14px;
-    color: rgba(255,255,255,0.55);
+    color: rgba(0,0,0,0.5);
     margin-bottom: 28px;
   }
   .price-features {
@@ -1366,7 +1366,7 @@
   }
   .price-features li {
     font-size: 14px;
-    color: rgba(255,255,255,0.78);
+    color: rgba(0,0,0,0.73);
     line-height: 1.5;
     padding: 7px 0 7px 28px;
     position: relative;
@@ -1376,7 +1376,7 @@
     position: absolute;
     left: 0;
     top: 7px;
-    color: #5eead4;
+    color: #0d9488;
     font-weight: 700;
     font-size: 14px;
   }
@@ -1384,8 +1384,8 @@
     display: block;
     width: 100%;
     padding: 14px 20px;
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     font-size: 15px;
@@ -1398,16 +1398,16 @@
   .price-cta:hover { background: #7df0db; transform: translateY(-1px); }
   .price-cta.ghost {
     background: transparent;
-    color: #fff;
-    border: 1px solid rgba(255,255,255,0.25);
+    color: #1a1a1a;
+    border: 1px solid rgba(0,0,0,0.18);
   }
-  .price-cta.ghost:hover { background: rgba(255,255,255,0.08); }
+  .price-cta.ghost:hover { background: rgba(0,0,0,0.08); }
   .price-note {
     max-width: 880px;
     margin: 32px auto 0;
     padding: 24px 28px;
-    background: rgba(94,234,212,0.04);
-    border: 1px solid rgba(94,234,212,0.15);
+    background: rgba(13,148,136,0.04);
+    border: 1px solid rgba(13,148,136,0.15);
     border-radius: 8px;
     display: flex;
     gap: 16px;
@@ -1421,17 +1421,17 @@
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 6px;
-    color: #5eead4;
+    color: #0d9488;
   }
   .price-note .note-body p {
     font-size: 13px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.7);
+    color: rgba(0,0,0,0.65);
   }
   .price-note .note-body p code {
     font-family: "JetBrains Mono", monospace;
     font-size: 12px;
-    color: #5eead4;
+    color: #0d9488;
   }
   @media (max-width: 760px) {
     .pricing-grid { grid-template-columns: 1fr; }
@@ -1444,11 +1444,11 @@
     left: 20px;
     right: 20px;
     max-width: 420px;
-    background: #14181d;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: 12px;
     padding: 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     z-index: 90;
     transform: translateY(150%);
     opacity: 0;
@@ -1469,16 +1469,16 @@
     font-size: 17px;
     font-weight: 700;
     margin-bottom: 8px;
-    color: #fff;
+    color: #1a1a1a;
   }
   .cookie-popup p {
     font-size: 13px;
     line-height: 1.6;
-    color: rgba(255,255,255,0.65);
+    color: rgba(0,0,0,0.6);
     margin-bottom: 18px;
   }
   .cookie-popup p a {
-    color: #5eead4;
+    color: #0d9488;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
@@ -1499,18 +1499,18 @@
   }
   .cookie-btn:hover { transform: translateY(-1px); }
   .cookie-btn.accept {
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
   }
   .cookie-btn.accept:hover { filter: brightness(1.1); }
   .cookie-btn.decline {
     background: transparent;
-    color: rgba(255,255,255,0.7);
-    border: 1px solid rgba(255,255,255,0.2);
+    color: rgba(0,0,0,0.65);
+    border: 1px solid rgba(0,0,0,0.15);
   }
   .cookie-btn.decline:hover {
-    background: rgba(255,255,255,0.06);
-    color: #fff;
+    background: rgba(0,0,0,0.08);
+    color: #1a1a1a;
   }
 
   @media (max-width: 520px) {
@@ -1529,7 +1529,7 @@
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.75);
+    background: rgba(0,0,0,0.4);
     backdrop-filter: blur(6px);
     z-index: 100;
     display: none;
@@ -1539,15 +1539,15 @@
   }
   .modal-backdrop.open { display: flex; }
   .modal {
-    background: #14181d;
-    color: #fff;
+    background: #ffffff;
+    color: #1a1a1a;
     border-radius: 10px;
     width: 100%;
     max-width: 480px;
     padding: 36px;
     position: relative;
-    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
-    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 24px 80px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.08);
     max-height: 88vh;
     overflow-y: auto;
   }
@@ -1557,7 +1557,7 @@
     right: 18px;
     background: transparent;
     border: none;
-    color: #fff;
+    color: #1a1a1a;
     font-size: 26px;
     cursor: pointer;
     line-height: 1;
@@ -1593,11 +1593,11 @@
   .contact-form textarea,
   .contact-form select {
     width: 100%;
-    background: #0b0d10;
-    border: 1px solid rgba(255,255,255,0.12);
+    background: #f9fafb;
+    border: 1px solid rgba(0,0,0,0.12);
     border-radius: 6px;
     padding: 12px 14px;
-    color: #fff;
+    color: #1a1a1a;
     font-size: 14px;
     font-family: inherit;
     transition: border-color 0.2s ease;
@@ -1606,7 +1606,7 @@
   .contact-form textarea:focus,
   .contact-form select:focus {
     outline: none;
-    border-color: #5eead4;
+    border-color: #0d9488;
   }
   .contact-form textarea {
     resize: vertical;
@@ -1620,12 +1620,12 @@
     background-position: right 14px center;
     padding-right: 36px;
   }
-  .contact-form select option { background: #14181d; }
+  .contact-form select option { background: #ffffff; }
   .contact-submit {
     margin-top: 24px;
     padding: 14px 22px;
-    background: #5eead4;
-    color: #06231d;
+    background: #0d9488;
+    color: #ffffff;
     border: none;
     border-radius: 6px;
     font-size: 15px;
@@ -1644,13 +1644,13 @@
   .contact-success .check {
     width: 56px; height: 56px;
     border-radius: 50%;
-    background: rgba(94,234,212,0.12);
-    border: 2px solid #5eead4;
+    background: rgba(13,148,136,0.12);
+    border: 2px solid #0d9488;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    color: #5eead4;
+    color: #0d9488;
     margin: 0 auto 20px;
   }
   .contact-success h3 { font-size: 20px; margin-bottom: 8px; font-weight: 700; }
@@ -1665,7 +1665,7 @@
     display: none;
     width: 14px; height: 14px;
     border: 2px solid rgba(6,35,29,0.25);
-    border-top-color: #06231d;
+    border-top-color: #ffffff;
     border-radius: 50%;
     animation: spin 0.7s linear infinite;
     vertical-align: middle;
@@ -1718,7 +1718,7 @@
     <div class="hero-grid"></div>
     <div class="hero-scrim"></div>
     <div class="hero-content">
-      <img src="images/logo-main.jpg" alt="DoqueRAG" style="height:56px;width:auto;margin-bottom:8px;max-width:100%;border-radius:8px;object-fit:contain;flex-shrink:0;align-self:flex-start;">
+      <img src="images/logo-main.jpg" alt="DoqueRAG" style="height:56px;width:auto;margin-bottom:8px;max-width:100%;border-radius:8px;object-fit:contain;flex-shrink:0;align-self:flex-start;border:1px solid rgba(0,0,0,0.08);">
       <div class="hero-eyebrow">Retrieval-Augmented Knowledge System</div>
       <h1 class="hero-title">Why memorise when you can <span class="accent">chat with your memory?</span></h1>
       <p class="hero-desc">Drop in PDFs, markdown, or raw text. Ask questions in plain English. Get cited, synthesized answers drawn only from your own documents — no hallucinated filler, no lost context, no third-party trackers.</p>
@@ -1910,7 +1910,7 @@
         <div class="price-new">
           <span class="price-amount"><span class="currency">₹</span>1,900</span>
         </div>
-        <div style="font-size:14px;color:rgba(255,255,255,0.5);margin-bottom:4px;">
+        <div style="font-size:14px;color:rgba(0,0,0,0.5);margin-bottom:4px;">
           <span class="price-original"><span class="currency">₹</span>5,000</span> per month
         </div>
         <div class="price-period">cancel anytime</div>
@@ -1953,7 +1953,7 @@
         <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></div>
         <h3>Drop a document in</h3>
         <p>Upload a PDF, markdown, or raw text. We handle the parsing — no cleanup, no formatting fixes needed on your end. Every chunk is tagged with its filename, <em>doc_type</em>, <em>project</em>, and <em>version</em> so you can filter later.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> Drop a 200-page PDF, we handle the parsing.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> Drop a 200-page PDF, we handle the parsing.</p>
         <span class="step-tag">POST /api/upload · /api/ingest</span>
       </div>
 
@@ -1962,7 +1962,7 @@
         <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div>
         <h3>We remember where every fact came from</h3>
         <p>Each document is chunked, embedded, and stored with full provenance — filename, version, page, and upload timestamp. So v2 of a policy doesn't get mixed with v1, and retrieval can be scoped to a single project or release.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> We remember which file, version, and page each fact came from.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> We remember which file, version, and page each fact came from.</p>
         <span class="step-tag">NVIDIA embeddings · Pinecone</span>
       </div>
 
@@ -1971,7 +1971,7 @@
         <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
         <h3>Ask a question, get a cited answer</h3>
         <p>Query expansion catches synonyms automatically — "owner" matches "lead" and "manager". An LLM reducer synthesizes the most relevant chunks into one coherent answer, detects conflicts across sources, and lists every filename it used.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(94,234,212,0.04);border:1px solid rgba(94,234,212,0.15);font-size:14px;color:rgba(255,255,255,0.85);"><strong style="color:#5eead4;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
         <span class="step-tag">POST /api/query · /api/query-stream</span>
       </div>
     </div>
@@ -1996,7 +1996,7 @@
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span>
         <h3>Document Aggregation</h3>
-        <p>Chunks are grouped by filename and reranked by <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">avgScore * log(chunkCount + 1)</code>. Multiple relevant chunks from the same doc merge into one coherent context window.</p>
+        <p>Chunks are grouped by filename and reranked by <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">avgScore * log(chunkCount + 1)</code>. Multiple relevant chunks from the same doc merge into one coherent context window.</p>
       </div>
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .963L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg></span>
@@ -2011,7 +2011,7 @@
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg></span>
         <h3>Metadata Filters</h3>
-        <p>Filter queries by <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">doc_type</code>, <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">project</code>, or <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">version</code>. Scope a question to a single project, a specific doc type, or a tagged release.</p>
+        <p>Filter queries by <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">doc_type</code>, <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">project</code>, or <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">version</code>. Scope a question to a single project, a specific doc type, or a tagged release.</p>
       </div>
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></span>
@@ -2021,17 +2021,17 @@
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8l-8.57 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
         <h3>Source Citation</h3>
-        <p>Every answer includes a <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">sources</code> array of filenames. Only files that still exist in the documents table are returned — deleted docs are never cited.</p>
+        <p>Every answer includes a <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">sources</code> array of filenames. Only files that still exist in the documents table are returned — deleted docs are never cited.</p>
       </div>
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
         <h3>Streaming Answers</h3>
-        <p>Use <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">/api/query-stream</code> for token-by-token streaming. Same retrieval, same citations, faster perceived latency for chat-style UIs.</p>
+        <p>Use <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">/api/query-stream</code> for token-by-token streaming. Same retrieval, same citations, faster perceived latency for chat-style UIs.</p>
       </div>
       <div class="feature">
         <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></span>
         <h3>Index Reset</h3>
-        <p>One call to <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
+        <p>One call to <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
       </div>
     </div>
   </div>
@@ -2097,14 +2097,14 @@
     <div class="section-head">
       <div class="section-eyebrow">API Reference</div>
       <h2 class="section-title">Talk to the brain directly.</h2>
-      <p class="section-desc">Base URL: <code style="color:#5eead4;font-family:'JetBrains Mono',monospace;font-size:14px;">https://doquerag.vercel.app</code></p>
+      <p class="section-desc">Base URL: <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:14px;">https://doquerag.vercel.app</code></p>
     </div>
 
     <div style="max-width:880px;margin:0 auto 32px;padding:14px 20px;border-radius:8px;background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);display:flex;align-items:flex-start;gap:12px;">
       <span style="font-size:18px;flex-shrink:0;color:#fbbf24;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
       <div>
         <strong style="font-size:13px;color:#fbbf24;">File size limit:</strong>
-        <span style="font-size:13px;color:rgba(255,255,255,0.7);"> PDF uploads must be under 4.5 MB (Vercel serverless payload limit). For larger files, split before upload or use the raw text ingest endpoint.</span>
+        <span style="font-size:13px;color:rgba(0,0,0,0.65);"> PDF uploads must be under 4.5 MB (Vercel serverless payload limit). For larger files, split before upload or use the raw text ingest endpoint.</span>
       </div>
     </div>
 
@@ -2177,7 +2177,7 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
       <div class="footer-brand">
         <a href="#" class="brand">
           <img src="images/logo-main.jpg" alt="DoqueRAG" style="height:32px;width:auto;vertical-align:middle;margin-right:10px;border-radius:4px;">
-          <span style="font-size:18px;font-weight:800;letter-spacing:-0.01em;">Doque<span style="color:#5eead4;">RAG</span></span>
+          <span style="font-size:18px;font-weight:800;letter-spacing:-0.01em;">Doque<span style="color:#0d9488;">RAG</span></span>
         </a>
         <p style="margin-top:12px;">A retrieval-augmented knowledge system — ingest documents, ask questions in plain English, and get cited, synthesized answers backed only by your own source material.</p>
       </div>
@@ -2238,8 +2238,8 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
 
       <label for="cf-phone">Phone <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
       <div style="display:flex;gap:8px;">
-        <select id="cf-country" name="country" style="width:120px;flex-shrink:0;background:#0b0d10;border:1px solid rgba(255,255,255,0.12);border-radius:6px;padding:12px 14px;color:#fff;font-size:14px;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' fill-opacity='0.5' d='M6 8L0 0h12z'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;">
-          <option value="" style="background:#14181d;">Code</option>
+        <select id="cf-country" name="country" style="width:120px;flex-shrink:0;background:#f8f9fa;border:1px solid rgba(0,0,0,0.12);border-radius:6px;padding:12px 14px;color:#1a1a1a;font-size:14px;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' fill-opacity='0.5' d='M6 8L0 0h12z'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;">
+          <option value="" style="background:#ffffff;">Code</option>
         </select>
         <input id="cf-phone" name="phone" type="tel" autocomplete="tel" placeholder="Your phone number" style="flex:1;">
       </div>
@@ -2551,7 +2551,7 @@ function initContactModal() {
       const opt = document.createElement('option');
       opt.value = c.code;
       opt.textContent = c.country + ' ' + c.code;
-      opt.style.background = '#14181d';
+      opt.style.background = '#ffffff';
       countrySelect.appendChild(opt);
     });
 
