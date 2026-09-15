@@ -1437,6 +1437,111 @@
     .pricing-grid { grid-template-columns: 1fr; }
   }
 
+  /* ─── Setup timer (below pricing) ───────────────────────────────────── */
+  .setup-timer {
+    max-width: 560px;
+    margin: 32px auto 0;
+    padding: 32px 28px;
+    background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  }
+  .setup-timer-ring {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+  }
+  .setup-timer-ring svg {
+    width: 100%;
+    height: 100%;
+    transform: rotate(-90deg);
+  }
+  .setup-timer-ring .ring-bg {
+    fill: none;
+    stroke: rgba(0,0,0,0.08);
+    stroke-width: 6;
+  }
+  .setup-timer-ring .ring-progress {
+    fill: none;
+    stroke: #0d9488;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-dasharray: 339.292;
+    stroke-dashoffset: 339.292;
+    animation: ring-fill 4s ease-in-out infinite;
+  }
+  @keyframes ring-fill {
+    0%   { stroke-dashoffset: 339.292; }
+    50%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 339.292; }
+  }
+  .setup-timer-ring .ring-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  .setup-timer-ring .ring-label .time {
+    font-size: 28px;
+    font-weight: 800;
+    color: #0d9488;
+    line-height: 1;
+  }
+  .setup-timer-ring .ring-label .unit {
+    font-size: 12px;
+    color: rgba(0,0,0,0.5);
+    margin-top: 2px;
+  }
+  .setup-timer h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  .setup-timer p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.65);
+  }
+  .setup-timer-steps {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .setup-step {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.55);
+    font-weight: 500;
+  }
+  .setup-step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #0d9488;
+    animation: step-pulse 1.5s ease-in-out infinite;
+  }
+  .setup-step:nth-child(1) .setup-step-dot { animation-delay: 0s; }
+  .setup-step:nth-child(2) .setup-step-dot { animation-delay: 0.3s; }
+  .setup-step:nth-child(3) .setup-step-dot { animation-delay: 0.6s; }
+  .setup-step:nth-child(4) .setup-step-dot { animation-delay: 0.9s; }
+  @keyframes step-pulse {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  .setup-step-arrow {
+    color: rgba(0,0,0,0.3);
+    font-size: 10px;
+  }
+
   /* ─── Cookie consent popup ──────────────────────────────────────────── */
   .cookie-popup {
     position: fixed;
@@ -1935,6 +2040,31 @@
         <p>The monthly plan excludes infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
       </div>
     </div>
+
+    <!-- 30-minute setup timer -->
+    <div class="setup-timer">
+      <div class="setup-timer-ring">
+        <svg viewBox="0 0 120 120">
+          <circle class="ring-bg" cx="60" cy="60" r="54"/>
+          <circle class="ring-progress" cx="60" cy="60" r="54"/>
+        </svg>
+        <div class="ring-label">
+          <div class="time">30</div>
+          <div class="unit">minutes</div>
+        </div>
+      </div>
+      <h3>Your app live in 30 minutes</h3>
+      <p>From signup to a fully deployed DoqueRAG instance — our technical team handles Supabase, Pinecone, and deployment setup with you. No dev experience required.</p>
+      <div class="setup-timer-steps">
+        <div class="setup-step"><span class="setup-step-dot"></span>Supabase</div>
+        <span class="setup-step-arrow">→</span>
+        <div class="setup-step"><span class="setup-step-dot"></span>Pinecone</div>
+        <span class="setup-step-arrow">→</span>
+        <div class="setup-step"><span class="setup-step-dot"></span>Deploy</div>
+        <span class="setup-step-arrow">→</span>
+        <div class="setup-step"><span class="setup-step-dot"></span>Live</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2227,7 +2357,7 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
     <button class="modal-close" id="modalClose" aria-label="Close">×</button>
 
     <h2 id="contactModalTitle">Contact us</h2>
-    <p class="lead">Send us a message and we'll get back within one business day.</p>
+    <p class="lead">Send us a message and our technical team will have your DoqueRAG instance live in 30 minutes — Supabase, Pinecone, and deployment all handled for you.</p>
 
     <form class="contact-form" id="contactForm">
       <label for="cf-name">Name</label>
