@@ -317,7 +317,7 @@
   @media (max-width: 700px) {
     .hero-content { padding: 80px 52px 80px; gap: 18px; max-width: 100%; }
     .hero-eyebrow { font-size: 10px; }
-    .hero-title { font-size: clamp(22px, 6vw, 36px); }
+    .hero-title { font-size: clamp(26px, 7.5vw, 40px); }
     .hero-desc { font-size: 12px; max-width: 100%; }
     .hero-cta { padding: 10px 18px; font-size: 13px; }
     .hero-nav-btn { width: 32px; height: 32px; font-size: 14px; }
@@ -3167,8 +3167,8 @@ function initDemo() {
       '</div>' +
       '<div class="demo-pipeline-log-body"></div>';
     messagesEl.appendChild(log);
-    // Scroll the pipeline log into view so it's visible
-    setTimeout(() => { log.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 50);
+    // Scroll within the messages container only — don't hijack page scroll
+    messagesEl.scrollTop = messagesEl.scrollHeight;
     return {
       el: log,
       body: log.querySelector('.demo-pipeline-log-body'),
@@ -3346,7 +3346,7 @@ function initDemo() {
           demoObserver.disconnect();
         }
       }
-    }, { threshold: 0.25 });
+    }, { threshold: 0.5, rootMargin: '0px 0px -150px 0px' });
     demoObserver.observe(demoSection);
   } else {
     // Fallback: just auto-play after 2.5s
