@@ -67,7 +67,8 @@ module.exports = async (req, res) => {
 
   if (!name)    return res.status(400).json({ ok: false, error: 'Name is required.' });
   if (!email || !isValidEmail(email)) return res.status(400).json({ ok: false, error: 'A valid email address is required.' });
-  if (!message) return res.status(400).json({ ok: false, error: 'Message is required.' });
+  if (!phone) return res.status(400).json({ ok: false, error: 'Phone number is required.' });
+  // Message is optional — no validation needed
 
   if (!SMTP_PASS) {
     console.error('[contact] SMTP_PASS environment variable is not set.');

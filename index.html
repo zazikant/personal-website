@@ -2624,7 +2624,12 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
       <label for="dash-email">Email</label>
       <input id="dash-email" name="email" type="email" required placeholder="you@company.com">
       <label for="dash-phone">Phone</label>
-      <input id="dash-phone" name="phone" type="tel" required placeholder="Your phone number">
+      <div style="display:flex;gap:8px;">
+        <select id="dash-country" name="country" style="width:120px;flex-shrink:0;background:#f9fafb;border:1px solid rgba(0,0,0,0.12);border-radius:6px;padding:12px 14px;color:#1a1a1a;font-size:14px;font-family:inherit;appearance:none;-webkit-appearance:none;background-image:url(&quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23000000' fill-opacity='0.4' d='M6 8L0 0h12z'/%3E%3C/svg%3E&quot;);background-repeat:no-repeat;background-position:right 10px center;padding-right:30px;">
+          <option value="">Code</option>
+        </select>
+        <input id="dash-phone" name="phone" type="tel" required placeholder="Your phone number" style="flex:1;">
+      </div>
       <label for="dash-company">Company <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
       <input id="dash-company" name="company" type="text" placeholder="Where do you work?">
       <label for="dash-plan">Plan</label>
@@ -3718,6 +3723,69 @@ function initClerk() {
         const dashboardClose = document.getElementById('dashboardClose');
         const dashboardForm = document.getElementById('dashboardForm');
         const dashboardSuccess = document.getElementById('dashboardSuccess');
+        const dashCountrySelect = document.getElementById('dash-country');
+
+        // Populate country codes for dashboard phone field
+        const countryCodes = [
+          { code: '+93', country: 'AF' }, { code: '+355', country: 'AL' },
+          { code: '+213', country: 'DZ' }, { code: '+61', country: 'AU' },
+          { code: '+43', country: 'AT' }, { code: '+880', country: 'BD' },
+          { code: '+32', country: 'BE' }, { code: '+55', country: 'BR' },
+          { code: '+1', country: 'CA' }, { code: '+86', country: 'CN' },
+          { code: '+45', country: 'DK' }, { code: '+20', country: 'EG' },
+          { code: '+358', country: 'FI' }, { code: '+33', country: 'FR' },
+          { code: '+49', country: 'DE' }, { code: '+30', country: 'GR' },
+          { code: '+852', country: 'HK' }, { code: '+36', country: 'HU' },
+          { code: '+354', country: 'IS' }, { code: '+91', country: 'IN' },
+          { code: '+62', country: 'ID' }, { code: '+98', country: 'IR' },
+          { code: '+353', country: 'IE' }, { code: '+972', country: 'IL' },
+          { code: '+39', country: 'IT' }, { code: '+81', country: 'JP' },
+          { code: '+254', country: 'KE' }, { code: '+82', country: 'KR' },
+          { code: '+965', country: 'KW' }, { code: '+961', country: 'LB' },
+          { code: '+60', country: 'MY' }, { code: '+960', country: 'MV' },
+          { code: '+52', country: 'MX' }, { code: '+31', country: 'NL' },
+          { code: '+64', country: 'NZ' }, { code: '+47', country: 'NO' },
+          { code: '+968', country: 'OM' }, { code: '+92', country: 'PK' },
+          { code: '+63', country: 'PH' }, { code: '+48', country: 'PL' },
+          { code: '+351', country: 'PT' }, { code: '+974', country: 'QA' },
+          { code: '+40', country: 'RO' }, { code: '+7', country: 'RU' },
+          { code: '+966', country: 'SA' }, { code: '+65', country: 'SG' },
+          { code: '+27', country: 'ZA' }, { code: '+34', country: 'ES' },
+          { code: '+94', country: 'LK' }, { code: '+46', country: 'SE' },
+          { code: '+41', country: 'CH' }, { code: '+886', country: 'TW' },
+          { code: '+66', country: 'TH' }, { code: '+90', country: 'TR' },
+          { code: '+971', country: 'AE' }, { code: '+44', country: 'GB' },
+          { code: '+1', country: 'US' }, { code: '+84', country: 'VN' },
+        ];
+
+        if (dashCountrySelect) {
+          countryCodes.forEach(c => {
+            const opt = document.createElement('option');
+            opt.value = c.code;
+            opt.textContent = c.country + ' ' + c.code;
+            opt.style.background = '#ffffff';
+            dashCountrySelect.appendChild(opt);
+          });
+
+          // Auto-detect country from IP
+          async function detectCountryDash() {
+            const providers = [
+              async () => { const r = await fetch('https://ip-api.com/json/?fields=countryCode'); const d = await r.json(); return d.countryCode || null; },
+              async () => { const r = await fetch('https://ipapi.co/json/'); const d = await r.json(); return d.country_code || null; },
+              async () => { const r = await fetch('https://ipinfo.io/json/'); const d = await r.json(); return d.country || null; },
+            ];
+            for (const provider of providers) {
+              try {
+                const code = await provider();
+                if (code) {
+                  const match = countryCodes.find(c => c.country === code.toUpperCase());
+                  if (match) { dashCountrySelect.value = match.code; return; }
+                }
+              } catch (e) { /* try next */ }
+            }
+          }
+          detectCountryDash();
+        }
 
         let notifiedSignup = false;  // track if we already sent the signup email
 
@@ -3968,13 +4036,16 @@ function initClerk() {
         if (dashboardForm) {
           dashboardForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const countryCode = document.getElementById('dash-country')?.value || '';
+            const phoneRaw = dashboardForm.phone?.value.trim() || '';
+            const phone = phoneRaw ? (countryCode + ' ' + phoneRaw) : '';
             const payload = {
               name: dashboardForm.name.value.trim(),
               email: dashboardForm.email.value.trim(),
-              phone: dashboardForm.phone?.value.trim() || '',
+              phone: phone,
               company: dashboardForm.company?.value.trim() || '',
               plan: dashboardForm.plan?.value || 'monthly',
-              message: dashboardForm.message.value.trim()
+              message: dashboardForm.message?.value.trim() || ''
             };
             if (!payload.name || !payload.email || !payload.phone) {
               alert('Please fill in your name, email, and phone number.');
