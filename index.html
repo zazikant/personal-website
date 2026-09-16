@@ -12,6 +12,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js" type="text/javascript"></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -101,6 +102,29 @@
     transition: transform 0.15s ease, box-shadow 0.2s ease;
   }
   .topnav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.35); }
+  .nav-auth { display: flex; align-items: center; gap: 10px; }
+  .nav-signin {
+    background: transparent;
+    color: #1a1a1a;
+    border: 1px solid rgba(0,0,0,0.15);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+  .nav-signin:hover { border-color: #0d9488; color: #0d9488; }
+  .nav-user-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+  }
+  .clerk-loaded .nav-signed-out { display: flex; }
+  .clerk-loaded .nav-signed-in { display: none; }
+  .clerk-authed .nav-signed-out { display: none; }
+  .clerk-authed .nav-signed-in { display: flex; }
   @media (max-width: 720px) {
     .topnav .nav-links a:not(.nav-cta) { display: none; }
   }
@@ -1914,7 +1938,15 @@
     <a href="#pricing">Pricing</a>
     <a href="#stack">Stack</a>
     <a href="#api">API</a>
-    <button class="nav-cta" data-cta>Get started</button>
+    <div class="nav-auth">
+      <div class="nav-signed-out">
+        <button class="nav-signin" id="clerkSignin">Sign in</button>
+        <button class="nav-cta" id="clerkSignup">Get started</button>
+      </div>
+      <div class="nav-signed-in">
+        <div id="clerkUserBtn" class="nav-user-btn"></div>
+      </div>
+    </div>
   </div>
 </nav>
 
@@ -3424,6 +3456,73 @@ function initCookiePopup() {
 }
 
 
+/* ════════════════════════════════════════════════════════════════════
+   Clerk authentication — vanilla JS integration
+   Requires CLERK_PUBLISHABLE_KEY to be set (see README)
+   ════════════════════════════════════════════════════════════════════ */
+function initClerk() {
+  const PUBLISHABLE_KEY = 'pk_YOUR_PUBLISHABLE_KEY'; // ← Replace with your Clerk publishable key
+
+  if (!window.Clerk || PUBLISHABLE_KEY === 'pk_YOUR_PUBLISHABLE_KEY') {
+    console.warn('[clerk] Clerk not loaded or publishable key not set. Auth controls disabled.');
+    // Fallback: restore the original "Get started" data-cta behavior
+    const signupBtn = document.getElementById('clerkSignup');
+    if (signupBtn) {
+      signupBtn.removeAttribute('id');
+      signupBtn.setAttribute('data-cta', '');
+    }
+    return;
+  }
+
+  const clerk = new Clerk(PUBLISHABLE_KEY);
+  clerk.load().then(() => {
+    document.body.classList.add('clerk-loaded');
+
+    const signinBtn = document.getElementById('clerkSignin');
+    const signupBtn = document.getElementById('clerkSignup');
+    const userBtnEl = document.getElementById('clerkUserBtn');
+
+    function updateAuthState() {
+      if (clerk.client?.sessions?.length > 0) {
+        document.body.classList.add('clerk-authed');
+        // Mount user button
+        if (userBtnEl && !userBtnEl.dataset.mounted) {
+          clerk.mountUserButton(userBtnEl, { afterSignInUrl: '/', afterSignOutUrl: '/' });
+          userBtnEl.dataset.mounted = '1';
+        }
+      } else {
+        document.body.classList.remove('clerk-authed');
+      }
+    }
+
+    // Initial state
+    updateAuthState();
+
+    // Listen for auth changes
+    clerk.addListener((e) => { updateAuthState(); });
+
+    // Sign in / Sign up → redirect to Clerk hosted pages
+    if (signinBtn) {
+      signinBtn.addEventListener('click', () => {
+        clerk.redirectToSignIn({ afterSignInUrl: window.location.href });
+      });
+    }
+    if (signupBtn) {
+      signupBtn.addEventListener('click', () => {
+        clerk.redirectToSignUp({ afterSignUpUrl: window.location.href });
+      });
+    }
+  }).catch((err) => {
+    console.error('[clerk] Failed to load:', err);
+    // Fallback: restore data-cta behavior
+    const signupBtn = document.getElementById('clerkSignup');
+    if (signupBtn) {
+      signupBtn.removeAttribute('id');
+      signupBtn.setAttribute('data-cta', '');
+    }
+  });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   initHeroCarousel();
   initConceptSlider();
@@ -3431,6 +3530,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initApiTabs();
   initDemo();
   initCookiePopup();
+  initClerk();
 });
 </script>
 
