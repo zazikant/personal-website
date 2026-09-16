@@ -3752,8 +3752,10 @@ function initClerk() {
         function showDashboard() {
           // Close Clerk auth modal first
           closeClerkModal();
+          console.log('[clerk] showDashboard called');
           // Pre-fill form from Clerk user data
           const info = getUserInfo();
+          console.log('[clerk] getUserInfo:', JSON.stringify(info));
           if (info) {
             const nameEl = document.getElementById('dash-name');
             const emailEl = document.getElementById('dash-email');
@@ -3765,6 +3767,7 @@ function initClerk() {
           if (dashboardForm) dashboardForm.style.display = '';
           if (dashboardSuccess) dashboardSuccess.classList.remove('show');
           if (dashboard) dashboard.classList.add('open');
+          console.log('[clerk] Dashboard opened:', dashboard ? 'YES' : 'NO');
         }
 
         function closeDashboard() {
@@ -3861,19 +3864,31 @@ function initClerk() {
         function startAuthPolling() {
           if (authPollTimer) clearInterval(authPollTimer);
           authPollTimer = setInterval(() => {
-            // Check both sessions AND user object (user might be ready before sessions)
+            // Check multiple indicators that user is signed in
             const sessions = window.Clerk?.client?.sessions;
             const user = window.Clerk?.user;
-            if ((sessions && sessions.length > 0) || user) {
+            const sessionCount = sessions ? sessions.length : 0;
+            if (sessionCount > 0 || user) {
+              console.log('[clerk] Auth detected — sessions:', sessionCount, 'user:', user ? 'YES' : 'NO');
               updateAuthState();
               clearInterval(authPollTimer);
               authPollTimer = null;
             }
-          }, 100);  // poll every 100ms for faster detection
+          }, 100);
           setTimeout(() => {
             if (authPollTimer) { clearInterval(authPollTimer); authPollTimer = null; }
           }, 300000);
         }
+
+        // Also run a background checker that runs independently of polling
+        // This catches the SSO callback even if the Clerk listener doesn't fire
+        let bgChecker = setInterval(() => {
+          const user = window.Clerk?.user;
+          if (user && !document.body.classList.contains('clerk-authed')) {
+            console.log('[clerk] Background checker detected user:', user.id);
+            updateAuthState();
+          }
+        }, 500);
 
         function closeClerkModal() {
           if (clerkModal) clerkModal.classList.remove('open');
