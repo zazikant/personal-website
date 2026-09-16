@@ -14,7 +14,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script async
   src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
-  data-clerk-publishable-key="pk_live_Y2xlcmsuZG9xdWVyYWcudmVyY2VsLmFwcCQ"
+  data-clerk-publishable-key="pk_test_cm9idXN0LWFsaWVuLTE0LmNsZXJrLmFjY291bnRzLmRldiQ"
   type="text/javascript"
   crossorigin
 ></script>
@@ -1647,6 +1647,47 @@
     font-size: 10px;
   }
 
+  /* ─── Clerk auth modal ────────────────────────────────────────────────── */
+  .clerk-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .clerk-modal.open { display: flex; }
+  .clerk-modal-card {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 440px;
+    padding: 8px;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.08);
+    min-height: 400px;
+  }
+  .clerk-modal-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    color: rgba(0,0,0,0.5);
+    font-size: 24px;
+    cursor: pointer;
+    line-height: 1;
+    z-index: 10;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+  .clerk-modal-close:hover { opacity: 1; }
+  .clerk-modal-card > div { min-height: 400px; }
+
   /* ─── Cookie consent popup ──────────────────────────────────────────── */
   .cookie-popup {
     position: fixed;
@@ -2411,6 +2452,14 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
   <div class="cookie-popup-actions">
     <button class="cookie-btn decline" id="cookieDecline">Decline</button>
     <button class="cookie-btn accept" id="cookieAccept">Accept all</button>
+  </div>
+</div>
+
+<!-- ─── Clerk auth modal ─────────────────────────────────────────────────── -->
+<div class="clerk-modal" id="clerkModal" role="dialog" aria-modal="true">
+  <div class="clerk-modal-card">
+    <button class="clerk-modal-close" id="clerkModalClose" aria-label="Close">×</button>
+    <div id="clerkAuthContainer"></div>
   </div>
 </div>
 
@@ -3466,7 +3515,7 @@ function initCookiePopup() {
    Requires CLERK_PUBLISHABLE_KEY to be set (see README)
    ════════════════════════════════════════════════════════════════════ */
 function initClerk() {
-  const PUBLISHABLE_KEY = 'pk_live_Y2xlcmsuZG9xdWVyYWcudmVyY2VsLmFwcCQ';
+  const PUBLISHABLE_KEY = 'pk_test_cm9idXN0LWFsaWVuLTE0LmNsZXJrLmFjY291bnRzLmRldiQ';
 
   // Wait for Clerk to load (script tag is async)
   function waitForClerk() {
@@ -3477,12 +3526,18 @@ function initClerk() {
         const signinBtn = document.getElementById('clerkSignin');
         const signupBtn = document.getElementById('clerkSignup');
         const userBtnEl = document.getElementById('clerkUserBtn');
+        const clerkModal = document.getElementById('clerkModal');
+        const clerkModalClose = document.getElementById('clerkModalClose');
+        const authContainer = document.getElementById('clerkAuthContainer');
 
         function updateAuthState() {
           if (window.Clerk.client && window.Clerk.client.sessions && window.Clerk.client.sessions.length > 0) {
             document.body.classList.add('clerk-authed');
+            closeClerkModal();
             if (userBtnEl && !userBtnEl.dataset.mounted) {
-              window.Clerk.mountUserButton(userBtnEl, { afterSignInUrl: '/', afterSignOutUrl: '/' });
+              window.Clerk.mountUserButton(userBtnEl, {
+                afterSignInUrl: '/', afterSignOutUrl: '/'
+              });
               userBtnEl.dataset.mounted = '1';
             }
           } else {
@@ -3490,22 +3545,43 @@ function initClerk() {
           }
         }
 
+        function openClerkModal(mode) {
+          if (!clerkModal || !authContainer) return;
+          authContainer.innerHTML = '';
+          if (mode === 'signin') {
+            window.Clerk.mountSignIn(authContainer);
+          } else {
+            window.Clerk.mountSignUp(authContainer);
+          }
+          clerkModal.classList.add('open');
+        }
+
+        function closeClerkModal() {
+          if (clerkModal) clerkModal.classList.remove('open');
+        }
+
         updateAuthState();
         window.Clerk.addListener(() => updateAuthState());
 
         if (signinBtn) {
-          signinBtn.addEventListener('click', () => {
-            window.Clerk.redirectToSignIn({ afterSignInUrl: window.location.href });
-          });
+          signinBtn.addEventListener('click', () => openClerkModal('signin'));
         }
         if (signupBtn) {
-          signupBtn.addEventListener('click', () => {
-            window.Clerk.redirectToSignUp({ afterSignUpUrl: window.location.href });
+          signupBtn.addEventListener('click', () => openClerkModal('signup'));
+        }
+        if (clerkModalClose) {
+          clerkModalClose.addEventListener('click', closeClerkModal);
+        }
+        if (clerkModal) {
+          clerkModal.addEventListener('click', (e) => {
+            if (e.target === clerkModal) closeClerkModal();
           });
         }
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && clerkModal?.classList.contains('open')) closeClerkModal();
+        });
       }).catch((err) => {
         console.error('[clerk] Failed to load:', err);
-        // Fallback: restore data-cta behavior
         const signupBtn = document.getElementById('clerkSignup');
         if (signupBtn) {
           signupBtn.removeAttribute('id');
@@ -3513,7 +3589,6 @@ function initClerk() {
         }
       });
     } else {
-      // Clerk not loaded yet — retry in 200ms
       setTimeout(waitForClerk, 200);
     }
   }
