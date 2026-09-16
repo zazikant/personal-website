@@ -1688,6 +1688,69 @@
   .clerk-modal-close:hover { opacity: 1; }
   .clerk-modal-card > div { min-height: 400px; }
 
+  /* ─── User dashboard (shows when signed in) ──────────────────────────── */
+  .clerk-dashboard {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .clerk-dashboard.open { display: flex; }
+  .clerk-dashboard-card {
+    background: #ffffff;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 480px;
+    padding: 36px;
+    position: relative;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.15);
+    border: 1px solid rgba(0,0,0,0.08);
+    max-height: 88vh;
+    overflow-y: auto;
+  }
+  .clerk-dashboard-card h2 {
+    font-size: 24px; font-weight: 800; margin-bottom: 6px; color: #1a1a1a;
+  }
+  .clerk-dashboard-card p.lead {
+    font-size: 14px; opacity: 0.7; margin-bottom: 22px; line-height: 1.55;
+  }
+  .clerk-dashboard .contact-form label {
+    display: block; font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; opacity: 0.65; margin-bottom: 6px;
+    margin-top: 16px; font-weight: 600;
+  }
+  .clerk-dashboard .contact-form label:first-of-type { margin-top: 0; }
+  .clerk-dashboard .contact-form input,
+  .clerk-dashboard .contact-form textarea,
+  .clerk-dashboard .contact-form select {
+    width: 100%; background: #f9fafb; border: 1px solid rgba(0,0,0,0.12);
+    border-radius: 6px; padding: 12px 14px; color: #1a1a1a; font-size: 14px;
+    font-family: inherit; transition: border-color 0.2s ease;
+  }
+  .clerk-dashboard .contact-form input:focus,
+  .clerk-dashboard .contact-form textarea:focus,
+  .clerk-dashboard .contact-form select:focus {
+    outline: none; border-color: #0d9488;
+  }
+  .clerk-dashboard .contact-form textarea { resize: vertical; min-height: 90px; }
+  .clerk-dashboard-success {
+    display: none; text-align: center; padding: 28px 0 12px;
+  }
+  .clerk-dashboard-success.show { display: block; }
+  .clerk-dashboard-success .check {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: rgba(13,148,136,0.12); border: 2px solid #0d9488;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px; color: #0d9488; margin: 0 auto 20px;
+  }
+  .clerk-dashboard-success h3 { font-size: 20px; margin-bottom: 8px; font-weight: 700; }
+  .clerk-dashboard-success p { font-size: 14px; opacity: 0.72; line-height: 1.55; }
+
   /* ─── Cookie consent popup ──────────────────────────────────────────── */
   .cookie-popup {
     position: fixed;
@@ -2460,6 +2523,40 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
   <div class="clerk-modal-card">
     <button class="clerk-modal-close" id="clerkModalClose" aria-label="Close">×</button>
     <div id="clerkAuthContainer"></div>
+  </div>
+</div>
+
+<!-- ─── User dashboard (shows after sign-up with contact form fields) ────── -->
+<div class="clerk-dashboard" id="clerkDashboard" role="dialog" aria-modal="true">
+  <div class="clerk-dashboard-card">
+    <button class="clerk-modal-close" id="dashboardClose" aria-label="Close">×</button>
+    <h2>Welcome to DoqueRAG! 🎉</h2>
+    <p class="lead">Your account is ready. Fill in your details below and our technical team will have your instance live in 30 minutes.</p>
+    <form class="contact-form" id="dashboardForm">
+      <label for="dash-name">Name</label>
+      <input id="dash-name" name="name" type="text" required placeholder="Your name">
+      <label for="dash-email">Email</label>
+      <input id="dash-email" name="email" type="email" required placeholder="you@company.com">
+      <label for="dash-phone">Phone <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
+      <input id="dash-phone" name="phone" type="tel" placeholder="Your phone number">
+      <label for="dash-company">Company <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
+      <input id="dash-company" name="company" type="text" placeholder="Where do you work?">
+      <label for="dash-plan">Plan</label>
+      <select id="dash-plan" name="plan">
+        <option value="monthly">Monthly — ₹900/month (launch offer)</option>
+        <option value="notsure">Not sure yet — help me decide</option>
+      </select>
+      <label for="dash-msg">What do you need?</label>
+      <textarea id="dash-msg" name="message" placeholder="Tell us about your use case, documents, or any questions..." required></textarea>
+      <button type="submit" class="contact-submit" id="dashboardSubmit" style="margin-top:24px;padding:14px 22px;background:#0d9488;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;width:100%;">
+        Request 30-min setup →
+      </button>
+    </form>
+    <div class="clerk-dashboard-success" id="dashboardSuccess">
+      <div class="check">✓</div>
+      <h3>You're all set!</h3>
+      <p>Our team has received your details. We'll reach out within the next 30 minutes to set up your DoqueRAG instance.</p>
+    </div>
   </div>
 </div>
 
@@ -3517,7 +3614,6 @@ function initCookiePopup() {
 function initClerk() {
   const PUBLISHABLE_KEY = 'pk_test_cm9idXN0LWFsaWVuLTE0LmNsZXJrLmFjY291bnRzLmRldiQ';
 
-  // Wait for Clerk to load (script tag is async)
   function waitForClerk() {
     if (window.Clerk && window.Clerk.load) {
       window.Clerk.load().then(() => {
@@ -3529,19 +3625,80 @@ function initClerk() {
         const clerkModal = document.getElementById('clerkModal');
         const clerkModalClose = document.getElementById('clerkModalClose');
         const authContainer = document.getElementById('clerkAuthContainer');
+        const dashboard = document.getElementById('clerkDashboard');
+        const dashboardClose = document.getElementById('dashboardClose');
+        const dashboardForm = document.getElementById('dashboardForm');
+        const dashboardSuccess = document.getElementById('dashboardSuccess');
+
+        let notifiedSignup = false;  // track if we already sent the signup email
+
+        function getUserInfo() {
+          const user = window.Clerk.user;
+          if (!user) return null;
+          const name = [user.firstName, user.lastName].filter(Boolean).join(' ') || user.username || '';
+          const email = user.primaryEmailAddress?.emailAddress || '';
+          const phone = user.primaryPhoneNumber?.phoneNumber || '';
+          return { name, email, phone };
+        }
+
+        async function notifySignup(userInfo) {
+          // Auto-send email to admin when someone signs up
+          try {
+            await fetch('/api/contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                name: userInfo.name || 'New User',
+                email: userInfo.email || 'unknown@example.com',
+                phone: userInfo.phone || '',
+                company: '',
+                plan: 'monthly',
+                message: 'NEW USER SIGNUP via Clerk. Email: ' + userInfo.email + '. Contact them for 30-min setup assistance.'
+              })
+            });
+            console.log('[clerk] Signup notification email sent to admin');
+          } catch(e) { console.error('[clerk] Failed to send signup email:', e); }
+        }
+
+        function showDashboard() {
+          // Pre-fill form from Clerk user data
+          const info = getUserInfo();
+          if (info) {
+            document.getElementById('dash-name').value = info.name || '';
+            document.getElementById('dash-email').value = info.email || '';
+            document.getElementById('dash-phone').value = info.phone || '';
+          }
+          if (dashboardForm) dashboardForm.style.display = '';
+          if (dashboardSuccess) dashboardSuccess.classList.remove('show');
+          if (dashboard) dashboard.classList.add('open');
+        }
+
+        function closeDashboard() {
+          if (dashboard) dashboard.classList.remove('open');
+        }
 
         function updateAuthState() {
           if (window.Clerk.client && window.Clerk.client.sessions && window.Clerk.client.sessions.length > 0) {
             document.body.classList.add('clerk-authed');
             closeClerkModal();
+            // Mount user button
             if (userBtnEl && !userBtnEl.dataset.mounted) {
               window.Clerk.mountUserButton(userBtnEl, {
                 afterSignInUrl: '/', afterSignOutUrl: '/'
               });
               userBtnEl.dataset.mounted = '1';
             }
+            // Auto-notify on first sign-up
+            if (!notifiedSignup) {
+              notifiedSignup = true;
+              const info = getUserInfo();
+              if (info) notifySignup(info);
+              // Show dashboard after a short delay
+              setTimeout(showDashboard, 500);
+            }
           } else {
             document.body.classList.remove('clerk-authed');
+            notifiedSignup = false;
           }
         }
 
@@ -3563,6 +3720,7 @@ function initClerk() {
         updateAuthState();
         window.Clerk.addListener(() => updateAuthState());
 
+        // Sign in / Sign up buttons → open embedded Clerk modal
         if (signinBtn) {
           signinBtn.addEventListener('click', () => openClerkModal('signin'));
         }
@@ -3577,9 +3735,74 @@ function initClerk() {
             if (e.target === clerkModal) closeClerkModal();
           });
         }
+        // Dashboard close
+        if (dashboardClose) {
+          dashboardClose.addEventListener('click', closeDashboard);
+        }
+        if (dashboard) {
+          dashboard.addEventListener('click', (e) => {
+            if (e.target === dashboard) closeDashboard();
+          });
+        }
         document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && clerkModal?.classList.contains('open')) closeClerkModal();
+          if (e.key === 'Escape') {
+            if (clerkModal?.classList.contains('open')) closeClerkModal();
+            if (dashboard?.classList.contains('open')) closeDashboard();
+          }
         });
+
+        // Dashboard form submission → send to /api/contact
+        if (dashboardForm) {
+          dashboardForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const payload = {
+              name: dashboardForm.name.value.trim(),
+              email: dashboardForm.email.value.trim(),
+              phone: dashboardForm.phone?.value.trim() || '',
+              company: dashboardForm.company?.value.trim() || '',
+              plan: dashboardForm.plan?.value || 'monthly',
+              message: dashboardForm.message.value.trim()
+            };
+            if (!payload.name || !payload.email || !payload.message) return;
+
+            const submitBtn = document.getElementById('dashboardSubmit');
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
+
+            try {
+              const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+              });
+              const data = await res.json().catch(() => ({}));
+              if (res.ok && data.ok) {
+                dashboardForm.style.display = 'none';
+                dashboardSuccess.classList.add('show');
+              } else {
+                alert(data.error || 'Something went wrong. Please try again.');
+              }
+            } catch(err) {
+              alert('Could not reach the server. Please try again.');
+            } finally {
+              if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Request 30-min setup →'; }
+            }
+          });
+        }
+
+        // User button click → show dashboard (for returning users)
+        if (userBtnEl) {
+          userBtnEl.addEventListener('click', (e) => {
+            // Small delay to let Clerk's own menu open first
+            // The user button has its own dropdown; clicking it shows the dashboard
+            setTimeout(() => {
+              const info = getUserInfo();
+              if (info && !notifiedSignup) {
+                // Already signed in but hasn't filled the form yet
+                showDashboard();
+              }
+            }, 100);
+          });
+        }
       }).catch((err) => {
         console.error('[clerk] Failed to load:', err);
         const signupBtn = document.getElementById('clerkSignup');
