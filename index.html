@@ -3805,28 +3805,40 @@ function initClerk() {
           }
         }
 
+        function getFreshContainer() {
+          // Replace the container entirely to avoid React tree corruption
+          // (innerHTML='' breaks Clerk's internal React reconciler)
+          const old = document.getElementById('clerkAuthContainer');
+          if (old) {
+            const fresh = document.createElement('div');
+            fresh.id = 'clerkAuthContainer';
+            old.parentNode.replaceChild(fresh, old);
+            return fresh;
+          }
+          return null;
+        }
+
         function openClerkModal(mode) {
-          if (!clerkModal || !authContainer) return;
-          authContainer.innerHTML = '';
+          if (!clerkModal) return;
+          const container = getFreshContainer();
+          if (!container) return;
           if (mode === 'signin') {
-            window.Clerk.mountSignIn(authContainer);
+            window.Clerk.mountSignIn(container);
           } else {
-            window.Clerk.mountSignUp(authContainer);
+            window.Clerk.mountSignUp(container);
           }
           clerkModal.classList.add('open');
           startAuthPolling();
         }
 
-        // Override Clerk's redirect functions so the "Sign up" link inside
-        // the sign-in component switches to the sign-up component in the
-        // SAME modal (no redirect to hosted page)
+        // Override Clerk's redirect functions — use fresh containers
         window.Clerk.redirectToSignUp = function() {
-          authContainer.innerHTML = '';
-          window.Clerk.mountSignUp(authContainer);
+          const container = getFreshContainer();
+          if (container) window.Clerk.mountSignUp(container);
         };
         window.Clerk.redirectToSignIn = function() {
-          authContainer.innerHTML = '';
-          window.Clerk.mountSignIn(authContainer);
+          const container = getFreshContainer();
+          if (container) window.Clerk.mountSignIn(container);
         };
 
         let authPollTimer = null;
