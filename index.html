@@ -595,11 +595,14 @@
     gap: 64px;
     align-items: center;
     width: max-content;
-    /* animation removed — static logos */
+    justify-content: center;
+    margin: 0 auto;
   }
   .logo-marquee:hover .logo-marquee-track {
     animation-play-state: paused;
   }
+  /* Desktop: hide the duplicate set, show logos once, static */
+  .logo-set-duplicate { display: none; }
   .logo-marquee-item {
     display: flex;
     align-items: center;
@@ -626,7 +629,9 @@
   @media (max-width: 768px) {
     .logo-marquee-item { height: 36px; }
     .logo-marquee-item img { max-height: 36px; max-width: 120px; }
-    .logo-marquee-track { gap: 40px; /* animation removed */ }
+    .logo-marquee-track { gap: 40px; animation: marquee-scroll 20s linear infinite; justify-content: flex-start; margin: 0; }
+    /* Mobile: show the duplicate set for seamless loop */
+    .logo-set-duplicate { display: contents; }
   }
 
     /* ─── API reference ──────────────────────────────────────────────────── */
@@ -2073,12 +2078,16 @@
       <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
       <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
       <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-vercel.png" alt="Vercel" /></div>
+      <div class="logo-set-duplicate">
       <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
       <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
       <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
       <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
       <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
       <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-vercel.png" alt="Vercel" /></div>
+      </div>
     </div>
   </div>
 </section>
