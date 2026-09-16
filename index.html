@@ -109,10 +109,10 @@
   .topnav .nav-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(13,148,136,0.35); }
   .nav-auth { display: flex; align-items: center; gap: 10px; }
   .nav-signin {
-    background: transparent;
-    color: #1a1a1a;
-    border: 1px solid rgba(0,0,0,0.15);
-    padding: 8px 16px;
+    background: #0d9488;
+    color: #ffffff;
+    border: none;
+    padding: 8px 18px;
     border-radius: 6px;
     font-size: 13px;
     font-weight: 600;
@@ -120,7 +120,7 @@
     font-family: inherit;
     transition: all 0.2s ease;
   }
-  .nav-signin:hover { border-color: #0d9488; color: #0d9488; }
+  .nav-signin:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(13,148,136,0.35); }
   .nav-user-btn {
     width: 36px;
     height: 36px;
@@ -2071,7 +2071,6 @@
     <div class="nav-auth">
       <div class="nav-signed-out">
         <button class="nav-signin" id="clerkSignin">Sign in</button>
-        <button class="nav-cta" id="clerkSignup">Get started</button>
       </div>
       <div class="nav-signed-in">
         <div id="clerkUserBtn" class="nav-user-btn"></div>
@@ -3785,8 +3784,22 @@ function initClerk() {
           if (authPollTimer) { clearInterval(authPollTimer); authPollTimer = null; }
         }
 
-        updateAuthState();
-        window.Clerk.addListener(() => updateAuthState());
+        // Override data-cta buttons to open Clerk sign-in modal (not contact form)
+        document.querySelectorAll('[data-cta]').forEach(btn => {
+          // Clone to remove old listeners from initContactModal
+          const clone = btn.cloneNode(true);
+          btn.parentNode.replaceChild(clone, btn);
+          clone.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (window.Clerk?.client?.sessions?.length > 0) {
+              // Already signed in → show dashboard
+              showDashboard();
+            } else {
+              // Not signed in → show sign-in modal
+              openClerkModal('signin');
+            }
+          });
+        });
 
         // Listen for SSO callback (Google sign-in redirects to #/sso-callback)
         // Immediately check auth state when the hash changes
