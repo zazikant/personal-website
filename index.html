@@ -214,20 +214,17 @@
 
   .hero-wrapper { position: relative; width: 100%; min-height: 100vh; overflow: hidden; }
 
-  /* ─── Top banner video ──────────────────────────────────────────────── */
-  .top-video {
-    width: 100%;
-    max-width: 100%;
-    display: block;
-    object-fit: cover;
-    border-bottom: 1px solid rgba(0,0,0,0.06);
-  }
+  /* ─── Top banner video (mobile only) ─────────────────────────────────── */
+  .top-video { display: none; }
   .top-video video {
     width: 100%;
     height: auto;
     display: block;
     max-height: 45vh;
     object-fit: cover;
+  }
+  @media (max-width: 768px) {
+    .top-video { display: block; }
   }
 
   /* ─── Floating promo video (always visible on hero, desktop only) ──────── */
@@ -2058,7 +2055,7 @@
 
     <div class="pricing-grid">
       <div class="price-card featured">
-        <div class="price-badge">Launch offer · 62% off</div>
+        <div class="price-badge">Launch offer · 55% off</div>
         <div class="price-name">Monthly</div>
         <div class="price-new">
           <span class="price-amount"><span class="currency">₹</span>1,900</span>
@@ -2343,7 +2340,7 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
 <section id="cta-banner">
   <div class="container">
     <h2>Ready to build your DoqueRAG?</h2>
-    <p>Just ₹1,900/month — launch offer, 62% off the regular ₹5,000. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
+    <p>Just ₹900/month — launch offer, 55% off the regular ₹2,000. Bring your own keys for Supabase, Pinecone, and your LLM — pay only for what you use.</p>
     <button class="hero-cta" data-cta style="margin: 0 auto;">Get started <span class="arrow">→</span></button>
   </div>
 </section>
@@ -2427,7 +2424,7 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
 
       <label for="cf-plan">Plan</label>
       <select id="cf-plan" name="plan">
-        <option value="monthly">Monthly — ₹1,900/month (launch offer)</option>
+        <option value="monthly">Monthly — ₹900/month (launch offer)</option>
         <option value="notsure">Not sure yet — help me decide</option>
       </select>
 
@@ -3073,7 +3070,7 @@ function initDemo() {
     },
     {
       keywords: ['price', 'pricing', 'cost', 'plan', 'subscription', 'buy'],
-      answer: "One plan. Monthly is \u20b91,900 per month with full feature access and cancel-anytime. BYOK \u2014 you bring your own Supabase, Pinecone, and LLM API keys, and pay the provider directly for actual usage. Regular price is \u20b95,000/month; the launch offer gives 62% off.",
+      answer: "One plan. Monthly is \u20b9900 per month with full feature access and cancel-anytime. BYOK \u2014 you bring your own Supabase, Pinecone, and LLM API keys, and pay the provider directly for actual usage. Regular price is \u20b92,000/month; the launch offer gives 55% off.",
       sources: ['pricing.md'],
       pipeline: [
         { delay: 300, type: 'stage-start', stage: 'embed-query' },
