@@ -1708,31 +1708,6 @@
   }
   .clerk-modal-close:hover { opacity: 1; }
   .clerk-modal-card > div { min-height: 400px; }
-  .clerk-tabs {
-    display: flex;
-    gap: 0;
-    margin-bottom: 8px;
-    border-bottom: 2px solid rgba(0,0,0,0.06);
-  }
-  .clerk-tab {
-    flex: 1;
-    padding: 10px 16px;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.5);
-    cursor: pointer;
-    font-family: inherit;
-    margin-bottom: -2px;
-    transition: all 0.2s ease;
-  }
-  .clerk-tab.active {
-    color: #0d9488;
-    border-bottom-color: #0d9488;
-  }
-  .clerk-tab:hover { color: #0d9488; }
 
   /* ─── User dashboard (shows when signed in) ──────────────────────────── */
   .clerk-dashboard {
@@ -2568,10 +2543,6 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
 <div class="clerk-modal" id="clerkModal" role="dialog" aria-modal="true">
   <div class="clerk-modal-card">
     <button class="clerk-modal-close" id="clerkModalClose" aria-label="Close">×</button>
-    <div class="clerk-tabs">
-      <button class="clerk-tab active" data-mode="signin" id="tabSignin">Sign in</button>
-      <button class="clerk-tab" data-mode="signup" id="tabSignup">Sign up</button>
-    </div>
     <div id="clerkAuthContainer"></div>
   </div>
 </div>
@@ -3772,19 +3743,26 @@ function initClerk() {
         function openClerkModal(mode) {
           if (!clerkModal || !authContainer) return;
           authContainer.innerHTML = '';
-          // Update active tab
-          const tabs = clerkModal.querySelectorAll('.clerk-tab');
-          tabs.forEach(t => t.classList.toggle('active', t.dataset.mode === mode));
           if (mode === 'signin') {
             window.Clerk.mountSignIn(authContainer);
           } else {
             window.Clerk.mountSignUp(authContainer);
           }
           clerkModal.classList.add('open');
-          // Start polling for auth state (embedded components don't trigger
-          // the listener immediately)
           startAuthPolling();
         }
+
+        // Override Clerk's redirect functions so the "Sign up" link inside
+        // the sign-in component switches to the sign-up component in the
+        // SAME modal (no redirect to hosted page)
+        window.Clerk.redirectToSignUp = function() {
+          authContainer.innerHTML = '';
+          window.Clerk.mountSignUp(authContainer);
+        };
+        window.Clerk.redirectToSignIn = function() {
+          authContainer.innerHTML = '';
+          window.Clerk.mountSignIn(authContainer);
+        };
 
         let authPollTimer = null;
         function startAuthPolling() {
@@ -3792,13 +3770,11 @@ function initClerk() {
           authPollTimer = setInterval(() => {
             const sessions = window.Clerk?.client?.sessions;
             if (sessions && sessions.length > 0) {
-              // User signed in — update UI immediately
               updateAuthState();
               clearInterval(authPollTimer);
               authPollTimer = null;
             }
           }, 300);
-          // Stop polling after 5 minutes
           setTimeout(() => {
             if (authPollTimer) { clearInterval(authPollTimer); authPollTimer = null; }
           }, 300000);
@@ -3818,25 +3794,6 @@ function initClerk() {
         }
         if (signupBtn) {
           signupBtn.addEventListener('click', () => openClerkModal('signup'));
-        }
-        // Tab switching within the auth modal
-        const tabSignin = document.getElementById('tabSignin');
-        const tabSignup = document.getElementById('tabSignup');
-        if (tabSignin) {
-          tabSignin.addEventListener('click', () => {
-            authContainer.innerHTML = '';
-            tabSignin.classList.add('active');
-            tabSignup.classList.remove('active');
-            window.Clerk.mountSignIn(authContainer);
-          });
-        }
-        if (tabSignup) {
-          tabSignup.addEventListener('click', () => {
-            authContainer.innerHTML = '';
-            tabSignup.classList.add('active');
-            tabSignin.classList.remove('active');
-            window.Clerk.mountSignUp(authContainer);
-          });
         }
         if (clerkModalClose) {
           clerkModalClose.addEventListener('click', closeClerkModal);
