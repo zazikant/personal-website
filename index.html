@@ -2623,8 +2623,8 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
       <input id="dash-name" name="name" type="text" required placeholder="Your name">
       <label for="dash-email">Email</label>
       <input id="dash-email" name="email" type="email" required placeholder="you@company.com">
-      <label for="dash-phone">Phone <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
-      <input id="dash-phone" name="phone" type="tel" placeholder="Your phone number">
+      <label for="dash-phone">Phone</label>
+      <input id="dash-phone" name="phone" type="tel" required placeholder="Your phone number">
       <label for="dash-company">Company <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
       <input id="dash-company" name="company" type="text" placeholder="Where do you work?">
       <label for="dash-plan">Plan</label>
@@ -2632,8 +2632,8 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
         <option value="monthly">Monthly — ₹900/month (launch offer)</option>
         <option value="notsure">Not sure yet — help me decide</option>
       </select>
-      <label for="dash-msg">What do you need?</label>
-      <textarea id="dash-msg" name="message" placeholder="Tell us about your use case, documents, or any questions..." required></textarea>
+      <label for="dash-msg">Write your Message <span style="text-transform:none;opacity:0.5;font-weight:400;">(optional)</span></label>
+      <textarea id="dash-msg" name="message" placeholder="Tell us about your use case, documents, or any questions..."></textarea>
       <button type="submit" class="contact-submit" id="dashboardSubmit" style="margin-top:24px;padding:14px 22px;background:#0d9488;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;width:100%;">
         Request 30-min setup →
       </button>
@@ -3063,8 +3063,8 @@ function initContactModal() {
     };
 
     // Basic client-side validation
-    if (!payload.name || !payload.email || !payload.message) {
-      showError('Please fill in your name, email, and message.');
+    if (!payload.name || !payload.email || !payload.phone) {
+      showError('Please fill in your name, email, and phone number.');
       return;
     }
 
@@ -3752,10 +3752,8 @@ function initClerk() {
         function showDashboard() {
           // Close Clerk auth modal first
           closeClerkModal();
-          console.log('[clerk] showDashboard called');
           // Pre-fill form from Clerk user data
           const info = getUserInfo();
-          console.log('[clerk] getUserInfo:', JSON.stringify(info));
           if (info) {
             const nameEl = document.getElementById('dash-name');
             const emailEl = document.getElementById('dash-email');
@@ -3767,7 +3765,6 @@ function initClerk() {
           if (dashboardForm) dashboardForm.style.display = '';
           if (dashboardSuccess) dashboardSuccess.classList.remove('show');
           if (dashboard) dashboard.classList.add('open');
-          console.log('[clerk] Dashboard opened:', dashboard ? 'YES' : 'NO');
         }
 
         function closeDashboard() {
@@ -3869,7 +3866,6 @@ function initClerk() {
             const user = window.Clerk?.user;
             const sessionCount = sessions ? sessions.length : 0;
             if (sessionCount > 0 || user) {
-              console.log('[clerk] Auth detected — sessions:', sessionCount, 'user:', user ? 'YES' : 'NO');
               updateAuthState();
               clearInterval(authPollTimer);
               authPollTimer = null;
@@ -3885,7 +3881,6 @@ function initClerk() {
         let bgChecker = setInterval(() => {
           const user = window.Clerk?.user;
           if (user && !document.body.classList.contains('clerk-authed')) {
-            console.log('[clerk] Background checker detected user:', user.id);
             updateAuthState();
           }
         }, 500);
@@ -3981,7 +3976,10 @@ function initClerk() {
               plan: dashboardForm.plan?.value || 'monthly',
               message: dashboardForm.message.value.trim()
             };
-            if (!payload.name || !payload.email || !payload.message) return;
+            if (!payload.name || !payload.email || !payload.phone) {
+              alert('Please fill in your name, email, and phone number.');
+              return;
+            }
 
             const submitBtn = document.getElementById('dashboardSubmit');
             if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending...'; }
