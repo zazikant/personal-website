@@ -12,7 +12,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@4/dist/clerk.browser.js" type="text/javascript"></script>
+<script async
+  src="https://cdn.jsdelivr.net/npm/@clerk/clerk-js@5/dist/clerk.browser.js"
+  data-clerk-publishable-key="pk_test_cm9idXN0LWFsaWVuLTE0LmNsZXJrLmFjY291bnRzLmRldiQ"
+  type="text/javascript"
+  crossorigin
+></script>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -3463,64 +3468,57 @@ function initCookiePopup() {
 function initClerk() {
   const PUBLISHABLE_KEY = 'pk_test_cm9idXN0LWFsaWVuLTE0LmNsZXJrLmFjY291bnRzLmRldiQ';
 
-  if (!window.Clerk || PUBLISHABLE_KEY === 'pk_YOUR_PUBLISHABLE_KEY') {
-    console.warn('[clerk] Clerk not loaded or publishable key not set. Auth controls disabled.');
-    // Fallback: restore the original "Get started" data-cta behavior
-    const signupBtn = document.getElementById('clerkSignup');
-    if (signupBtn) {
-      signupBtn.removeAttribute('id');
-      signupBtn.setAttribute('data-cta', '');
+  // Wait for Clerk to load (script tag is async)
+  function waitForClerk() {
+    if (window.Clerk && window.Clerk.load) {
+      window.Clerk.load().then(() => {
+        document.body.classList.add('clerk-loaded');
+
+        const signinBtn = document.getElementById('clerkSignin');
+        const signupBtn = document.getElementById('clerkSignup');
+        const userBtnEl = document.getElementById('clerkUserBtn');
+
+        function updateAuthState() {
+          if (window.Clerk.client && window.Clerk.client.sessions && window.Clerk.client.sessions.length > 0) {
+            document.body.classList.add('clerk-authed');
+            if (userBtnEl && !userBtnEl.dataset.mounted) {
+              window.Clerk.mountUserButton(userBtnEl, { afterSignInUrl: '/', afterSignOutUrl: '/' });
+              userBtnEl.dataset.mounted = '1';
+            }
+          } else {
+            document.body.classList.remove('clerk-authed');
+          }
+        }
+
+        updateAuthState();
+        window.Clerk.addListener(() => updateAuthState());
+
+        if (signinBtn) {
+          signinBtn.addEventListener('click', () => {
+            window.Clerk.redirectToSignIn({ afterSignInUrl: window.location.href });
+          });
+        }
+        if (signupBtn) {
+          signupBtn.addEventListener('click', () => {
+            window.Clerk.redirectToSignUp({ afterSignUpUrl: window.location.href });
+          });
+        }
+      }).catch((err) => {
+        console.error('[clerk] Failed to load:', err);
+        // Fallback: restore data-cta behavior
+        const signupBtn = document.getElementById('clerkSignup');
+        if (signupBtn) {
+          signupBtn.removeAttribute('id');
+          signupBtn.setAttribute('data-cta', '');
+        }
+      });
+    } else {
+      // Clerk not loaded yet — retry in 200ms
+      setTimeout(waitForClerk, 200);
     }
-    return;
   }
 
-  const clerk = new Clerk(PUBLISHABLE_KEY);
-  clerk.load().then(() => {
-    document.body.classList.add('clerk-loaded');
-
-    const signinBtn = document.getElementById('clerkSignin');
-    const signupBtn = document.getElementById('clerkSignup');
-    const userBtnEl = document.getElementById('clerkUserBtn');
-
-    function updateAuthState() {
-      if (clerk.client?.sessions?.length > 0) {
-        document.body.classList.add('clerk-authed');
-        // Mount user button
-        if (userBtnEl && !userBtnEl.dataset.mounted) {
-          clerk.mountUserButton(userBtnEl, { afterSignInUrl: '/', afterSignOutUrl: '/' });
-          userBtnEl.dataset.mounted = '1';
-        }
-      } else {
-        document.body.classList.remove('clerk-authed');
-      }
-    }
-
-    // Initial state
-    updateAuthState();
-
-    // Listen for auth changes
-    clerk.addListener((e) => { updateAuthState(); });
-
-    // Sign in / Sign up → redirect to Clerk hosted pages
-    if (signinBtn) {
-      signinBtn.addEventListener('click', () => {
-        clerk.redirectToSignIn({ afterSignInUrl: window.location.href });
-      });
-    }
-    if (signupBtn) {
-      signupBtn.addEventListener('click', () => {
-        clerk.redirectToSignUp({ afterSignUpUrl: window.location.href });
-      });
-    }
-  }).catch((err) => {
-    console.error('[clerk] Failed to load:', err);
-    // Fallback: restore data-cta behavior
-    const signupBtn = document.getElementById('clerkSignup');
-    if (signupBtn) {
-      signupBtn.removeAttribute('id');
-      signupBtn.setAttribute('data-cta', '');
-    }
-  });
+  waitForClerk();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
