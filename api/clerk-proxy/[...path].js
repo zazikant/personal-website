@@ -6,7 +6,7 @@
  * In proxy mode, Clerk routes through the app's /__clerk path.
  */
 
-const FAPI_DOMAIN = 'clerk.doquerag.vercel.app';
+const FAPI_DOMAIN = 'robust-alien-14.clerk.accounts.com';
 
 module.exports = async (req, res) => {
   // Build the target URL on Clerk's FAPI
