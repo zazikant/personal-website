@@ -125,6 +125,27 @@
     width: 36px;
     height: 36px;
     border-radius: 50%;
+    cursor: pointer;
+    overflow: hidden;
+    border: 2px solid #0d9488;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    background: #0d9488;
+    transition: transform 0.15s ease, box-shadow 0.2s ease;
+  }
+  .nav-user-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(13,148,136,0.4);
+  }
+  .nav-user-btn img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
   }
   .clerk-loaded .nav-signed-out { display: flex; }
   .clerk-loaded .nav-signed-in { display: none; }
@@ -2551,6 +2572,9 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
       <button type="submit" class="contact-submit" id="dashboardSubmit" style="margin-top:24px;padding:14px 22px;background:#0d9488;color:#fff;border:none;border-radius:6px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;width:100%;">
         Request 30-min setup →
       </button>
+      <button type="button" id="dashboardSignout" style="margin-top:12px;padding:10px;background:transparent;color:rgba(0,0,0,0.5);border:1px solid rgba(0,0,0,0.15);border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;width:100%;">
+        Sign out
+      </button>
     </form>
     <div class="clerk-dashboard-success" id="dashboardSuccess">
       <div class="check">✓</div>
@@ -3681,19 +3705,33 @@ function initClerk() {
           if (window.Clerk.client && window.Clerk.client.sessions && window.Clerk.client.sessions.length > 0) {
             document.body.classList.add('clerk-authed');
             closeClerkModal();
-            // Mount user button
+
+            // Build custom avatar button (NOT Clerk's mountUserButton which shows
+            // their default Account/API keys dashboard)
             if (userBtnEl && !userBtnEl.dataset.mounted) {
-              window.Clerk.mountUserButton(userBtnEl, {
-                afterSignInUrl: '/', afterSignOutUrl: '/'
-              });
+              const user = window.Clerk.user;
+              if (user) {
+                const imgUrl = user.profileImageUrl || user.imageUrl;
+                if (imgUrl) {
+                  userBtnEl.innerHTML = '<img src="' + imgUrl + '" alt="' + (user.firstName || 'User') + '" />';
+                } else {
+                  // Show initials
+                  const initials = ((user.firstName || 'U')[0] + (user.lastName || '')[0] || 'U').toUpperCase();
+                  userBtnEl.textContent = initials;
+                }
+              } else {
+                userBtnEl.textContent = 'U';
+              }
               userBtnEl.dataset.mounted = '1';
+              userBtnEl.title = 'Click to complete your setup';
+              userBtnEl.addEventListener('click', () => showDashboard());
             }
+
             // Auto-notify on first sign-up
             if (!notifiedSignup) {
               notifiedSignup = true;
               const info = getUserInfo();
               if (info) notifySignup(info);
-              // Show dashboard after a short delay
               setTimeout(showDashboard, 500);
             }
           } else {
@@ -3789,18 +3827,19 @@ function initClerk() {
           });
         }
 
-        // User button click → show dashboard (for returning users)
+        // User button click → show dashboard
         if (userBtnEl) {
-          userBtnEl.addEventListener('click', (e) => {
-            // Small delay to let Clerk's own menu open first
-            // The user button has its own dropdown; clicking it shows the dashboard
-            setTimeout(() => {
-              const info = getUserInfo();
-              if (info && !notifiedSignup) {
-                // Already signed in but hasn't filled the form yet
-                showDashboard();
-              }
-            }, 100);
+          userBtnEl.addEventListener('click', () => showDashboard());
+        }
+
+        // Sign out button in dashboard
+        const signoutBtn = document.getElementById('dashboardSignout');
+        if (signoutBtn) {
+          signoutBtn.addEventListener('click', () => {
+            window.Clerk.signOut().then(() => {
+              closeDashboard();
+              window.location.reload();
+            });
           });
         }
       }).catch((err) => {
