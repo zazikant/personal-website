@@ -1750,6 +1750,14 @@
     overflow-y: auto;
     max-height: calc(90vh - 60px);
   }
+  /* Override Clerk's internal padding to remove excessive whitespace */
+  .clerk-modal-card .cl-card {
+    padding: 24px 20px !important;
+  }
+  .clerk-modal-card .cl-cardBox {
+    box-shadow: none !important;
+    border: none !important;
+  }
   @media (max-width: 520px) {
     .clerk-modal { padding: 0; align-items: flex-start; }
     .clerk-modal-card {
