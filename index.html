@@ -3788,6 +3788,20 @@ function initClerk() {
         updateAuthState();
         window.Clerk.addListener(() => updateAuthState());
 
+        // Listen for SSO callback (Google sign-in redirects to #/sso-callback)
+        // Immediately check auth state when the hash changes
+        window.addEventListener('hashchange', () => {
+          // Give Clerk a moment to process the callback
+          setTimeout(() => {
+            updateAuthState();
+            startAuthPolling();
+          }, 200);
+        });
+        // Also check on page load in case we landed on sso-callback
+        if (window.location.hash.includes('sso-callback')) {
+          setTimeout(() => { updateAuthState(); startAuthPolling(); }, 500);
+        }
+
         // Sign in / Sign up buttons → open embedded Clerk modal
         if (signinBtn) {
           signinBtn.addEventListener('click', () => openClerkModal('signin'));
