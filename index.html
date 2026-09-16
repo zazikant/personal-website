@@ -595,7 +595,7 @@
     gap: 64px;
     align-items: center;
     width: max-content;
-    animation: marquee-scroll 30s linear infinite;
+    /* animation removed — static logos */
   }
   .logo-marquee:hover .logo-marquee-track {
     animation-play-state: paused;
@@ -626,7 +626,7 @@
   @media (max-width: 768px) {
     .logo-marquee-item { height: 36px; }
     .logo-marquee-item img { max-height: 36px; max-width: 120px; }
-    .logo-marquee-track { gap: 40px; animation-duration: 20s; }
+    .logo-marquee-track { gap: 40px; /* animation removed */ }
   }
 
     /* ─── API reference ──────────────────────────────────────────────────── */
@@ -2056,6 +2056,35 @@
   </div>
 </section>
 
+<!-- ─── Tech stack — logo marquee ───────────────────────────────── -->
+<section class="section" id="stack">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-eyebrow">Under The Hood</div>
+      <h2 class="section-title">Built on the best.</h2>
+      <p class="section-desc">A small, sharp stack of managed services — no clusters to babysit, no models to host.</p>
+    </div>
+  </div>
+  <div class="logo-marquee">
+    <div class="logo-marquee-track">
+      <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
+      <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
+    </div>
+  </div>
+</section>
+
+
+
 <!-- ─── Pricing ────────────────────────────────────────────────────────── -->
 <section class="section" id="pricing">
   <div class="container">
@@ -2161,92 +2190,6 @@
         <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
         <span class="step-tag">POST /api/query · /api/query-stream</span>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Features grid ────────────────────────────────────────────────────── -->
-<section class="section" id="features">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-eyebrow">What's Inside</div>
-      <h2 class="section-title">Built for trust, not just recall.</h2>
-      <p class="section-desc">Every feature exists to make the answer verifiable — so you can ship it inside real workflows without second-guessing the output.</p>
-    </div>
-
-    <div class="features-grid">
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg></span>
-        <h3>Query Expansion</h3>
-        <p>Synonyms are expanded automatically. “Owner” matches “responsible”, “lead”, “manager”. “API” matches “endpoint”, “rest”, “service”. Recall goes up without you rewriting the question.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"/><path d="m22 17.65-9.17 4.16a2 2 0 0 1-1.66 0L2 17.65"/><path d="m22 12.65-9.17 4.16a2 2 0 0 1-1.66 0L2 12.65"/></svg></span>
-        <h3>Document Aggregation</h3>
-        <p>Chunks are grouped by filename and reranked by <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">avgScore * log(chunkCount + 1)</code>. Multiple relevant chunks from the same doc merge into one coherent context window.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .963L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg></span>
-        <h3>LLM Reducer</h3>
-        <p>A dedicated reducer LLM synthesizes multi-chunk answers, extracts key points, detects conflicting information across sources, and produces a single unified response — not a stitched-together list.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
-        <h3>Two Retrieval Modes</h3>
-        <p>Conversational mode (top-K=12) for broad exploration. Precise mode (top-K=5) for specific facts. Switch per question — same index, different retrieval shape, no re-indexing.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/></svg></span>
-        <h3>Metadata Filters</h3>
-        <p>Filter queries by <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">doc_type</code>, <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">project</code>, or <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">version</code>. Scope a question to a single project, a specific doc type, or a tagged release.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M3 21v-5h5"/></svg></span>
-        <h3>Add · Replace · Delete</h3>
-        <p>Upload modes handle the full lifecycle. Replace auto-deletes old chunks at the same filename before inserting new ones — no stale duplicates, no manual cleanup, no orphaned vectors.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 17.93 8.8l-8.57 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"/></svg></span>
-        <h3>Source Citation</h3>
-        <p>Every answer includes a <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">sources</code> array of filenames. Only files that still exist in the documents table are returned — deleted docs are never cited.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
-        <h3>Streaming Answers</h3>
-        <p>Use <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">/api/query-stream</code> for token-by-token streaming. Same retrieval, same citations, faster perceived latency for chat-style UIs.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></span>
-        <h3>Index Reset</h3>
-        <p>One call to <code style="color:#0d9488;font-family:'JetBrains Mono',monospace;font-size:12px;">DELETE /api/index/reset</code> wipes every Pinecone record. Useful for dev cycles, migrations, or starting the index from scratch.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── Tech stack — logo marquee ───────────────────────────────── -->
-<section class="section" id="stack">
-  <div class="container">
-    <div class="section-head">
-      <div class="section-eyebrow">Under The Hood</div>
-      <h2 class="section-title">Built on the best.</h2>
-      <p class="section-desc">A small, sharp stack of managed services — no clusters to babysit, no models to host.</p>
-    </div>
-  </div>
-  <div class="logo-marquee">
-    <div class="logo-marquee-track">
-      <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
     </div>
   </div>
 </section>
