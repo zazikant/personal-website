@@ -1711,8 +1711,8 @@
     background: #ffffff;
     border-radius: 16px;
     width: calc(100% - 32px);
-    max-width: 380px;
-    padding: 40px 16px 16px;
+    max-width: 460px;
+    padding: 40px 20px 20px;
     position: relative;
     box-shadow: 0 24px 80px rgba(0,0,0,0.15);
     border: 1px solid rgba(0,0,0,0.08);
@@ -1750,14 +1750,7 @@
     overflow-y: auto;
     max-height: calc(90vh - 60px);
   }
-  /* Override Clerk's internal padding to remove excessive whitespace */
-  .clerk-modal-card .cl-card {
-    padding: 24px 20px !important;
-  }
-  .clerk-modal-card .cl-cardBox {
-    box-shadow: none !important;
-    border: none !important;
-  }
+  /* Clerk component fills the card — no internal padding override needed */
   @media (max-width: 520px) {
     .clerk-modal { padding: 0; align-items: flex-start; }
     .clerk-modal-card {
