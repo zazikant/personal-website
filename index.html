@@ -622,6 +622,11 @@
     height: auto;
     display: block;
   }
+  /* Desktop: Supabase + OpenCode logos at 2x size */
+  .logo-xl img {
+    max-height: 96px;
+    max-width: 320px;
+  }
   @keyframes marquee-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
@@ -629,6 +634,7 @@
   @media (max-width: 768px) {
     .logo-marquee-item { height: 36px; }
     .logo-marquee-item img { max-height: 36px; max-width: 120px; }
+    .logo-xl img { max-height: 36px; max-width: 120px; } /* reset to normal on mobile */
     .logo-marquee-track { gap: 40px; animation: marquee-scroll 20s linear infinite; justify-content: flex-start; margin: 0; }
     /* Mobile: show the duplicate set for seamless loop */
     .logo-set-duplicate { display: contents; }
@@ -2100,18 +2106,18 @@
   <div class="logo-marquee">
     <div class="logo-marquee-track">
       <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
+      <div class="logo-marquee-item logo-xl"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
       <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
       <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
+      <div class="logo-marquee-item logo-xl"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
       <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
       <div class="logo-marquee-item"><img src="images/logo-vercel.png" alt="Vercel" /></div>
       <div class="logo-set-duplicate">
       <div class="logo-marquee-item"><img src="images/logo-nextjs.webp" alt="Next.js" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
+      <div class="logo-marquee-item logo-xl"><img src="images/logo-supabase.webp" alt="Supabase" /></div>
       <div class="logo-marquee-item"><img src="images/logo-pinecone.svg" alt="Pinecone" /></div>
       <div class="logo-marquee-item"><img src="images/logo-zai.webp" alt="Z.ai" /></div>
-      <div class="logo-marquee-item"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
+      <div class="logo-marquee-item logo-xl"><img src="images/logo-opencode.png" alt="OpenCode" /></div>
       <div class="logo-marquee-item"><img src="images/logo-nvidia.webp" alt="NVIDIA" /></div>
       <div class="logo-marquee-item"><img src="images/logo-vercel.png" alt="Vercel" /></div>
       </div>
