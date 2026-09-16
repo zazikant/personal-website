@@ -3771,8 +3771,7 @@ function initClerk() {
             document.body.classList.add('clerk-authed');
             closeClerkModal();
 
-            // Build custom avatar button (NOT Clerk's mountUserButton which shows
-            // their default Account/API keys dashboard)
+            // Build custom avatar button
             if (userBtnEl && !userBtnEl.dataset.mounted) {
               const user = window.Clerk.user;
               if (user) {
@@ -3780,7 +3779,6 @@ function initClerk() {
                 if (imgUrl) {
                   userBtnEl.innerHTML = '<img src="' + imgUrl + '" alt="' + (user.firstName || 'User') + '" />';
                 } else {
-                  // Show initials
                   const initials = ((user.firstName || 'U')[0] + (user.lastName || '')[0] || 'U').toUpperCase();
                   userBtnEl.textContent = initials;
                 }
@@ -3789,16 +3787,17 @@ function initClerk() {
               }
               userBtnEl.dataset.mounted = '1';
               userBtnEl.title = 'Click to complete your setup';
-              userBtnEl.addEventListener('click', () => showDashboard());
             }
 
-            // Auto-notify on first sign-up
+            // Send signup email only once
             if (!notifiedSignup) {
               notifiedSignup = true;
               const info = getUserInfo();
               if (info) notifySignup(info);
-              setTimeout(showDashboard, 500);
             }
+
+            // ALWAYS show dashboard on sign-in (not just first time)
+            showDashboard();
           } else {
             document.body.classList.remove('clerk-authed');
             notifiedSignup = false;
@@ -3895,10 +3894,23 @@ function initClerk() {
 
         // Sign in / Sign up buttons → open embedded Clerk modal
         if (signinBtn) {
-          signinBtn.addEventListener('click', () => openClerkModal('signin'));
+          signinBtn.addEventListener('click', () => {
+            // If already signed in, show dashboard instead of sign-in form
+            if (window.Clerk?.client?.sessions?.length > 0) {
+              showDashboard();
+            } else {
+              openClerkModal('signin');
+            }
+          });
         }
         if (signupBtn) {
-          signupBtn.addEventListener('click', () => openClerkModal('signup'));
+          signupBtn.addEventListener('click', () => {
+            if (window.Clerk?.client?.sessions?.length > 0) {
+              showDashboard();
+            } else {
+              openClerkModal('signup');
+            }
+          });
         }
         if (clerkModalClose) {
           clerkModalClose.addEventListener('click', closeClerkModal);
