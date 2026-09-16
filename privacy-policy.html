@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — DoqueRAG</title>
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: "Inter", -apple-system, sans-serif; background: #f8f9fa; color: #1a1a1a; line-height: 1.7; }
+  .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: flex; align-items: center; justify-content: space-between; padding: 14px 24px; background: rgba(248,249,250,0.85); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .nav a { text-decoration: none; }
+  .nav .logo { display: flex; align-items: center; gap: 10px; }
+  .nav .logo img { height: 28px; border-radius: 4px; }
+  .nav .logo span { font-size: 16px; font-weight: 800; }
+  .nav .logo .rag { color: #0d9488; }
+  .nav .back { font-size: 14px; color: #0d9488; font-weight: 600; text-decoration: none; }
+  .container { max-width: 760px; margin: 0 auto; padding: 100px 24px 80px; }
+  h1 { font-size: 32px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.02em; }
+  .meta { font-size: 14px; color: rgba(0,0,0,0.5); margin-bottom: 40px; font-family: "JetBrains Mono", monospace; }
+  h2 { font-size: 20px; font-weight: 700; margin-top: 36px; margin-bottom: 12px; color: #0d9488; }
+  h3 { font-size: 16px; font-weight: 600; margin-top: 20px; margin-bottom: 8px; }
+  p { font-size: 15px; margin-bottom: 14px; color: rgba(0,0,0,0.75); }
+  ul { margin: 0 0 14px 20px; }
+  li { font-size: 15px; margin-bottom: 6px; color: rgba(0,0,0,0.75); }
+  strong { color: #1a1a1a; }
+  code { font-family: "JetBrains Mono", monospace; font-size: 13px; background: rgba(13,148,136,0.08); padding: 2px 6px; border-radius: 3px; color: #0d9488; }
+  .contact-box { margin-top: 40px; padding: 24px; background: #ffffff; border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; }
+  .contact-box h3 { margin-top: 0; }
+  @media (max-width: 600px) { .container { padding: 80px 16px 60px; } h1 { font-size: 26px; } }
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/" class="logo">
+    <img src="images/logo-main.jpg" alt="DoqueRAG">
+    <span>Doque<span class="rag">RAG</span></span>
+  </a>
+  <a href="/" class="back">← Back to site</a>
+</nav>
+
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <div class="meta">effective · 15 september 2026 · updated · 15 september 2026</div>
+
+  <p>Shashikant Zarekar ("DoqueRAG", "we", "our", "us") respects your privacy. This Privacy Policy explains how we collect, use, store, and share information when you use our website, products, and services (collectively, the "Services"). By using DoqueRAG, you consent to the practices described in this Privacy Policy.</p>
+
+  <h2>01 — Information We Collect</h2>
+  <p>We collect the following categories of data:</p>
+  <h3>a. Contact Information</h3>
+  <p>Name, email address, phone number, company, and plan preference that you voluntarily provide through the contact form on our website.</p>
+  <h3>b. Document Data</h3>
+  <p>DoqueRAG uses a BYOK (Bring Your Own Keys) model. You provide your own Supabase, Pinecone, and LLM API keys. <strong>Your document content never touches DoqueRAG's servers.</strong> Documents are processed entirely within your own infrastructure.</p>
+  <h3>c. Usage Information</h3>
+  <p>IP address (for country code detection only), browser type, timestamps, and interaction logs with the contact form.</p>
+  <h3>d. Cookies</h3>
+  <p>We use cookies to remember your cookie consent preference. We do not use tracking cookies, ad cookies, or analytics cookies.</p>
+
+  <h2>02 — BYOK and Data Ownership</h2>
+  <p>DoqueRAG is a thin orchestration layer. All data — documents, embeddings, queries, and answers — lives in your own infrastructure:</p>
+  <ul>
+    <li><strong>Supabase</strong> — your document metadata table</li>
+    <li><strong>Pinecone</strong> — your vector index</li>
+    <li><strong>LLM API</strong> — your own API key (recommended: GLM 5.1)</li>
+  </ul>
+  <p>We do not have access to your Supabase, Pinecone, or LLM accounts. We cannot read your documents, queries, or answers.</p>
+
+  <h2>03 — Contact Form Data</h2>
+  <p>When you submit the contact form, we collect:</p>
+  <ul>
+    <li>Name, email, phone number, company, plan preference, and message</li>
+    <li>This data is sent via SMTP email to <code>shashikant.zarekar@gemengserv.com</code></li>
+    <li>We use this data solely to respond to your enquiry and set up your instance</li>
+    <li>Contact form data is retained in the email inbox and deleted upon request</li>
+  </ul>
+  <p>We do not sell, rent, or share contact form data with third parties.</p>
+
+  <h2>04 — Data Retention</h2>
+  <p>We retain contact form submissions only for as long as necessary to:</p>
+  <ul>
+    <li>Provide the requested services (setup assistance)</li>
+    <li>Fulfill legitimate business or legal obligations</li>
+    <li>Resolve disputes or enforce our agreements</li>
+  </ul>
+  <p>When no longer required, data is securely deleted. Your document data in your own infrastructure is governed by your own retention policies — we have no access to it.</p>
+
+  <h2>05 — Your Rights</h2>
+  <p>Depending on your jurisdiction, you may have the right to:</p>
+  <ul>
+    <li>Access, correct, or delete your personal data</li>
+    <li>Request a copy of your stored data</li>
+    <li>Withdraw consent at any time</li>
+  </ul>
+  <p>You can exercise these rights by emailing <code>zazikant@gmail.com</code>. We respond in accordance with applicable data protection laws (GDPR, CCPA, DPDP Act India).</p>
+
+  <h2>06 — Security Measures</h2>
+  <p>We use administrative and technical security measures, including:</p>
+  <ul>
+    <li>SMTP email transmission via encrypted connection (SSL/TLS port 465)</li>
+    <li>No document content stored on our servers (BYOK architecture)</li>
+    <li>Rate limiting on the contact form API (5 requests per minute)</li>
+    <li>Input validation and sanitization on all form fields</li>
+  </ul>
+  <p>No system is completely secure, but the BYOK model ensures your sensitive data never leaves your control.</p>
+
+  <h2>07 — Children's Privacy</h2>
+  <p>DoqueRAG is not directed to or intended for children under 13. We do not knowingly collect information from minors.</p>
+
+  <h2>08 — Changes to This Policy</h2>
+  <p>We may update this Privacy Policy periodically. Significant changes will be communicated via the website.</p>
+
+  <div class="contact-box">
+    <h3>Contact Us</h3>
+    <p>For privacy-related concerns:</p>
+    <p><strong>Shashikant Zarekar</strong><br>
+    <code>zazikant@gmail.com</code><br>
+    +91 98691 01909</p>
+  </div>
+</div>
+
+</body>
+</html>

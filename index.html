@@ -1855,6 +1855,34 @@
     line-height: 1.5;
   }
   .contact-error.show { display: block; }
+
+  /* ─── Large footer logo watermark ───────────────────────────────────── */
+  .footer-watermark {
+    width: 100%;
+    text-align: center;
+    padding: 40px 0 20px;
+    overflow: hidden;
+  }
+  .footer-watermark img {
+    width: clamp(200px, 60vw, 600px);
+    height: auto;
+    opacity: 0.08;
+    object-fit: contain;
+  }
+  .footer-legal {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+  .footer-legal a {
+    font-size: 13px;
+    color: rgba(0,0,0,0.5);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-legal a:hover { color: #0d9488; }
 </style>
 </head>
 <body>
@@ -2313,6 +2341,13 @@ curl -X POST <span class="s">"https://doquerag.vercel.app/api/query"</span> \
         <a href="tel:+919869101909">+91 98691 01909</a>
         <a href="mailto:zazikant@gmail.com">zazikant@gmail.com</a>
       </div>
+    </div>
+        <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+    </div>
+    <div class="footer-watermark">
+      <img src="images/logo-main.jpg" alt="DoqueRAG" />
     </div>
     <div class="footer-bottom">
       <span>© 2026 DoqueRAG. Built by Shashikant Zarekar.</span>
