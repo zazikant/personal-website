@@ -1409,6 +1409,30 @@
     max-width: 440px;
     margin: 0 auto;
   }
+  /* Desktop: pricing card + 30-min timer side by side */
+  @media (min-width: 900px) {
+    .pricing-wrapper {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      justify-content: center;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+    .pricing-grid {
+      flex: 0 0 360px;
+      max-width: 360px;
+      margin: 0;
+    }
+    .setup-timer {
+      flex: 1;
+      max-width: 400px;
+      margin: 0;
+    }
+  }
+  @media (max-width: 899px) {
+    .pricing-wrapper { }
+  }
   .price-card {
     background: #ffffff;
     border: 1px solid rgba(0,0,0,0.08);
@@ -1686,7 +1710,7 @@
     border-radius: 16px;
     width: 100%;
     max-width: 440px;
-    padding: 8px;
+    padding: 24px;
     position: relative;
     box-shadow: 0 24px 80px rgba(0,0,0,0.15);
     border: 1px solid rgba(0,0,0,0.08);
@@ -2305,28 +2329,55 @@
       <p class="section-desc">One plan. Everything included. Infrastructure is BYOK — you bring the keys, you pay actuals.</p>
     </div>
 
-    <div class="pricing-grid">
-      <div class="price-card featured">
-        <div class="price-badge">Launch offer · 55% off</div>
-        <div class="price-name">Monthly</div>
-        <div class="price-new">
-          <span class="price-amount"><span class="currency">₹</span>900</span>
+    <div class="pricing-wrapper">
+      <div class="pricing-grid">
+        <div class="price-card featured">
+          <div class="price-badge">Launch offer · 55% off</div>
+          <div class="price-name">Monthly</div>
+          <div class="price-new">
+            <span class="price-amount"><span class="currency">₹</span>900</span>
+          </div>
+          <div style="font-size:14px;color:rgba(0,0,0,0.5);margin-bottom:4px;">
+            <span class="price-original"><span class="currency">₹</span>2,000</span> per month
+          </div>
+          <div class="price-period">cancel anytime</div>
+          <ul class="price-features">
+            <li>Full access to all features</li>
+            <li>Conversational + Precise retrieval modes</li>
+            <li>Query expansion & document aggregation</li>
+            <li>LLM reducer with conflict detection</li>
+            <li>Source citation on every answer</li>
+            <li>Streaming responses via /api/query-stream</li>
+            <li>Add · Replace · Delete document lifecycle</li>
+            <li>Email support</li>
+          </ul>
+          <button class="price-cta" data-cta>Start monthly →</button>
         </div>
-        <div style="font-size:14px;color:rgba(0,0,0,0.5);margin-bottom:4px;">
-          <span class="price-original"><span class="currency">₹</span>2,000</span> per month
+      </div>
+
+      <!-- 30-minute setup timer -->
+      <div class="setup-timer">
+        <div class="setup-timer-ring">
+          <svg viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="54"/>
+            <circle class="ring-progress" cx="60" cy="60" r="54"/>
+          </svg>
+          <div class="ring-label">
+            <div class="time">30</div>
+            <div class="unit">minutes</div>
+          </div>
         </div>
-        <div class="price-period">cancel anytime</div>
-        <ul class="price-features">
-          <li>Full access to all features</li>
-          <li>Conversational + Precise retrieval modes</li>
-          <li>Query expansion & document aggregation</li>
-          <li>LLM reducer with conflict detection</li>
-          <li>Source citation on every answer</li>
-          <li>Streaming responses via /api/query-stream</li>
-          <li>Add · Replace · Delete document lifecycle</li>
-          <li>Email support</li>
-        </ul>
-        <button class="price-cta" data-cta>Start monthly →</button>
+        <h3>Your app live in 30 minutes</h3>
+        <p>From signup to a fully deployed DoqueRAG instance — our technical team handles Supabase, Pinecone, and deployment setup with you. No dev experience required.</p>
+        <div class="setup-timer-steps">
+          <div class="setup-step"><span class="setup-step-dot"></span>Supabase</div>
+          <span class="setup-step-arrow">→</span>
+          <div class="setup-step"><span class="setup-step-dot"></span>Pinecone</div>
+          <span class="setup-step-arrow">→</span>
+          <div class="setup-step"><span class="setup-step-dot"></span>Deploy</div>
+          <span class="setup-step-arrow">→</span>
+          <div class="setup-step"><span class="setup-step-dot"></span>Live</div>
+        </div>
       </div>
     </div>
 
@@ -2335,31 +2386,6 @@
       <div class="note-body">
         <h4>Bring your own keys (BYOK)</h4>
         <p>The monthly plan excludes infrastructure costs. You bring your own keys for <strong>Supabase</strong> (document metadata), <strong>Pinecone</strong> (vector index), and your <strong>LLM API key</strong>. Recommended model: <code>GLM 5.1</code> — you're charged at the provider's actual usage rate, no markup. Typical monthly infra cost for a personal knowledge base: under $10.</p>
-      </div>
-    </div>
-
-    <!-- 30-minute setup timer -->
-    <div class="setup-timer">
-      <div class="setup-timer-ring">
-        <svg viewBox="0 0 120 120">
-          <circle class="ring-bg" cx="60" cy="60" r="54"/>
-          <circle class="ring-progress" cx="60" cy="60" r="54"/>
-        </svg>
-        <div class="ring-label">
-          <div class="time">30</div>
-          <div class="unit">minutes</div>
-        </div>
-      </div>
-      <h3>Your app live in 30 minutes</h3>
-      <p>From signup to a fully deployed DoqueRAG instance — our technical team handles Supabase, Pinecone, and deployment setup with you. No dev experience required.</p>
-      <div class="setup-timer-steps">
-        <div class="setup-step"><span class="setup-step-dot"></span>Supabase</div>
-        <span class="setup-step-arrow">→</span>
-        <div class="setup-step"><span class="setup-step-dot"></span>Pinecone</div>
-        <span class="setup-step-arrow">→</span>
-        <div class="setup-step"><span class="setup-step-dot"></span>Deploy</div>
-        <span class="setup-step-arrow">→</span>
-        <div class="setup-step"><span class="setup-step-dot"></span>Live</div>
       </div>
     </div>
   </div>
