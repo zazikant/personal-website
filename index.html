@@ -3750,12 +3750,17 @@ function initClerk() {
         }
 
         function showDashboard() {
+          // Close Clerk auth modal first
+          closeClerkModal();
           // Pre-fill form from Clerk user data
           const info = getUserInfo();
           if (info) {
-            document.getElementById('dash-name').value = info.name || '';
-            document.getElementById('dash-email').value = info.email || '';
-            document.getElementById('dash-phone').value = info.phone || '';
+            const nameEl = document.getElementById('dash-name');
+            const emailEl = document.getElementById('dash-email');
+            const phoneEl = document.getElementById('dash-phone');
+            if (nameEl) nameEl.value = info.name || '';
+            if (emailEl) emailEl.value = info.email || '';
+            if (phoneEl) phoneEl.value = info.phone || '';
           }
           if (dashboardForm) dashboardForm.style.display = '';
           if (dashboardSuccess) dashboardSuccess.classList.remove('show');
@@ -3772,10 +3777,10 @@ function initClerk() {
             closeClerkModal();
 
             // Build custom avatar button
-            if (userBtnEl && !userBtnEl.dataset.mounted) {
+            if (userBtnEl) {
               const user = window.Clerk.user;
               if (user) {
-                const imgUrl = user.profileImageUrl || user.imageUrl;
+                const imgUrl = user.profileImageUrl || user.imageUrl || user.avatarUrl;
                 if (imgUrl) {
                   userBtnEl.innerHTML = '<img src="' + imgUrl + '" alt="' + (user.firstName || 'User') + '" />';
                 } else {
@@ -3787,7 +3792,19 @@ function initClerk() {
               }
               userBtnEl.dataset.mounted = '1';
               userBtnEl.title = 'Click to complete your setup';
+              userBtnEl.addEventListener('click', () => showDashboard());
             }
+
+            // Re-check for profile image after a delay (Google images load late)
+            setTimeout(() => {
+              const user = window.Clerk.user;
+              if (user && userBtnEl) {
+                const imgUrl = user.profileImageUrl || user.imageUrl || user.avatarUrl;
+                if (imgUrl && !userBtnEl.querySelector('img')) {
+                  userBtnEl.innerHTML = '<img src="' + imgUrl + '" alt="' + (user.firstName || 'User') + '" />';
+                }
+              }
+            }, 2000);
 
             // Send signup email only once
             if (!notifiedSignup) {
@@ -3844,13 +3861,15 @@ function initClerk() {
         function startAuthPolling() {
           if (authPollTimer) clearInterval(authPollTimer);
           authPollTimer = setInterval(() => {
+            // Check both sessions AND user object (user might be ready before sessions)
             const sessions = window.Clerk?.client?.sessions;
-            if (sessions && sessions.length > 0) {
+            const user = window.Clerk?.user;
+            if ((sessions && sessions.length > 0) || user) {
               updateAuthState();
               clearInterval(authPollTimer);
               authPollTimer = null;
             }
-          }, 300);
+          }, 100);  // poll every 100ms for faster detection
           setTimeout(() => {
             if (authPollTimer) { clearInterval(authPollTimer); authPollTimer = null; }
           }, 300000);
@@ -3879,17 +3898,16 @@ function initClerk() {
         });
 
         // Listen for SSO callback (Google sign-in redirects to #/sso-callback)
-        // Immediately check auth state when the hash changes
         window.addEventListener('hashchange', () => {
-          // Give Clerk a moment to process the callback
+          // Wait longer for Clerk to process the SSO callback
           setTimeout(() => {
             updateAuthState();
             startAuthPolling();
-          }, 200);
+          }, 500);
         });
         // Also check on page load in case we landed on sso-callback
         if (window.location.hash.includes('sso-callback')) {
-          setTimeout(() => { updateAuthState(); startAuthPolling(); }, 500);
+          setTimeout(() => { updateAuthState(); startAuthPolling(); }, 800);
         }
 
         // Sign in / Sign up buttons → open embedded Clerk modal
