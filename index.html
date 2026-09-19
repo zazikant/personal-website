@@ -2351,7 +2351,8 @@
   .testimonials-section { padding: 60px 0 80px; background: #f8f9fa; }
   .testimonials-swiper { max-width: 620px; margin: 0 auto; padding: 0 20px; }
   .testimonials-swiper .swiper { background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); }
-  .testimonials-swiper .swiper-slide { padding: 40px 40px 80px; }
+  .testimonials-swiper .swiper-slide { padding: 40px 40px 80px; height: auto !important; box-sizing: border-box; }
+  .testimonials-swiper .swiper-wrapper { align-items: stretch; }
   .testimonial-quote { width: 40px; height: 40px; fill: #0d9488; margin-bottom: 16px; }
   .testimonial-content { font-style: italic; font-size: 17px; line-height: 1.6; color: #1a1a1a; margin: 0 0 20px; }
   .testimonial-name { font-size: 15px; font-weight: 700; color: #1a1a1a; }
@@ -2366,7 +2367,7 @@
   .testimonials-swiper .swiper-button-prev::after,
   .testimonials-swiper .swiper-button-next::after { font-size: 12px; font-weight: 700; }
   @media (max-width: 600px) {
-    .testimonials-swiper .swiper-slide { padding: 32px 24px 72px; }
+    .testimonials-swiper .swiper-slide { padding: 32px 24px 72px; height: auto !important; }
     .testimonials-swiper .swiper-pagination { left: 24px; }
     .testimonial-content { font-size: 15px; }
   }
