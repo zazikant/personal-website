@@ -963,60 +963,89 @@
     background: #ffffff;
     border-top: 1px solid rgba(0,0,0,0.06);
   }
+  /* Mobile: single slide, auto-scroll carousel */
   .demo-gallery {
     position: relative;
     width: 100%;
     max-width: 340px;
     margin: 0 auto;
     overflow: hidden;
-    border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.08);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
-    aspect-ratio: 9/20.1;
+    border-radius: 18px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
   }
   .demo-gallery-track {
     display: flex;
-    width: 600%;
-    height: 100%;
-    animation: gallery-scroll 30s linear infinite;
-  }
-  .demo-gallery:hover .demo-gallery-track {
-    animation-play-state: paused;
+    will-change: transform;
+    transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
   }
   .demo-gallery-item {
-    flex: 0 0 calc(100% / 6);
-    height: 100%;
+    flex: 0 0 100%;
   }
   .demo-gallery-item img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
     display: block;
+    object-fit: cover;
   }
-  @keyframes gallery-scroll {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-83.33%); }
+  .demo-gallery-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.9);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease;
   }
+  .demo-gallery-arrow:hover { background: rgba(255,255,255,1); }
+  .demo-gallery-arrow.prev { left: 8px; }
+  .demo-gallery-arrow.next { right: 8px; }
   .demo-gallery-dots {
     display: flex;
     justify-content: center;
-    gap: 6px;
+    gap: 10px;
     margin-top: 16px;
   }
   .demo-gallery-dot {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: rgba(0,0,0,0.15);
     border: none;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.3s ease, transform 0.3s ease;
   }
   .demo-gallery-dot.active {
     background: #0d9488;
+    transform: scale(1.3);
   }
+  /* Desktop: show multiple slides side by side, auto-scroll */
   @media (min-width: 769px) {
-    .demo-gallery { max-width: 320px; }
+    .demo-gallery {
+      max-width: 100%;
+      border-radius: 18px;
+    }
+    .demo-gallery-track {
+      gap: 16px;
+      padding: 0 16px;
+    }
+    .demo-gallery-item {
+      flex: 0 0 240px;
+    }
+    .demo-gallery-item img {
+      border-radius: 14px;
+      height: 534px; /* 240 * 20.1/9 */
+    }
+    .demo-gallery-arrow { display: none; }
+    .demo-gallery-dots { display: none; }
   }
   .demo-promo-mobile {
     display: block;
@@ -2296,8 +2325,10 @@
       </div>
     </div>
 
-    <div class="demo-gallery">
-      <div class="demo-gallery-track">
+    <div class="demo-gallery" id="demoGallery">
+      <button class="demo-gallery-arrow prev" id="demoGalleryPrev" aria-label="Previous">‹</button>
+      <button class="demo-gallery-arrow next" id="demoGalleryNext" aria-label="Next">›</button>
+      <div class="demo-gallery-track" id="demoGalleryTrack">
         <div class="demo-gallery-item"><img src="images/demo-1.jpg" alt="DoqueRAG screenshot 1" loading="lazy"/></div>
         <div class="demo-gallery-item"><img src="images/demo-2.jpg" alt="DoqueRAG screenshot 2" loading="lazy"/></div>
         <div class="demo-gallery-item"><img src="images/demo-3.jpg" alt="DoqueRAG screenshot 3" loading="lazy"/></div>
@@ -4111,31 +4142,109 @@ function initClerk() {
 }
 
 /* ════════════════════════════════════════════════════════════════════
-   Demo gallery dots — indicator dots for the auto-scrolling gallery
+   Demo gallery — carousel with autoplay (mobile) + continuous scroll (desktop)
    ════════════════════════════════════════════════════════════════════ */
 function initDemoGallery() {
-  const dotsContainer = document.getElementById('demoGalleryDots');
-  const track = document.querySelector('.demo-gallery-track');
-  if (!dotsContainer || !track) return;
+  var gallery = document.getElementById('demoGallery');
+  var track = document.getElementById('demoGalleryTrack');
+  var dotsWrap = document.getElementById('demoGalleryDots');
+  if (!gallery || !track) return;
 
-  const items = track.querySelectorAll('.demo-gallery-item');
-  let current = 0;
+  var slides = track.querySelectorAll('.demo-gallery-item');
+  var total = slides.length;
+  var current = 0;
+  var isAnimating = false;
+  var dots = [];
+  var isDesktop = window.innerWidth >= 769;
 
-  // Create dots
-  items.forEach((_, i) => {
-    const dot = document.createElement('button');
-    dot.className = 'demo-gallery-dot' + (i === 0 ? ' active' : '');
-    dot.setAttribute('aria-label', 'Screenshot ' + (i + 1));
-    dotsContainer.appendChild(dot);
+  // Create dots (mobile only)
+  if (dotsWrap) {
+    for (var i = 0; i < total; i++) {
+      (function(idx) {
+        var d = document.createElement('button');
+        d.className = 'demo-gallery-dot' + (idx === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Screenshot ' + (idx + 1));
+        d.addEventListener('click', function() { go(idx); });
+        dotsWrap.appendChild(d);
+        dots.push(d);
+      })(i);
+    }
+  }
+
+  function updateDots() {
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  function go(index) {
+    if (isAnimating || isDesktop) return;
+    var next = (index + total) % total;
+    if (next === current) return;
+    isAnimating = true;
+    track.style.transform = 'translateX(-' + (next * 100) + '%)';
+    current = next;
+    updateDots();
+    setTimeout(function() { isAnimating = false; }, 600);
+  }
+
+  // Arrow buttons
+  var prevBtn = document.getElementById('demoGalleryPrev');
+  var nextBtn = document.getElementById('demoGalleryNext');
+  if (prevBtn) prevBtn.addEventListener('click', function() { go(current - 1); });
+  if (nextBtn) nextBtn.addEventListener('click', function() { go(current + 1); });
+
+  updateDots();
+
+  // Mobile: autoplay every 4 seconds, pause on hover
+  var timer;
+  function startAutoplay() {
+    if (isDesktop) return;
+    clearInterval(timer);
+    timer = setInterval(function() { go(current + 1); }, 4000);
+  }
+  function stopAutoplay() { clearInterval(timer); }
+
+  gallery.addEventListener('mouseenter', stopAutoplay);
+  gallery.addEventListener('mouseleave', startAutoplay);
+  startAutoplay();
+
+  // Desktop: continuous horizontal scroll animation
+  if (isDesktop) {
+    // Clone slides for seamless loop
+    slides.forEach(function(s) {
+      var clone = s.cloneNode(true);
+      track.appendChild(clone);
+    });
+    var animName = 'demo-desktop-scroll';
+    var styleEl = document.createElement('style');
+    styleEl.textContent = '@keyframes ' + animName + ' {' +
+      'from { transform: translateX(0); }' +
+      'to { transform: translateX(-50%); }' +
+      '}';
+    document.head.appendChild(styleEl);
+    track.style.animation = animName + ' 30s linear infinite';
+    track.style.transition = 'none';
+
+    // Pause on hover
+    gallery.addEventListener('mouseenter', function() { track.style.animationPlayState = 'paused'; });
+    gallery.addEventListener('mouseleave', function() { track.style.animationPlayState = 'running'; });
+  }
+
+  // Handle resize
+  window.addEventListener('resize', function() {
+    var newIsDesktop = window.innerWidth >= 769;
+    if (newIsDesktop !== isDesktop) {
+      isDesktop = newIsDesktop;
+      if (isDesktop) {
+        stopAutoplay();
+        // Re-apply desktop scroll
+        location.reload();
+      } else {
+        track.style.animation = 'none';
+        track.style.transition = 'transform 0.6s cubic-bezier(0.65, 0, 0.35, 1)';
+        startAutoplay();
+      }
+    }
   });
-
-  const dots = dotsContainer.querySelectorAll('.demo-gallery-dot');
-
-  // Update active dot every 5 seconds (matches 30s animation / 6 items)
-  setInterval(() => {
-    current = (current + 1) % items.length;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-  }, 5000);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
