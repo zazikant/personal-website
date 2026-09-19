@@ -2434,36 +2434,36 @@
   <div class="container">
     <div class="section-head">
       <div class="section-eyebrow">How It Works</div>
-      <h2 class="section-title">From messy PDFs to answers you can cite in 30 seconds.</h2>
-      <p class="section-desc">No model training, no fine-tuning, no infrastructure to babysit. Drop a document in, ask a question, get an answer with the source file attached.</p>
+      <h2 class="section-title">From messy notes to answers you can act on in 30 seconds.</h2>
+      <p class="section-desc">No training, no cleanup, no tech skills. Just dump your thinking, ask in plain words, get a cited answer — then turn it into a task.</p>
     </div>
 
     <div class="steps">
       <div class="step">
-        <div class="step-num">01 / INGEST</div>
+        <div class="step-num">01 / CAPTURE</div>
         <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></div>
-        <h3>Drop a document in</h3>
-        <p>Upload a PDF, markdown, or raw text. We handle the parsing — no cleanup, no formatting fixes needed on your end. Every chunk is tagged with its filename, <em>doc_type</em>, <em>project</em>, and <em>version</em> so you can filter later.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> Drop a 200-page PDF, we handle the parsing.</p>
+        <h3>Drop your notes in</h3>
+        <p>Add meeting notes, ideas, docs, or text PDFs. No formatting needed. We remember it all — what file it came from, which version, when you added it.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> Your second brain starts building instantly.</p>
         <span class="step-tag">POST /api/upload · /api/ingest</span>
       </div>
 
       <div class="step">
-        <div class="step-num">02 / INDEX</div>
-        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div>
-        <h3>We remember where every fact came from</h3>
-        <p>Each document is chunked, embedded, and stored with full provenance — filename, version, page, and upload timestamp. So v2 of a policy doesn't get mixed with v1, and retrieval can be scoped to a single project or release.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> We remember which file, version, and page each fact came from.</p>
-        <span class="step-tag">NVIDIA embeddings · Pinecone</span>
+        <div class="step-num">02 / ASK</div>
+        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
+        <h3>Ask anything, get an AI answer with proof</h3>
+        <p>Ask like you'd ask a friend — "what did we decide on pricing?" The AI reads across all your notes, connects the dots, flags conflicts, and answers with exact sources cited. If it's not in your notes, it says so. No hallucinations.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> One clear answer + source files. No more Ctrl+F through 1000 notes.</p>
+        <span class="step-tag">POST /api/query · /api/query-stream</span>
       </div>
 
       <div class="step">
-        <div class="step-num">03 / ANSWER</div>
-        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg></div>
-        <h3>Ask a question, get a cited answer</h3>
-        <p>Query expansion catches synonyms automatically — "owner" matches "lead" and "manager". An LLM reducer synthesizes the most relevant chunks into one coherent answer, detects conflicts across sources, and lists every filename it used.</p>
-        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> One answer + a list of source files. No made-up filler.</p>
-        <span class="step-tag">POST /api/query · /api/query-stream</span>
+        <div class="step-num">03 / ACT</div>
+        <div class="step-icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg></div>
+        <h3>Turn answers into tasks</h3>
+        <p>Found it? One click turns it into a tracked task linked back to the source. No copy-paste, no losing context.</p>
+        <p style="margin-top:14px;padding:12px 16px;border-radius:6px;background:rgba(13,148,136,0.04);border:1px solid rgba(13,148,136,0.15);font-size:14px;color:rgba(0,0,0,0.75);"><strong style="color:#0d9488;">You get:</strong> Notes that don't just remember — they help you do.</p>
+        <span class="step-tag">Live in 30 minutes. Bring your notes, we'll set it up with you.</span>
       </div>
     </div>
   </div>
