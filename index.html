@@ -2345,6 +2345,90 @@
   </div>
 </section>
 
+<!-- ─── Testimonials ─────────────────────────────────────────────────────── -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<style>
+  .testimonials-section { padding: 60px 0 80px; background: #f8f9fa; }
+  .testimonials-swiper { max-width: 620px; margin: 0 auto; padding: 0 20px; }
+  .testimonials-swiper .swiper { background: #fff; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.06); }
+  .testimonials-swiper .swiper-slide { padding: 40px 40px 80px; }
+  .testimonial-quote { width: 40px; height: 40px; fill: #0d9488; margin-bottom: 16px; }
+  .testimonial-content { font-style: italic; font-size: 17px; line-height: 1.6; color: #1a1a1a; margin: 0 0 20px; }
+  .testimonial-name { font-size: 15px; font-weight: 700; color: #1a1a1a; }
+  .testimonial-title { font-size: 13px; color: rgba(0,0,0,0.55); }
+  .testimonials-swiper .swiper-pagination { bottom: 24px; left: 40px; width: auto; text-align: left; }
+  .testimonials-swiper .swiper-pagination-bullet { width: 10px; height: 10px; background: #1a1a1a; opacity: 0.2; }
+  .testimonials-swiper .swiper-pagination-bullet-active { background: #0d9488; opacity: 1; }
+  .testimonials-swiper .swiper-button-prev,
+  .testimonials-swiper .swiper-button-next { top: auto; bottom: 20px; width: 36px; height: 36px; border: 1.5px solid rgba(0,0,0,0.2); border-radius: 50%; color: #1a1a1a; }
+  .testimonials-swiper .swiper-button-next { right: 24px; left: auto; }
+  .testimonials-swiper .swiper-button-prev { right: 68px; left: auto; }
+  .testimonials-swiper .swiper-button-prev::after,
+  .testimonials-swiper .swiper-button-next::after { font-size: 12px; font-weight: 700; }
+  @media (max-width: 600px) {
+    .testimonials-swiper .swiper-slide { padding: 32px 24px 72px; }
+    .testimonials-swiper .swiper-pagination { left: 24px; }
+    .testimonial-content { font-size: 15px; }
+  }
+</style>
+<section class="testimonials-section">
+  <div class="testimonials-swiper">
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <svg class="testimonial-quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/></svg>
+          <p class="testimonial-content">I can now memorise through my digital notes, and the AI-assisted chat swiftly gives me the answers I need on the go.</p>
+          <div class="testimonial-name">Djpa</div>
+          <div class="testimonial-title">UPSC Professor</div>
+        </div>
+        <div class="swiper-slide">
+          <svg class="testimonial-quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/></svg>
+          <p class="testimonial-content">I never imagined this app would help me daily with noting tasks and give me the confidence to search data on time.</p>
+          <div class="testimonial-name">Bhavin</div>
+          <div class="testimonial-title">Data Scientist</div>
+        </div>
+        <div class="swiper-slide">
+          <svg class="testimonial-quote" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 17h3l2-4V7H5v6h3l-2 4zm8 0h3l2-4V7h-6v6h3l-2 4z"/></svg>
+          <p class="testimonial-content">This app has helped our CXO management organise their notes and get critical insights during client meetings.</p>
+          <div class="testimonial-name">Dhawal</div>
+          <div class="testimonial-title">Vice President</div>
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+      <div class="swiper-button-prev" aria-label="Previous"></div>
+      <div class="swiper-button-next" aria-label="Next"></div>
+    </div>
+  </div>
+</section>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  function initTestimonials() {
+    if (typeof Swiper === 'undefined') {
+      var s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js';
+      s.onload = initTestimonials;
+      document.head.appendChild(s);
+      return;
+    }
+    new Swiper('.testimonials-swiper .swiper', {
+      loop: true,
+      speed: 600,
+      autoplay: { delay: 5000, disableOnInteraction: false },
+      pagination: { el: '.testimonials-swiper .swiper-pagination', clickable: true },
+      navigation: {
+        nextEl: '.testimonials-swiper .swiper-button-next',
+        prevEl: '.testimonials-swiper .swiper-button-prev'
+      },
+      keyboard: { enabled: true }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTestimonials);
+  } else {
+    initTestimonials();
+  }
+</script>
+
 
 <!-- ─── Concepts slider (adapted from gallery-demo.html, image removed) ──── -->
 <section class="section" id="concepts">
